@@ -30,13 +30,12 @@
         {
             this.paneMain = new System.Windows.Forms.Panel();
             this.gBSet = new System.Windows.Forms.GroupBox();
-            this.pBOk = new System.Windows.Forms.PictureBox();
+            this.lblPass = new System.Windows.Forms.Label();
             this.tBPass = new System.Windows.Forms.TextBox();
             this.tBUser = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnBrow = new System.Windows.Forms.Button();
             this.paneCode = new System.Windows.Forms.Panel();
             this.tBCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,13 +43,14 @@
             this.tBEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tBFold = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblFold = new System.Windows.Forms.Label();
+            this.pBOk = new System.Windows.Forms.PictureBox();
+            this.btnBrow = new System.Windows.Forms.Button();
             this.pBClose = new System.Windows.Forms.PictureBox();
-            this.lblPass = new System.Windows.Forms.Label();
             this.paneMain.SuspendLayout();
             this.gBSet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBOk)).BeginInit();
             this.paneCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBOk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +67,7 @@
             // 
             // gBSet
             // 
+            this.gBSet.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gBSet.Controls.Add(this.lblPass);
             this.gBSet.Controls.Add(this.pBOk);
             this.gBSet.Controls.Add(this.tBPass);
@@ -80,7 +81,7 @@
             this.gBSet.Controls.Add(this.tBEmail);
             this.gBSet.Controls.Add(this.label2);
             this.gBSet.Controls.Add(this.tBFold);
-            this.gBSet.Controls.Add(this.label1);
+            this.gBSet.Controls.Add(this.lblFold);
             this.gBSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBSet.ForeColor = System.Drawing.Color.White;
             this.gBSet.Location = new System.Drawing.Point(102, 86);
@@ -90,15 +91,17 @@
             this.gBSet.TabStop = false;
             this.gBSet.Text = "Current Settings:";
             // 
-            // pBOk
+            // lblPass
             // 
-            this.pBOk.Image = global::PROJ_admin_.Properties.Resources.Ok_icon__1_;
-            this.pBOk.Location = new System.Drawing.Point(506, 246);
-            this.pBOk.Name = "pBOk";
-            this.pBOk.Size = new System.Drawing.Size(30, 30);
-            this.pBOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBOk.TabIndex = 61;
-            this.pBOk.TabStop = false;
+            this.lblPass.AutoSize = true;
+            this.lblPass.Font = new System.Drawing.Font("Century", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPass.ForeColor = System.Drawing.Color.Red;
+            this.lblPass.Location = new System.Drawing.Point(257, 164);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(50, 16);
+            this.lblPass.TabIndex = 62;
+            this.lblPass.Text = "label14";
+            this.lblPass.Visible = false;
             // 
             // tBPass
             // 
@@ -158,18 +161,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnBrow
-            // 
-            this.btnBrow.FlatAppearance.BorderSize = 0;
-            this.btnBrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrow.Image = global::PROJ_admin_.Properties.Resources.Folder_Generic_Green_icon;
-            this.btnBrow.Location = new System.Drawing.Point(506, 210);
-            this.btnBrow.Name = "btnBrow";
-            this.btnBrow.Size = new System.Drawing.Size(30, 30);
-            this.btnBrow.TabIndex = 54;
-            this.btnBrow.UseVisualStyleBackColor = true;
-            this.btnBrow.Click += new System.EventHandler(this.btnBrow_Click);
-            // 
             // paneCode
             // 
             this.paneCode.Controls.Add(this.tBCode);
@@ -207,7 +198,7 @@
             this.btnVer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVer.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.btnVer.ForeColor = System.Drawing.Color.Lime;
             this.btnVer.Location = new System.Drawing.Point(409, 287);
             this.btnVer.Name = "btnVer";
             this.btnVer.Size = new System.Drawing.Size(91, 27);
@@ -250,16 +241,38 @@
             this.tBFold.TabIndex = 10;
             this.tBFold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label1
+            // lblFold
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label1.Location = new System.Drawing.Point(17, 213);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 24);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Folder Path:";
+            this.lblFold.AutoSize = true;
+            this.lblFold.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFold.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblFold.Location = new System.Drawing.Point(17, 213);
+            this.lblFold.Name = "lblFold";
+            this.lblFold.Size = new System.Drawing.Size(124, 24);
+            this.lblFold.TabIndex = 1;
+            this.lblFold.Text = "Folder Path:";
+            // 
+            // pBOk
+            // 
+            this.pBOk.Image = global::PROJ_admin_.Properties.Resources.Ok_icon__1_;
+            this.pBOk.Location = new System.Drawing.Point(506, 246);
+            this.pBOk.Name = "pBOk";
+            this.pBOk.Size = new System.Drawing.Size(30, 30);
+            this.pBOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBOk.TabIndex = 61;
+            this.pBOk.TabStop = false;
+            // 
+            // btnBrow
+            // 
+            this.btnBrow.FlatAppearance.BorderSize = 0;
+            this.btnBrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrow.Image = global::PROJ_admin_.Properties.Resources.Folder_Generic_Green_icon;
+            this.btnBrow.Location = new System.Drawing.Point(506, 210);
+            this.btnBrow.Name = "btnBrow";
+            this.btnBrow.Size = new System.Drawing.Size(30, 30);
+            this.btnBrow.TabIndex = 54;
+            this.btnBrow.UseVisualStyleBackColor = true;
+            this.btnBrow.Click += new System.EventHandler(this.btnBrow_Click);
             // 
             // pBClose
             // 
@@ -272,18 +285,6 @@
             this.pBClose.TabIndex = 5;
             this.pBClose.TabStop = false;
             this.pBClose.Click += new System.EventHandler(this.pBClose_Click);
-            // 
-            // lblPass
-            // 
-            this.lblPass.AutoSize = true;
-            this.lblPass.Font = new System.Drawing.Font("Century", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPass.ForeColor = System.Drawing.Color.Red;
-            this.lblPass.Location = new System.Drawing.Point(257, 164);
-            this.lblPass.Name = "lblPass";
-            this.lblPass.Size = new System.Drawing.Size(50, 16);
-            this.lblPass.TabIndex = 62;
-            this.lblPass.Text = "label14";
-            this.lblPass.Visible = false;
             // 
             // frmSet
             // 
@@ -301,9 +302,9 @@
             this.paneMain.ResumeLayout(false);
             this.gBSet.ResumeLayout(false);
             this.gBSet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBOk)).EndInit();
             this.paneCode.ResumeLayout(false);
             this.paneCode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBOk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).EndInit();
             this.ResumeLayout(false);
 
@@ -314,7 +315,7 @@
         private System.Windows.Forms.Panel paneMain;
         private System.Windows.Forms.PictureBox pBClose;
         private System.Windows.Forms.GroupBox gBSet;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblFold;
         private System.Windows.Forms.TextBox tBEmail;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tBFold;

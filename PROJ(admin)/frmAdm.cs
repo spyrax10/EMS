@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using classLib;
 
@@ -24,11 +17,14 @@ namespace PROJ_admin_
         {
             paneSlide.Height = btnEmp.Height;
             paneSlide.Top = btnEmp.Top;
+            if (misc.activeForm != null)
+                misc.activeForm.Close();
         }
 
         private void frmAdm_Load(object sender, EventArgs e)
         {
             lblEmpId.Text = frmMain.empId;
+            home();
         }
 
         bool isShow;
@@ -70,21 +66,36 @@ namespace PROJ_admin_
 
         private void btnShut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MessageBox.Show("Quit?", msg.ver, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==
+                 DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void pBHome_Click(object sender, EventArgs e)
         {
-            if (misc.activeForm != null)
-                misc.activeForm.Close();
             home();         
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            frmMain ma = new frmMain();
-            ma.Visible = true;
-            this.Visible = false;
+            if (MessageBox.Show("Logout?", msg.ver, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
+                DialogResult.Yes)
+            {
+                DbQ.sysLog(frmMain.empId, msg.time, msg.date, msg.logOut);
+                frmMain ma = new frmMain();
+                ma.Show();
+                this.Hide();
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void btnEmp_Click(object sender, EventArgs e)
@@ -100,13 +111,37 @@ namespace PROJ_admin_
             paneSlide.Height = btnStud.Height;
             paneSlide.Top = btnStud.Top;
             misc.opnChild(paneCont, new studBio());
-            empId = lblEmpId.Text;
         }
 
         private void btnSet_Click(object sender, EventArgs e)
         {
-            empId = lblEmpId.Text;
+            paneSlide.Height = btnEmp.Height;
+            paneSlide.Top = btnEmp.Top;
             misc.opnChild(paneCont, new frmSet());
+        }
+
+        private void btnSys_Click(object sender, EventArgs e)
+        {
+            paneSlide.Height = btnEmp.Height;
+            paneSlide.Top = btnEmp.Top;
+            misc.opnChild(paneCont, new frmLog());
+        }
+
+        private void frmAdm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DbQ.sysLog(frmMain.empId, msg.time, msg.date, msg.appClose);
+        }
+
+        private void frmAdm_VisibleChanged(object sender, EventArgs e)
+        {
+            home();
+        }
+
+        private void btnAcd_Click(object sender, EventArgs e)
+        {
+            paneSlide.Height = btnAcd.Height;
+            paneSlide.Top = btnAcd.Top;
+            misc.opnChild(paneCont, new acdmBio());
         }
     }
 }

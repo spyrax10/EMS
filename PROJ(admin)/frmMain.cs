@@ -1,17 +1,6 @@
 ﻿using classLib;
 using System;
-using System.Data.SqlClient;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
 
 namespace PROJ_admin_
 {
@@ -21,26 +10,29 @@ namespace PROJ_admin_
         private static frmAdm admFrm = new frmAdm();
         private static frmEmp empFrm = new frmEmp();
         public static string empId;
-        
+
         public frmMain()
         {
             InitializeComponent();
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            if (DBInfo.conStat() == true)
-            {
-                hideForm();
-            }
-            else
-            {
-                timer1.Stop();
-                timer2.Stop();
-                msg.serverErr();
-                Application.Exit();
-            }
+            hideForm();
         }
-
+        public void LOG()
+        {
+            empId = DbQ.getEmpId(tBLUser.Text);
+            if (DbQ.empStat(empId) == "ADMIN")
+            {
+                misc.usrCode(empId);
+                admFrm.Visible = true;
+            }
+            else if (DbQ.empStat(empId) == "EMP")
+            {
+                empFrm.Visible = true;
+            }
+            this.Hide();
+        }
         public void hideForm()
         {
             misc.hideCont(paneMain);
@@ -67,46 +59,36 @@ namespace PROJ_admin_
         }
         private void lblForgot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (tBLUser.Text == "")
+            if (DbQ.getEmail(tBLUser.Text) != "")
             {
-                msg.userNeed();
+                misc.codeSend(DbQ.getEmail(tBLUser.Text), DbQ.getEmpId(tBLUser.Text));
+                if (misc.emailSent == true)
+                {
+                    lblForgot.Visible = false;
+                    paneFor.Visible = true;
+                }
             }
             else
             {
-                string empId = DbQ.getEmpId(tBLUser.Text);
-                if (DbQ.userValid == true)
-                {
-                    if (DbQ.getEmail(empId) != "")
-                    {
-                        misc.codeSend(DbQ.getEmail(empId), empId);
-                        lblForgot.Visible = false;
-                    }
-                    paneFor.Visible = true;
-                }
-                else
-                {
-                    msg.usrInv();
-                }           
+                msg.usrInv();
             }
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (misc.isEmptyFields(gBadmCre) == true)
+            if (DbQ.chkUsername(tBCUser.Text) == true)
             {
-                msg.incMsg();
+                msg.userUse();
+                tBCUser.Focus();
             }
-            if (misc.passMatch(tBCPass, tBCPass2) == false)
+            else if (misc.passMatch(tBCPass, tBCPass2) == false)
             {
                 lblPass.Visible = true;
                 lblPass.Text = msg.matchErr();
             }
             else
             {
-                DbQ.empCre(tBId.Text, tBCUser.Text, tBCPass.Text, msg.date(), "ADMIN");
-                gBNot.Visible = true;
-                gBadmCre.Visible = false;
-                lblID.Text = tBId.Text;
+                DbQ.empCre(gBadmCre, tBId, tBCUser.Text, tBCPass.Text, gBNot, lblID, gBLog);
             }
         }
 
@@ -119,7 +101,7 @@ namespace PROJ_admin_
             }
             else
             {
-                DbQ.admSet(lblID.Text, tBPath.Text, tBEmail.Text, msg.nverified());
+                DbQ.admSet(lblID.Text, tBPath.Text, tBEmail.Text, msg.nverified);
                 hideForm();
                 gBLog.Visible = true;
             }
@@ -162,7 +144,7 @@ namespace PROJ_admin_
 
                 if (DbQ.codeStat == true)
                 {
-                    DbQ.admSet(lblID.Text, tBPath.Text, tBEmail.Text, msg.verified());
+                    DbQ.admSet(lblID.Text, tBPath.Text, tBEmail.Text, msg.verified);
                     misc.usrCode(lblID.Text);
                     hideForm();
                     gBLog.Visible = true;           
@@ -221,24 +203,11 @@ namespace PROJ_admin_
             else
             {
                 DbQ.empLog(tBLUser.Text, tBLPass.Text, tBLPass2.Text);
-                empId = DbQ.getEmpId(tBLUser.Text);
-
                 if (DbQ.isPass == true)
                 {
-                    if (DbQ.empStat(empId) == "ADMIN")
-                    {
-                        misc.usrCode(empId);
-                        admFrm.Visible = true;
-                        this.Visible = false;
-                    }
-                    else if (DbQ.empStat(empId) == "EMP")
-                    {
-                        empFrm.Visible = true;
-                        this.Visible = false;
-                    }
-                }
-            }
-           
+                    LOG();
+                }     
+            }        
         }
 
         private void tBLPass_Leave(object sender, EventArgs e)
@@ -269,24 +238,12 @@ namespace PROJ_admin_
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                empId = DbQ.getEmpId(tBLUser.Text);
-                DbQ.chkCode(tBForCode.Text, empId);
-
+                DbQ.chkCode(tBForCode.Text, DbQ.getEmpId(tBLUser.Text));
                 if (DbQ.codeStat == true)
                 {
                     msg.logSuc();
-                    DbQ.sysLog(empId, msg.time(), msg.date(), msg.logInVC() + tBForCode.Text);
-                    if (DbQ.empStat(empId) == "ADMIN")
-                    {
-                        misc.usrCode(empId);
-                        admFrm.Visible = true;
-                        this.Visible = false;
-                    }
-                    else if (DbQ.empStat(empId) == "EMP")
-                    {
-                        empFrm.Visible = true;
-                        this.Visible = false;
-                    }
+                    DbQ.sysLog(DbQ.getEmpId(tBLUser.Text), msg.time, msg.date, msg.logInVC + tBForCode.Text);
+                    LOG();
                 }
                 else
                 {
@@ -294,6 +251,20 @@ namespace PROJ_admin_
                 }
             }
         }
+
+        private void tBIdMain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                DBInfo.chkEmp(tBIdMain, gBMain, gBLog, gBadmCre, tBId);
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DbQ.sysLog(msg.sysName, msg.time, msg.date, msg.appClose);
+        }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             left--;

@@ -20,44 +20,75 @@ namespace classLib
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
         
         public static Form activeForm = null;
-        
+
+        public static void typePane(ComboBox cB, Panel paneIden, Panel paneEnu, Panel paneMult)
+        {
+            if (cB.Text == "Identification")
+            {    
+                paneIden.Visible = true;
+                paneIden.BringToFront();
+            }
+            else if (cB.Text == "Enumeration")
+            {
+                paneEnu.Visible = true;
+                paneEnu.BringToFront();
+            }
+            else if (cB.Text == "Multiple Choice")
+            {
+                paneMult.Visible = true;
+                paneMult.BringToFront();
+            }
+        }
         public static void passChar(TextBox tB)
         {
-            if (tB.PasswordChar == '\0')
-            {
-                tB.PasswordChar = '*';
-            }
-            else
+            if (tB.PasswordChar != '\0')
             {
                 tB.PasswordChar = '\0';
             }
+            else
+            {
+                tB.PasswordChar = '*';
+            }
         }
-        public static bool emailCount(string email)
+        public static bool emailCount(string email, string id)
         {
             bool stat = false;
             try
-            {              
+            {
                 using (var con = DBInfo.getCon())
                 {
-                    using(var cmd = con.CreateCommand())
+                    using (var cmd = con.CreateCommand())
                     {
                         con.Open();
-                        cmd.CommandText = "Select (Select COUNT (Email) from empTB where Email = @Email) + " +
-                            "(Select COUNT (Email) from empTB where Email = @Email) + " +
-                            "(Select COUNT (Email) from studTB where Email = @Email)";
+                        cmd.CommandText = "Select dbo.emC(@Email)";
                         cmd.Parameters.AddWithValue("@Email", email);
                         object cnt = cmd.ExecuteScalar();
+                        int num = Convert.ToInt32(cnt);
 
-                        if (Convert.ToInt32(cnt) > 3)
+                        if (DbQ.verEmail(email, id) == true)
                         {
-                            stat = true;
+                            if (num <= 3)
+                            {
+                                stat = true;
+                            }
+                            else
+                            {
+                                stat = false;
+                            }
                         }
-                        else
+                        else if (DbQ.verEmail(email, id) == false)
                         {
-                            stat = false;
+                            if (num < 3)
+                            {
+                                stat = true;
+                            }
+                            else
+                            {
+                                stat = false;
+                            }
                         }
                     }
-                }              
+                }
             }
             catch (Exception e)
             {
@@ -102,7 +133,7 @@ namespace classLib
             comp.Controls.OfType<TextBox>().ToList().ForEach(t => t.Clear());
             comp.Controls.OfType<ComboBox>().ToList().ForEach(t => t.Text = "");
             comp.Controls.OfType<Panel>().ToList().ForEach(t => t.Text = "");
-         
+           
             foreach (Control c in comp.Controls)
             {
                 if (c is Panel)
@@ -116,6 +147,10 @@ namespace classLib
                         if (d is ComboBox)
                         {
                             d.Text = "";
+                        }
+                        if (d is DataGridView)
+                        {
+                            d.Refresh();
                         }
                     }
                 }
@@ -270,8 +305,8 @@ namespace classLib
             string usr = System.Environment.UserName;
             using (StreamWriter sw = new StreamWriter(path))
             {
-                sw.WriteLine("Date: " + msg.date());
-                sw.WriteLine("Time: " + msg.time() + Environment.NewLine);
+                sw.WriteLine("Date: " + msg.date);
+                sw.WriteLine("Time: " + msg.time + Environment.NewLine);
                 sw.WriteLine("Current User: " + usr);
                 sw.WriteLine("OS Build Info: " + new ComputerInfo().OSFullName + " | " + buildInfo());
                 sw.WriteLine("SQL Version: " + getSql() + Environment.NewLine);
@@ -311,8 +346,8 @@ namespace classLib
                 {
                     sw.WriteLine(code);
                 }
-                DbQ.codeLog(code, msg.codeNUse(), msg.date(), "", DbQ.getEmpId(user)); ;
-                DbQ.sysLog(user, msg.time(), msg.date(), msg.codeReq() + code);
+                DbQ.codeLog(code, msg.codeNUse, msg.date, "", DbQ.getEmpId(user)); ;
+                DbQ.sysLog(user, msg.time, msg.date, msg.codeReq + code);
             }
         }
 
@@ -366,14 +401,14 @@ namespace classLib
                         cmd.Parameters.AddWithValue("@ID", id);
                         using (var dr = cmd.ExecuteReader())
                         {
-                            if (dr.Read())
+                            do
                             {
-                                stat = false;
-                            }
-                            else
-                            {
-                                stat = true;
-                            }
+                                while (dr.Read())
+                                {
+                                    stat = true;
+                                }
+
+                            } while (dr.NextResult());
                         }
                     }
                 }
@@ -382,7 +417,6 @@ namespace classLib
             {
                 msg.expMsg(f.Message);
                 crashRep(f.Message);
-                stat = true;
             }
             return stat;
         }
@@ -396,54 +430,58 @@ namespace classLib
             {
                 if (valEmail(email) == false)
                 {
-                    msg.invEmail();
                     emailSent = false;
+                    msg.invEmail();
+                }
+                else if (userId == "")
+                {
+                    emailSent = false;
+                    msg.userNeed();               
+                }
+                else if (emailCount(email, userId) == false)
+                {
+                    emailSent = false;
+                    msg.emailAbuse();
                 }
                 else
                 {
                     if (chkInt(true))
                     {
-                        if (isEmailVer(email, userId) == false)
-                        {
-                            msg.alreadyVer();
-                            emailSent = false;
-                        }
-                        else
-                        {
-                            SmtpClient client = new SmtpClient("smtp.gmail.com");
-                            MailMessage mail = new MailMessage();
-                            mail.From = new MailAddress("sistemoquizo@gmail.com");
-                            mail.To.Add(email);
+                        SmtpClient client = new SmtpClient("smtp.gmail.com");
+                        MailMessage mail = new MailMessage();
+                        mail.From = new MailAddress(DBInfo.username);
+                        mail.To.Add(email);
 
-                            mail.Subject = "Account Verification";
-                            mail.Body = "Code: " + code + "" + Environment.NewLine + "" +
-                                "Date Generate: " + date + "" + Environment.NewLine + "" +
-                                "" + Environment.NewLine + "" +
-                                "" + Environment.NewLine + "" +
-                                "Login the code to the app to verify email address. Thank you!" + Environment.NewLine + "" +
-                                "" + Environment.NewLine + "" +
-                                "Regards," +
-                                "" + Environment.NewLine + "" +
-                                "- spyrax10";
+                        mail.Subject = "Account Verification";
+                        mail.Body = "Code: " + code + "" + Environment.NewLine + "" +
+                            "Date Generate: " + date + "" + Environment.NewLine + "" +
+                            "" + Environment.NewLine + "" +
+                            "" + Environment.NewLine + "" +
+                            "Login the code to the app to verify email address. Thank you!" + Environment.NewLine + "" +
+                            "" + Environment.NewLine + "" +
+                            "Regards," +
+                            "" + Environment.NewLine + "" +
+                            "- spyrax10";
 
-                            client.Port = 587;
-                            client.UseDefaultCredentials = false;
-                            client.EnableSsl = true;
-                            client.Credentials = new System.Net.NetworkCredential("sistemoquizo@gmail.com", "@spyrax10@");
-                            client.Send(mail);
+                        client.Port = 587;
+                        client.UseDefaultCredentials = false;
+                        client.EnableSsl = true;
+                        client.Credentials = new System.Net.NetworkCredential(DBInfo.username, DBInfo.password);
+                        client.Send(mail);
 
-                            DbQ.codeLog(code,
-                               msg.codeNUse(),
-                               msg.date(), "",
-                               userId);
+                        DbQ.codeLog(code,
+                           msg.codeNUse,
+                           msg.date, "",
+                           userId);
 
-                            DbQ.sysLog(userId, msg.time(), msg.date(), msg.codeReq() + code);
-                            emailSent = true;
-                        }
+                        DbQ.sysLog(msg.sysName, msg.time, msg.date, msg.codeReq + code);
+                        emailSent = true;
+                        msg.sentMsg();
                     }
                     else
                     {
-                        msg.noInt();
+                        emailSent = false;
+                        msg.noInt();             
                     }
                 }
             }
@@ -451,6 +489,7 @@ namespace classLib
             {
                 msg.expMsg(e.Message);
                 crashRep(e.Message);
+                emailSent = false;
             }
         }
     }

@@ -25,17 +25,25 @@ namespace PROJ_admin_
             paneCour.Enabled = false;
             paneSub.Visible = false;        
             gBDet.Visible = false;
+            btnViewSub.Visible = false;
             gBInfo.Visible = true; 
             paneInfo.Visible = true;
             btnAdd.Image = Properties.Resources.List;
         }
+        public void showSub()
+        {
+            paneInfo.Visible = false;
+            paneCour.Enabled = false;
+            btnSub.Text = "ADD";
+            paneSub.Visible = true;
+            DbQ.loadStudSub(gVSub, tBID);
+
+        }
         public void showDet()
         { 
             gBInfo.Visible = false;
-            misc.defGV(gVList);
             gBDet.Visible = true;
-            DbQ.loadStud(gVList);
-            DbQ.loadStudSub(gVSub, tBID);
+            DbQ.loadStud(gVList);   
             btnAdd.Image = Properties.Resources.add_user_icon__1_;
         }
         private void studBio_Load(object sender, EventArgs e)
@@ -76,21 +84,14 @@ namespace PROJ_admin_
         {
             if (btnReg.Text == "REGISTER")
             {
-                DbQ.studCreate(paneInfo, tBID.Text, tBDept.Text, tBCourse.Text, tBYear.Text, tBFirst.Text,
-                tBMid.Text, tBLast.Text, cBCount.Text, cBPro.Text,
-                cBMun.Text, cBBar.Text, tBPur.Text, tBMob.Text, tBEmail.Text);
-                if (DbQ.isSucess == true)
-                {
-                    paneSub.Visible = true;
-                    paneInfo.Visible = false;
-                    DbQ.sysLog(frmAdm.empId, msg.time(), msg.date(), msg.addStud(tBID.Text));
-                }
+                DbQ.studCreate(paneInfo, showSub, frmMain.empId, tBID.Text, tBDept.Text, tBCourse.Text, tBYear.Text, 
+                    tBFirst.Text, tBMid.Text, tBLast.Text, 
+                    cBCount.Text, cBPro.Text, cBMun.Text, cBBar.Text, tBPur.Text, tBMob.Text, tBEmail.Text);
             }
             else
             {
-                DbQ.updateStud(gVSub,paneInfo, tBID, tBDept, tBCourse, tBYear, tBFirst, tBMid, tBLast, 
-                    tBMob, tBEmail, tBPur, cBCount, cBPro, cBMun, cBBar, paneCour, paneSub);
-                btnSub.Text = "ADD";
+                DbQ.updateStud(frmMain.empId,paneInfo, tBID, tBDept, tBCourse, tBYear, tBFirst, tBMid, tBLast, 
+                    tBMob, tBEmail, tBPur, cBCount, cBPro, cBMun, cBBar, btnViewSub);
             }
         }
 
@@ -221,6 +222,29 @@ namespace PROJ_admin_
             {
                 lblEmail.Visible = false;
             }
+        }
+
+        private void btnViewSub_Click(object sender, EventArgs e)
+        {
+            showSub();
+        }
+
+        private void tbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            DbQ.srchStud(gVList, tbSearch.Text);
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (tbSearch.Text == "")
+            {
+                DbQ.loadStud(gVList);
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            DbQ.print(gVList, msg.studList);
         }
     }
 }

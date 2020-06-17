@@ -37,7 +37,6 @@ namespace PROJ_admin_
         public void showDet()
         {        
             gBInfo.Visible = false;
-            misc.defGV(gVList);
             gBDet.Visible = true;
             DbQ.loadEmp(gVList);
             btnAdd.Image = Properties.Resources.add_user_icon__1_;
@@ -64,21 +63,16 @@ namespace PROJ_admin_
         {
             if (btnReg.Text == "REGISTER")
             {
-                DbQ.empCreate(paneInfo, tBID.Text, tBDept.Text, tBFirst.Text,
+                DbQ.empCreate(frmMain.empId, paneInfo, tBID.Text, tBDept.Text, tBFirst.Text,
                 tBMid.Text, tBLast.Text, cBCount.Text, cBPro.Text,
                 cBMun.Text, cBBar.Text, tBPur.Text, tBMob.Text,
-                tBEmail.Text);
-                if (DbQ.isSucess == true)
-                {
-                    paneRef();
-                    DbQ.sysLog(frmAdm.empId, msg.time(), msg.date(), msg.addEmp(tBID.Text));
-                }
+                tBEmail.Text, showDet);
             }
             else
             {
-                DbQ.updateEmp(paneInfo, tBID, tBDept, tBFirst, tBMid,
+                DbQ.updateEmp(paneInfo, frmMain.empId, tBID, tBDept, tBFirst, tBMid,
                 tBLast, tBMob, tBEmail, tBPur, cBCount, cBPro,
-                cBMun, cBBar, pBImg, btnReg);
+                cBMun, cBBar, showDet);
             }
         }
 
@@ -158,11 +152,6 @@ namespace PROJ_admin_
             }
         }
 
-        private void tbSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            DbQ.srchEmp(gVList, tbSearch.Text);
-        }
-
         private void tBDept_KeyPress(object sender, KeyPressEventArgs e)
         {
             misc.invChar(e);
@@ -185,6 +174,16 @@ namespace PROJ_admin_
             {
                 lblEmail.Visible = false;
             }
+        }
+
+        private void tbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            DbQ.srchEmp(gVList, tbSearch.Text);
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            DbQ.print(gVList, msg.empList);
         }
     }
 }

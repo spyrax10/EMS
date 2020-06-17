@@ -52,6 +52,12 @@
     <Compile Include="empBio.Designer.cs">
       <DependentUpon>empBio.cs</DependentUpon>
     </Compile>
+    <Compile Include="acdmBio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acdmBio.Designer.cs">
+      <DependentUpon>acdmBio.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAdm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,11 +70,29 @@
     <Compile Include="frmEmp.Designer.cs">
       <DependentUpon>frmEmp.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLog.Designer.cs">
+      <DependentUpon>frmLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPro.Designer.cs">
+      <DependentUpon>frmPro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQues.Designer.cs">
+      <DependentUpon>frmQues.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSet.cs">
       <SubType>Form</SubType>
@@ -87,14 +111,26 @@
     <EmbeddedResource Include="empBio.resx">
       <DependentUpon>empBio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="acdmBio.resx">
+      <DependentUpon>acdmBio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAdm.resx">
       <DependentUpon>frmAdm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmp.resx">
       <DependentUpon>frmEmp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.resx">
+      <DependentUpon>frmLog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPro.resx">
+      <DependentUpon>frmPro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQues.resx">
+      <DependentUpon>frmQues.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSet.resx">
       <DependentUpon>frmSet.cs</DependentUpon>
@@ -247,6 +283,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graduate-academic-cap-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Books-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\illustrator-old-school-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button-Next-icon %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Go-back-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button-Previous-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

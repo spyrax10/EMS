@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBInfo.cs" />
+    <Compile Include="DGVPrinter.cs" />
     <Compile Include="misc.cs" />
     <Compile Include="msg.cs" />
     <Compile Include="Program.cs" />
