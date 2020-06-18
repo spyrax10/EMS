@@ -63,6 +63,16 @@ namespace PROJ_admin_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add_icon {
+            get {
+                object obj = ResourceManager.GetObject("Add-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap add_user_icon {
             get {
                 object obj = ResourceManager.GetObject("add-user-icon", resourceCulture);
@@ -86,6 +96,16 @@ namespace PROJ_admin_.Properties {
         internal static System.Drawing.Bitmap Books_icon {
             get {
                 object obj = ResourceManager.GetObject("Books-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Button_Add_icon__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Button-Add-icon (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

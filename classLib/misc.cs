@@ -21,8 +21,10 @@ namespace classLib
         
         public static Form activeForm = null;
 
-        public static void typePane(ComboBox cB, Panel paneIden, Panel paneEnu, Panel paneMult)
+        public static void typePane(ComboBox cB, Panel ques, Panel paneIden, Panel paneEnu, Panel paneMult)
         {
+            ques.Visible = true;
+            ques.BringToFront();
             if (cB.Text == "Identification")
             {    
                 paneIden.Visible = true;

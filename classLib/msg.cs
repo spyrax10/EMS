@@ -162,5 +162,9 @@ namespace classLib
         {
             MessageBox.Show("Code Already been Used!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+        public static void quesUse()
+        {
+            MessageBox.Show("Question Already Exits!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 }
