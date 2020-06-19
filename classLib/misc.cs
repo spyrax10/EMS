@@ -21,26 +21,6 @@ namespace classLib
         
         public static Form activeForm = null;
 
-        public static void typePane(ComboBox cB, Panel ques, Panel paneIden, Panel paneEnu, Panel paneMult)
-        {
-            ques.Visible = true;
-            ques.BringToFront();
-            if (cB.Text == "Identification")
-            {    
-                paneIden.Visible = true;
-                paneIden.BringToFront();
-            }
-            else if (cB.Text == "Enumeration")
-            {
-                paneEnu.Visible = true;
-                paneEnu.BringToFront();
-            }
-            else if (cB.Text == "Multiple Choice")
-            {
-                paneMult.Visible = true;
-                paneMult.BringToFront();
-            }
-        }
         public static void passChar(TextBox tB)
         {
             if (tB.PasswordChar != '\0')
@@ -51,6 +31,38 @@ namespace classLib
             {
                 tB.PasswordChar = '*';
             }
+        }
+
+        public static void sortGV(DataGridView gV)
+        {
+            if (gV.Rows.Count != 0)
+            {
+                string val1 = gV.Rows[0].Cells[1].Value.ToString();
+                string val2 = gV.Rows[0].Cells[0].Value.ToString();
+
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[1].Value.ToString() == val1)
+                    {
+                        gV.Rows[i].Cells[1].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val1 = gV.Rows[i].Cells[1].Value.ToString();
+                    }
+                }
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[0].Value.ToString() == val2)
+                    {
+                        gV.Rows[i].Cells[0].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val2 = gV.Rows[i].Cells[0].Value.ToString();
+                    }
+                }
+            }   
         }
         public static bool emailCount(string email, string id)
         {

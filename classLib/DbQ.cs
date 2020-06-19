@@ -1915,6 +1915,101 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
+        public static void editQues(Panel pane, DataGridView gV, string empId, string code, string sub,
+            string period, string set, string type, NumericUpDown num, 
+            TextBox ques, TextBox ans, Button btn, TextBox cho, Button btn2)
+        {
+            try
+            {
+                string val = gV.CurrentRow.Cells[2].Value.ToString();
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    using (var cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = "Select * from quesTB where Code = @Code and empId = @ID " +
+                        "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ " +
+                        "and Answer = @Val";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Sub", sub);
+                        cmd.Parameters.AddWithValue("@Per", period);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Typ", type);
+                        cmd.Parameters.AddWithValue("@Val", val);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                num.Value = Convert.ToInt32(dr["No"].ToString());
+                                ques.Text = dr["Question"].ToString();
+                                ans.Text = val;
+                                btn.Text = "UPDATE";
+                            }
+                            else
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Select * from choiceTB where Code = @Code and empId = @ID " +
+                                    "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ " +
+                                    "and Choices = @Val";
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.Parameters.AddWithValue("@Sub", sub);
+                                    cmd2.Parameters.AddWithValue("@Per", period);
+                                    cmd2.Parameters.AddWithValue("@Set", set);
+                                    cmd2.Parameters.AddWithValue("@Typ", type);
+                                    cmd2.Parameters.AddWithValue("@Val", val);
+
+                                    using (var dr2 = cmd2.ExecuteReader())
+                                    {
+                                        if (dr2.Read())
+                                        {
+                                            num.Value = Convert.ToInt32(dr2["No"].ToString());
+                                            ques.Text = dr2["Question"].ToString();
+                                            cho.Text = val;
+                                            btn2.Text = "UPDATE";
+                                            pane.Visible = true;
+                                            pane.BringToFront();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadCho(DataGridView gV, string empId, string code, string sub,
+            string period, string set, string type)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select No, Question, Choices from choiceTB where " +
+                        "Code = '" + code + "' and empId = '" + empId + "' and Subject = '" + sub + "' " +
+                        "and Period = '" + period + "' and Date = '" + msg.date + "' " +
+                        "and QSet = '" + set + "' and Type = '" + type + "' ORDER BY CAST (No AS INT) ASC", con);
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                    misc.sortGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
         public static void loadQues(DataGridView gV, string empId, string code, string sub,
             string period, string set, string type)
         {
@@ -1922,14 +2017,16 @@ namespace classLib
             {
                 using (var con = DBInfo.getCon())
                 {
+                    con.Open();
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select No, Question, Answer from quesTB where " +
                         "Code = '" + code + "' and empId = '" + empId + "' and Subject = '" + sub + "' " +
                         "and Period = '" + period + "' and Date = '" + msg.date + "' " +
-                        "and QSet = '" + set + "' and Type = '" + type + "'", con);
+                        "and QSet = '" + set + "' and Type = '" + type + "' ORDER BY CAST (No AS INT) ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
+                    misc.sortGV(gV);
                 }
             }
             catch(Exception e)
@@ -1939,7 +2036,7 @@ namespace classLib
             }
         }
         public static void delQues(DataGridView gV, string empId, string code, string sub,
-            string period, string set, string type)
+            string period, string set, string type, TextBox quesT, TextBox ansT, Button btn)
         {
             try
             {            
@@ -1951,28 +2048,45 @@ namespace classLib
                     }
                     else
                     {
-                        string num = gV.CurrentRow.Cells[0].Value.ToString();
-                        string ques = gV.CurrentRow.Cells[1].Value.ToString();
                         string ans = gV.CurrentRow.Cells[2].Value.ToString();
+                        string colName = gV.Columns[2].Name;
                         
                         con.Open();
 
                         using (var cmd = con.CreateCommand())
                         {
-                            cmd.CommandText = "Delete from quesTB where Code = @Code and empId = @ID " +
-                            "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ and No = @num " +
-                            "and Question = @Ques and Answer = @Ans";
-                            cmd.Parameters.AddWithValue("@Code", code);
-                            cmd.Parameters.AddWithValue("@ID", empId);
-                            cmd.Parameters.AddWithValue("@Sub", sub);
-                            cmd.Parameters.AddWithValue("@Per", period);
-                            cmd.Parameters.AddWithValue("@Set", set);
-                            cmd.Parameters.AddWithValue("@Typ", type);
-                            cmd.Parameters.AddWithValue("@num", num);
-                            cmd.Parameters.AddWithValue("Ques", ques);
-                            cmd.Parameters.AddWithValue("@Ans", ans);
-                            cmd.ExecuteNonQuery();
-                            loadQues(gV, empId, code, sub, period, set, type);
+                            if (colName == "Answer")
+                            {
+                                cmd.CommandText = "Delete from quesTB where Code = @Code and empId = @ID " +
+                                "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ " +
+                                "and Answer = @Ans";
+                                cmd.Parameters.AddWithValue("@Code", code);
+                                cmd.Parameters.AddWithValue("@ID", empId);
+                                cmd.Parameters.AddWithValue("@Sub", sub);
+                                cmd.Parameters.AddWithValue("@Per", period);
+                                cmd.Parameters.AddWithValue("@Set", set);
+                                cmd.Parameters.AddWithValue("@Typ", type);
+                                cmd.Parameters.AddWithValue("@Ans", ans);
+                                cmd.ExecuteNonQuery();
+                                loadQues(gV, empId, code, sub, period, set, type);
+                                quesT.Text = ""; ansT.Text = ""; quesT.Focus();
+                                btn.Text = "ADD";
+                            }
+                            else
+                            {
+                                cmd.CommandText = "Delete from choiceTB where Code = @Code and empId = @ID " +
+                                "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ " +
+                                "and Choices = @Ans";
+                                cmd.Parameters.AddWithValue("@Code", code);
+                                cmd.Parameters.AddWithValue("@ID", empId);
+                                cmd.Parameters.AddWithValue("@Sub", sub);
+                                cmd.Parameters.AddWithValue("@Per", period);
+                                cmd.Parameters.AddWithValue("@Set", set);
+                                cmd.Parameters.AddWithValue("@Typ", type);
+                                cmd.Parameters.AddWithValue("@Ans", ans);
+                                cmd.ExecuteNonQuery();
+                                loadCho(gV, empId, code, sub, period, set, type);
+                            }  
                         }
                     }
                 }
@@ -1983,15 +2097,14 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void addQues(Panel pane, DataGridView gV, string empId, string code, string sub,
-            string period, string set, string type, NumericUpDown num, TextBox ques, string ans, 
-            TextBox lbl, Button btn)
+        public static void addChoQues(Panel pane, DataGridView gV, string empId, string code, string sub,
+            string period, string set, string type, NumericUpDown num, TextBox ques, TextBox cho, Button btn)
         {
             try
             {
                 using (var con = DBInfo.getCon())
                 {
-                    if (misc.isEmptyFields(pane) == true)
+                    if (misc.isEmptyFields(pane) == true && cho.Text == "")
                     {
                         msg.incMsg();
                     }
@@ -2001,9 +2114,9 @@ namespace classLib
 
                         using (var cmd = con.CreateCommand())
                         {
-                            cmd.CommandText = "Select * from quesTB where Code = @Code and empId = @ID " +
-                                "and Subject = @Sub and Period = @Per and Type = @Type and QSet = @Set and No = @Num ";
-                                //"and Question = @Ques and Answer = @Ans";
+                            cmd.CommandText = "Select * from choiceTB where Code = @Code and empId = @ID " +
+                                "and Subject = @Sub and Period = @Per and Type = @Type and QSet = @Set " +
+                                "and No = @Num and Choices = @Cho";
                             cmd.Parameters.AddWithValue("@Code", code);
                             cmd.Parameters.AddWithValue("@ID", empId);
                             cmd.Parameters.AddWithValue("@Sub", sub);
@@ -2011,8 +2124,7 @@ namespace classLib
                             cmd.Parameters.AddWithValue("@Type", type);
                             cmd.Parameters.AddWithValue("@Set", set);
                             cmd.Parameters.AddWithValue("@Num", num.Value.ToString());
-                            //cmd.Parameters.AddWithValue("@Ques", ques.Text);
-                           // cmd.Parameters.AddWithValue("@Ans", ans);
+                            cmd.Parameters.AddWithValue("@Cho", cho.Text);
                             using (var dr = cmd.ExecuteReader())
                             {
                                 if (dr.Read() && btn.Text != "UPDATE")
@@ -2025,8 +2137,8 @@ namespace classLib
                                     {
                                         using (var cmd2 = con.CreateCommand())
                                         {
-                                            cmd2.CommandText = "Insert into quesTB Values(@Code, @ID, @Sub, " +
-                                                "@Per, @Date, @Set, @Type, @Num, @Ques, @Ans)";
+                                            cmd2.CommandText = "Insert into choiceTB Values(@Code, @ID, @Sub, " +
+                                            "@Per, @Date, @Set, @Type, @Num, @Ques, @Cho)";
                                             cmd2.Parameters.AddWithValue("@Code", code);
                                             cmd2.Parameters.AddWithValue("@ID", empId);
                                             cmd2.Parameters.AddWithValue("@Sub", sub);
@@ -2036,38 +2148,179 @@ namespace classLib
                                             cmd2.Parameters.AddWithValue("@Set", set);
                                             cmd2.Parameters.AddWithValue("@Num", num.Value.ToString());
                                             cmd2.Parameters.AddWithValue("@Ques", ques.Text);
-                                            cmd2.Parameters.AddWithValue("@Ans", ans);
-                                            cmd2.ExecuteNonQuery();                                    
+                                            cmd2.Parameters.AddWithValue("@Cho", cho.Text);
+                                            cmd2.ExecuteNonQuery();
                                         }
                                     }
-                                    else if (btn.Text == "UPDATE")
+                                    else
                                     {
-                                        string val = gV.CurrentRow.Cells[0].Value.ToString();
+                                        string val = gV.CurrentRow.Cells[2].Value.ToString();
                                         using (var cmd3 = con.CreateCommand())
                                         {
-                                            cmd3.CommandText = "Update quesTB Set Question = @Ques, Answer = @Ans where " +
+                                            cmd3.CommandText = "Update choiceTB Set Question = @Ques, Choice = @Ans where " +
                                                 "Code = @Code and empId = @ID and Subject = @Sub and Period = @Per and " +
-                                                "Type = @Type and QSet = @Set and No = @Num ";
+                                                "Type = @Type and QSet = @Set and Answer = @valA";
                                             cmd3.Parameters.AddWithValue("@Ques", ques.Text);
-                                            cmd3.Parameters.AddWithValue("@Ans", ans);
+                                            cmd3.Parameters.AddWithValue("@Ans", cho.Text);
                                             cmd3.Parameters.AddWithValue("@Code", code);
                                             cmd3.Parameters.AddWithValue("@ID", empId);
                                             cmd3.Parameters.AddWithValue("@Sub", sub);
                                             cmd3.Parameters.AddWithValue("@Per", period);
                                             cmd3.Parameters.AddWithValue("@Type", type);
                                             cmd3.Parameters.AddWithValue("@Set", set);
-                                            cmd3.Parameters.AddWithValue("@Num", val);
+                                            cmd3.Parameters.AddWithValue("@valA", val);
                                             cmd3.ExecuteNonQuery();
                                             btn.Text = "ADD";
                                         }
                                     }
-                                    misc.clrCont(pane);
-                                    num.Value += 1;
-                                    lbl.Text = type;
-                                    ques.Focus();
-                                    loadQues(gV, empId, code, sub, period, set, type);
-                                }     
+                                    cho.Focus();
+                                    loadCho(gV, empId, code, sub, period, set, type);
+                                }
                             }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void addQues(Panel pane, DataGridView gV, string empId, string code, string sub,
+            string period, string set, string type, NumericUpDown num, TextBox ques, TextBox ans, 
+            TextBox lbl, Button btn)
+        {
+            try
+            {
+                bool stat = false;
+            
+                using (var con = DBInfo.getCon())
+                {
+                    if (misc.isEmptyFields(pane) == true)
+                    {
+                        msg.incMsg();
+                    }
+                    else
+                    {
+                        con.Open();
+
+                        if (type == "Identification" || type == "Multiple Choice")
+                        {
+                            using (var cmd = con.CreateCommand())
+                            {
+                                cmd.CommandText = "Select * from quesTB where Code = @Code and empId = @ID " +
+                                "and Subject = @Sub and Period = @Per and Type = @Type and QSet = @Set and No = @Num ";
+                                cmd.Parameters.AddWithValue("@Code", code);
+                                cmd.Parameters.AddWithValue("@ID", empId);
+                                cmd.Parameters.AddWithValue("@Sub", sub);
+                                cmd.Parameters.AddWithValue("@Per", period);
+                                cmd.Parameters.AddWithValue("@Type", type);
+                                cmd.Parameters.AddWithValue("@Set", set);
+                                cmd.Parameters.AddWithValue("@Num", num.Value.ToString());
+
+                                using (var dr = cmd.ExecuteReader())
+                                {
+                                    if (dr.Read() && btn.Text != "UPDATE")
+                                    {
+                                        stat = false;
+                                    }
+                                    else
+                                    {
+                                        stat = true;
+                                    }
+                                }
+                            }
+                        }
+                        else if (type == "Enumeration")
+                        {
+                            using (var cmdE = con.CreateCommand())
+                            {
+                                cmdE.CommandText = "Select * from quesTB where Code = @Code and empId = @ID " +
+                                "and Subject = @Sub and Period = @Per and Type = @Type and QSet = @Set " +
+                                "and No = @Num and Answer = @Ans";
+                                cmdE.Parameters.AddWithValue("@Code", code);
+                                cmdE.Parameters.AddWithValue("@ID", empId);
+                                cmdE.Parameters.AddWithValue("@Sub", sub);
+                                cmdE.Parameters.AddWithValue("@Per", period);
+                                cmdE.Parameters.AddWithValue("@Type", type);
+                                cmdE.Parameters.AddWithValue("@Set", set);
+                                cmdE.Parameters.AddWithValue("@Num", num.Value.ToString());
+                                cmdE.Parameters.AddWithValue("@Ans", ans.Text);
+
+                                using (var drE = cmdE.ExecuteReader())
+                                {
+                                    if (drE.Read() && btn.Text != "UPDATE")
+                                    {
+                                        stat = false;
+                                    }
+                                    else
+                                    {
+                                        stat = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (stat == false)
+                        {
+                            msg.quesUse();
+                        }
+                        else
+                        {
+                            if (btn.Text == "ADD")
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Insert into quesTB Values(@Code, @ID, @Sub, " +
+                                        "@Per, @Date, @Set, @Type, @Num, @Ques, @Ans)";
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.Parameters.AddWithValue("@Sub", sub);
+                                    cmd2.Parameters.AddWithValue("@Per", period);
+                                    cmd2.Parameters.AddWithValue("@Date", msg.date);
+                                    cmd2.Parameters.AddWithValue("@Type", type);
+                                    cmd2.Parameters.AddWithValue("@Set", set);
+                                    cmd2.Parameters.AddWithValue("@Num", num.Value.ToString());
+                                    cmd2.Parameters.AddWithValue("@Ques", ques.Text);
+                                    cmd2.Parameters.AddWithValue("@Ans", ans.Text);
+                                    cmd2.ExecuteNonQuery();
+                                    if (type == "Enumeration")
+                                    {
+                                        ans.Text = ""; ans.Focus();
+                                    }
+                                    else
+                                    {
+                                        num.Value += 1;
+                                        ques.Text = ""; ans.Text = ""; ques.Focus();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                string valA = gV.CurrentRow.Cells[2].Value.ToString();
+
+                                using (var cmd3 = con.CreateCommand())
+                                {
+                                    cmd3.CommandText = "Update quesTB Set Question = @Ques, Answer = @Ans where " +
+                                        "Code = @Code and empId = @ID and Subject = @Sub and Period = @Per and " +
+                                        "Type = @Type and QSet = @Set and Answer = @valA";
+                                    cmd3.Parameters.AddWithValue("@Ques", ques.Text);
+                                    cmd3.Parameters.AddWithValue("@Ans", ans.Text);
+                                    cmd3.Parameters.AddWithValue("@Code", code);
+                                    cmd3.Parameters.AddWithValue("@ID", empId);
+                                    cmd3.Parameters.AddWithValue("@Sub", sub);
+                                    cmd3.Parameters.AddWithValue("@Per", period);
+                                    cmd3.Parameters.AddWithValue("@Type", type);
+                                    cmd3.Parameters.AddWithValue("@Set", set);
+                                    cmd3.Parameters.AddWithValue("@valA", valA);
+                                    cmd3.ExecuteNonQuery();
+                                    btn.Text = "ADD";
+                                    misc.clrCont(pane);
+                                }
+                            }
+                            lbl.Text = type;
+                            loadQues(gV, empId, code, sub, period, set, type);
                         }
                     }
                 }

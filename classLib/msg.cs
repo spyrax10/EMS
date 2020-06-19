@@ -164,7 +164,7 @@ namespace classLib
         }
         public static void quesUse()
         {
-            MessageBox.Show("Question Already Exits!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Question / Answer Already Exits!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

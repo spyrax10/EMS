@@ -36,6 +36,7 @@
             this.gBQues = new System.Windows.Forms.GroupBox();
             this.btnPre = new System.Windows.Forms.Button();
             this.gBDet = new System.Windows.Forms.GroupBox();
+            this.btnRefDet = new System.Windows.Forms.Button();
             this.lblErr = new System.Windows.Forms.Label();
             this.tBSet = new System.Windows.Forms.TextBox();
             this.cBType = new System.Windows.Forms.ComboBox();
@@ -55,17 +56,20 @@
             this.btnNum = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.gVData = new System.Windows.Forms.DataGridView();
+            this.btnDropIden = new System.Windows.Forms.Button();
             this.tBQues = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.btnRefIden = new System.Windows.Forms.Button();
             this.paneIns = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnRefDet = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDropIden = new System.Windows.Forms.Button();
-            this.btnRefIden = new System.Windows.Forms.Button();
             this.pBClose = new System.Windows.Forms.PictureBox();
+            this.paneCho = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tBCho = new System.Windows.Forms.TextBox();
+            this.btnChoX = new System.Windows.Forms.Button();
+            this.btnAddCho = new System.Windows.Forms.Button();
             this.paneMain.SuspendLayout();
             this.gBQues.SuspendLayout();
             this.gBDet.SuspendLayout();
@@ -74,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gVData)).BeginInit();
             this.paneIns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).BeginInit();
+            this.paneCho.SuspendLayout();
             this.SuspendLayout();
             // 
             // paneMain
@@ -137,6 +142,21 @@
             this.gBDet.TabIndex = 75;
             this.gBDet.TabStop = false;
             this.gBDet.Text = "Details:";
+            // 
+            // btnRefDet
+            // 
+            this.btnRefDet.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefDet.FlatAppearance.BorderSize = 0;
+            this.btnRefDet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefDet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefDet.ForeColor = System.Drawing.Color.Red;
+            this.btnRefDet.Image = global::PROJ_admin_.Properties.Resources.Button_Refresh_icon24;
+            this.btnRefDet.Location = new System.Drawing.Point(175, 17);
+            this.btnRefDet.Name = "btnRefDet";
+            this.btnRefDet.Size = new System.Drawing.Size(29, 29);
+            this.btnRefDet.TabIndex = 84;
+            this.btnRefDet.UseVisualStyleBackColor = true;
+            this.btnRefDet.Click += new System.EventHandler(this.btnRefDet_Click);
             // 
             // lblErr
             // 
@@ -275,18 +295,18 @@
             // paneQues
             // 
             this.paneQues.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneQues.Controls.Add(this.btnAdd);
+            this.paneQues.Controls.Add(this.paneCho);
             this.paneQues.Controls.Add(this.btnOk);
             this.paneQues.Controls.Add(this.btnCho);
-            this.paneQues.Controls.Add(this.lblType);
-            this.paneQues.Controls.Add(this.tBAns);
             this.paneQues.Controls.Add(this.btnNum);
+            this.paneQues.Controls.Add(this.lblType);
+            this.paneQues.Controls.Add(this.label13);
+            this.paneQues.Controls.Add(this.tBAns);
             this.paneQues.Controls.Add(this.label11);
             this.paneQues.Controls.Add(this.gVData);
             this.paneQues.Controls.Add(this.btnDropIden);
             this.paneQues.Controls.Add(this.tBQues);
             this.paneQues.Controls.Add(this.label12);
-            this.paneQues.Controls.Add(this.label13);
             this.paneQues.Controls.Add(this.btnRefIden);
             this.paneQues.Location = new System.Drawing.Point(225, 21);
             this.paneQues.Name = "paneQues";
@@ -300,7 +320,7 @@
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOk.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.btnOk.Location = new System.Drawing.Point(467, 391);
+            this.btnOk.Location = new System.Drawing.Point(467, 389);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(84, 27);
             this.btnOk.TabIndex = 94;
@@ -314,7 +334,7 @@
             this.btnCho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCho.ForeColor = System.Drawing.Color.Lime;
-            this.btnCho.Location = new System.Drawing.Point(7, 391);
+            this.btnCho.Location = new System.Drawing.Point(143, 385);
             this.btnCho.Name = "btnCho";
             this.btnCho.Size = new System.Drawing.Size(115, 27);
             this.btnCho.TabIndex = 93;
@@ -342,11 +362,11 @@
             this.tBAns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBAns.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBAns.ForeColor = System.Drawing.Color.Gainsboro;
-            this.tBAns.Location = new System.Drawing.Point(275, 303);
+            this.tBAns.Location = new System.Drawing.Point(277, 295);
             this.tBAns.Margin = new System.Windows.Forms.Padding(7);
             this.tBAns.Multiline = true;
             this.tBAns.Name = "tBAns";
-            this.tBAns.Size = new System.Drawing.Size(276, 84);
+            this.tBAns.Size = new System.Drawing.Size(274, 84);
             this.tBAns.TabIndex = 91;
             this.tBAns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -355,7 +375,7 @@
             this.btnNum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.btnNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNum.ForeColor = System.Drawing.Color.White;
-            this.btnNum.Location = new System.Drawing.Point(45, 239);
+            this.btnNum.Location = new System.Drawing.Point(45, 384);
             this.btnNum.Maximum = new decimal(new int[] {
             999,
             0,
@@ -374,13 +394,14 @@
             0,
             0,
             0});
+            this.btnNum.ValueChanged += new System.EventHandler(this.btnNum_ValueChanged);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.SlateGray;
-            this.label11.Location = new System.Drawing.Point(271, 280);
+            this.label11.Location = new System.Drawing.Point(271, 268);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(73, 20);
             this.label11.TabIndex = 92;
@@ -428,12 +449,27 @@
             this.gVData.TabIndex = 45;
             this.gVData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gVData_CellClick);
             // 
+            // btnDropIden
+            // 
+            this.btnDropIden.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDropIden.FlatAppearance.BorderSize = 0;
+            this.btnDropIden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDropIden.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDropIden.ForeColor = System.Drawing.Color.Red;
+            this.btnDropIden.Image = global::PROJ_admin_.Properties.Resources.trash24;
+            this.btnDropIden.Location = new System.Drawing.Point(522, 233);
+            this.btnDropIden.Name = "btnDropIden";
+            this.btnDropIden.Size = new System.Drawing.Size(29, 29);
+            this.btnDropIden.TabIndex = 83;
+            this.btnDropIden.UseVisualStyleBackColor = true;
+            this.btnDropIden.Click += new System.EventHandler(this.btnDropIden_Click);
+            // 
             // tBQues
             // 
             this.tBQues.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBQues.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBQues.ForeColor = System.Drawing.Color.Gainsboro;
-            this.tBQues.Location = new System.Drawing.Point(7, 303);
+            this.tBQues.Location = new System.Drawing.Point(7, 295);
             this.tBQues.Margin = new System.Windows.Forms.Padding(7);
             this.tBQues.Multiline = true;
             this.tBQues.Name = "tBQues";
@@ -446,7 +482,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.SlateGray;
-            this.label12.Location = new System.Drawing.Point(3, 280);
+            this.label12.Location = new System.Drawing.Point(3, 268);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 20);
             this.label12.TabIndex = 89;
@@ -457,11 +493,25 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.SlateGray;
-            this.label13.Location = new System.Drawing.Point(3, 241);
+            this.label13.Location = new System.Drawing.Point(3, 386);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(36, 20);
             this.label13.TabIndex = 87;
             this.label13.Text = "No:";
+            // 
+            // btnRefIden
+            // 
+            this.btnRefIden.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefIden.FlatAppearance.BorderSize = 0;
+            this.btnRefIden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefIden.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefIden.ForeColor = System.Drawing.Color.Red;
+            this.btnRefIden.Image = global::PROJ_admin_.Properties.Resources.Button_Refresh_icon24;
+            this.btnRefIden.Location = new System.Drawing.Point(3, 3);
+            this.btnRefIden.Name = "btnRefIden";
+            this.btnRefIden.Size = new System.Drawing.Size(29, 29);
+            this.btnRefIden.TabIndex = 82;
+            this.btnRefIden.UseVisualStyleBackColor = true;
             // 
             // paneIns
             // 
@@ -493,65 +543,6 @@
             this.label6.TabIndex = 84;
             this.label6.Text = "INSTRUCTIONS:";
             // 
-            // btnRefDet
-            // 
-            this.btnRefDet.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefDet.FlatAppearance.BorderSize = 0;
-            this.btnRefDet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefDet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefDet.ForeColor = System.Drawing.Color.Red;
-            this.btnRefDet.Image = global::PROJ_admin_.Properties.Resources.Button_Refresh_icon24;
-            this.btnRefDet.Location = new System.Drawing.Point(175, 17);
-            this.btnRefDet.Name = "btnRefDet";
-            this.btnRefDet.Size = new System.Drawing.Size(29, 29);
-            this.btnRefDet.TabIndex = 84;
-            this.btnRefDet.UseVisualStyleBackColor = true;
-            this.btnRefDet.Click += new System.EventHandler(this.btnRefDet_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ForeColor = System.Drawing.Color.Red;
-            this.btnAdd.Image = global::PROJ_admin_.Properties.Resources.Add_icon;
-            this.btnAdd.Location = new System.Drawing.Point(275, 390);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(29, 29);
-            this.btnAdd.TabIndex = 95;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Visible = false;
-            // 
-            // btnDropIden
-            // 
-            this.btnDropIden.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDropIden.FlatAppearance.BorderSize = 0;
-            this.btnDropIden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDropIden.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDropIden.ForeColor = System.Drawing.Color.Red;
-            this.btnDropIden.Image = global::PROJ_admin_.Properties.Resources.trash24;
-            this.btnDropIden.Location = new System.Drawing.Point(524, 236);
-            this.btnDropIden.Name = "btnDropIden";
-            this.btnDropIden.Size = new System.Drawing.Size(29, 29);
-            this.btnDropIden.TabIndex = 83;
-            this.btnDropIden.UseVisualStyleBackColor = true;
-            this.btnDropIden.Click += new System.EventHandler(this.btnDropIden_Click);
-            // 
-            // btnRefIden
-            // 
-            this.btnRefIden.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefIden.FlatAppearance.BorderSize = 0;
-            this.btnRefIden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefIden.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefIden.ForeColor = System.Drawing.Color.Red;
-            this.btnRefIden.Image = global::PROJ_admin_.Properties.Resources.Button_Refresh_icon24;
-            this.btnRefIden.Location = new System.Drawing.Point(522, 3);
-            this.btnRefIden.Name = "btnRefIden";
-            this.btnRefIden.Size = new System.Drawing.Size(29, 29);
-            this.btnRefIden.TabIndex = 82;
-            this.btnRefIden.UseVisualStyleBackColor = true;
-            // 
             // pBClose
             // 
             this.pBClose.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -563,6 +554,71 @@
             this.pBClose.TabIndex = 7;
             this.pBClose.TabStop = false;
             this.pBClose.Click += new System.EventHandler(this.pBClose_Click);
+            // 
+            // paneCho
+            // 
+            this.paneCho.Controls.Add(this.btnAddCho);
+            this.paneCho.Controls.Add(this.btnChoX);
+            this.paneCho.Controls.Add(this.tBCho);
+            this.paneCho.Controls.Add(this.label4);
+            this.paneCho.Location = new System.Drawing.Point(275, 264);
+            this.paneCho.Name = "paneCho";
+            this.paneCho.Size = new System.Drawing.Size(276, 152);
+            this.paneCho.TabIndex = 95;
+            this.paneCho.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.SlateGray;
+            this.label4.Location = new System.Drawing.Point(5, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 20);
+            this.label4.TabIndex = 96;
+            this.label4.Text = "Choices:";
+            // 
+            // tBCho
+            // 
+            this.tBCho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.tBCho.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBCho.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBCho.Location = new System.Drawing.Point(9, 31);
+            this.tBCho.Margin = new System.Windows.Forms.Padding(7);
+            this.tBCho.Multiline = true;
+            this.tBCho.Name = "tBCho";
+            this.tBCho.Size = new System.Drawing.Size(260, 84);
+            this.tBCho.TabIndex = 97;
+            this.tBCho.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnChoX
+            // 
+            this.btnChoX.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChoX.FlatAppearance.BorderSize = 0;
+            this.btnChoX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChoX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChoX.ForeColor = System.Drawing.Color.Red;
+            this.btnChoX.Image = global::PROJ_admin_.Properties.Resources.close;
+            this.btnChoX.Location = new System.Drawing.Point(9, 119);
+            this.btnChoX.Name = "btnChoX";
+            this.btnChoX.Size = new System.Drawing.Size(29, 29);
+            this.btnChoX.TabIndex = 99;
+            this.btnChoX.UseVisualStyleBackColor = true;
+            this.btnChoX.Click += new System.EventHandler(this.btnChoX_Click);
+            // 
+            // btnAddCho
+            // 
+            this.btnAddCho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddCho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddCho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddCho.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.btnAddCho.Location = new System.Drawing.Point(185, 119);
+            this.btnAddCho.Name = "btnAddCho";
+            this.btnAddCho.Size = new System.Drawing.Size(84, 27);
+            this.btnAddCho.TabIndex = 100;
+            this.btnAddCho.Text = "UPDATE";
+            this.btnAddCho.UseVisualStyleBackColor = true;
+            this.btnAddCho.Click += new System.EventHandler(this.btnAddCho_Click);
             // 
             // frmQues
             // 
@@ -591,6 +647,8 @@
             this.paneIns.ResumeLayout(false);
             this.paneIns.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).EndInit();
+            this.paneCho.ResumeLayout(false);
+            this.paneCho.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -630,6 +688,10 @@
         private System.Windows.Forms.TextBox lblType;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Panel paneCho;
+        private System.Windows.Forms.TextBox tBCho;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnChoX;
+        private System.Windows.Forms.Button btnAddCho;
     }
 }
