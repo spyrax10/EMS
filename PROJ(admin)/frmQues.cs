@@ -13,6 +13,8 @@ namespace PROJ_admin_
         public void def()
         {
             DbQ.loadSub(frmMain.empId, cBSub);
+            DbQ.loadSub(frmMain.empId, cBSub2);
+            DbQ.loadQuesCode(cBCode, frmMain.empId);
             misc.clrCont(gBQues);
             misc.clrCont(gBDet);
             paneIns.BringToFront();
@@ -23,14 +25,22 @@ namespace PROJ_admin_
             cBPer.Enabled = true;
             lblErr.Visible = false;
             tBCode.Enabled = true;
-            tBCode.Focus();
             btnCho.Visible = false;
             btnOk.Text = "ADD";
             btnAddCho.Text = "ADD";
+            btnSet.Text = "STUDENT TEST SET";
+            btnAdd.Visible = false;
+            gBSet.Visible = false;
+            gBQues.Visible = true;
+            btnAdd.Visible = false;
+            gVSet.DataSource = null;
+            cBCode2.Text = "";
+            tBCode.Focus();
         }
         public void showQues()
         {
             lblType.Text = cBType.Text.ToUpper();
+            paneIns.Visible = false;
             paneQues.Visible = true;
             paneQues.BringToFront();
             cBSub.Enabled = false;
@@ -50,8 +60,19 @@ namespace PROJ_admin_
             tBCho.Text = "";
             paneCho.Focus();
             btnAddCho.Text = "ADD";
-            DbQ.loadCho(gVData, frmMain.empId, tBCode.Text,
-                    cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text);
+            DbQ.loadCho(gVData, frmMain.empId, tBCode.Text, tBSet.Text, btnNum);
+        }
+        public void Ref()
+        {
+            tBQues.Text = "";
+            tBAns.Text = "";
+            tBQues.Focus();
+            paneCho.Visible = false;
+            tBCho.Text = "";
+            btnAddCho.Text = "ADD";
+            btnOk.Text = "ADD";
+            DbQ.loadQues(gVData, frmMain.empId, tBCode.Text,
+                        cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text);
         }
         private void frmQues_Load(object sender, EventArgs e)
         {
@@ -108,12 +129,13 @@ namespace PROJ_admin_
 
         private void btnCho_Click(object sender, EventArgs e)
         {
-            if (gVData.Rows.Count <= 0)
+            if (gVData.Rows.Count <= 0 || misc.isEmptyFields(paneQues) == true)
             {
                 msg.dataEmpty();
             }
             else
             {
+                DbQ.addChoDef(frmMain.empId, tBCode.Text, tBSet.Text, btnNum, tBQues, tBAns);
                 showCho();
             }
         }
@@ -121,7 +143,8 @@ namespace PROJ_admin_
         private void btnDropIden_Click(object sender, EventArgs e)
         {
             DbQ.delQues(gVData, frmMain.empId, tBCode.Text, 
-                cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text, tBQues, tBAns, btnOk);
+                cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text, tBQues, tBAns, btnOk,
+                btnAddCho, tBCho, btnNum);
         }
 
         private void gVData_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -134,13 +157,21 @@ namespace PROJ_admin_
             {
                 DbQ.editQues(paneCho, gVData, frmMain.empId, tBCode.Text, cBSub.Text, cBPer.Text,
                      tBSet.Text, cBType.Text, btnNum, tBQues, tBAns, btnOk, tBCho, btnAddCho);
+                
+                if (cBType.Text == "Enumeration")
+                {
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                }
             }
         }
 
         private void btnNum_ValueChanged(object sender, EventArgs e)
         {
-            tBQues.Text = ""; tBAns.Text = ""; tBQues.Focus();
-            paneCho.Visible = false; tBCho.Text = ""; btnAddCho.Text = "ADD";
+            Ref();
         }
 
         private void btnChoX_Click(object sender, EventArgs e)
@@ -149,17 +180,108 @@ namespace PROJ_admin_
             DbQ.loadQues(gVData, frmMain.empId, tBCode.Text,
                         cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text);
         }
-
-        private void btnView_Click(object sender, EventArgs e)
-        {
-            showCho();
-        }
-
         private void btnAddCho_Click(object sender, EventArgs e)
         {
             DbQ.addChoQues(paneQues, gVData, frmMain.empId, tBCode.Text,
-                                cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text,
-                                btnNum, tBQues, tBCho, btnAddCho);
+                            tBSet.Text, btnNum, tBQues, tBCho, btnAddCho);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (tBQues.Text != "")
+            {
+                tBAns.Text = ""; tBAns.Focus(); btnOk.Text = "ADD";
+            }
+            else
+            {
+                msg.incMsg();
+            }
+        }
+        private void cBCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DbQ.dispQues(gBDet, cBCode, frmMain.empId, tBCode, cBSub, cBPer, tBSet);
+            cBType.Text = "";
+            paneIns.Visible = true;
+            paneIns.BringToFront();
+        }
+
+        private void tBSet_TextChanged(object sender, EventArgs e)
+        {
+            cBType.Text = "";
+            paneIns.Visible = true;
+            paneIns.BringToFront();
+        }
+
+        private void btnRef_Click(object sender, EventArgs e)
+        {
+            Ref();
+            btnNum.Value = 1;
+        }
+
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+            if (btnSet.Text == "STUDENT TEST SET")
+            {
+                gBSet.Visible = true;
+                gBQues.Visible = false;
+                btnSet.Text = "QUESTIONAIRE";
+                DbQ.loadStudents(frmMain.empId, gVStud);
+                cBSet.Text = "";
+                cBSub2.Text = "";
+            }
+            else
+            {
+                def();
+            }       
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            def();
+        }
+
+        private void cBSub2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBSub2.Text != "")
+            {
+                DbQ.loadSet2(cBSet, frmMain.empId, cBSub2.Text, cBCode2);
+                DbQ.loadEmpStud(frmMain.empId, cBSub2, gVStud);
+                gVSet.DataSource = null;
+            }
+        }
+
+        private void cBCode2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cBCode2.Text != "")
+            {           
+                DbQ.loadStudSet(gVSet, frmMain.empId, cBSub2.Text, cBCode2.Text);
+            }
+        }
+
+        private void cBSet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBSet.Text != "")
+            {
+                DbQ.insStudSet(gVStud, cBCode2.Text, frmMain.empId, 
+                    cBSub2.Text, cBSet, gVSet);
+            }
+        }
+
+        private void gVStud_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cBSet.Text = "";
+        }
+
+        private void btnDelSet_Click(object sender, EventArgs e)
+        {
+            if (gVSet.Rows.Count <= 0)
+            {
+                msg.dataEmpty();
+            }
+            else
+            {
+                DbQ.delStudSet(gVSet, cBCode2.Text, cBSub2.Text, frmMain.empId);
+            }
         }
     }
 }

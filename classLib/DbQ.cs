@@ -10,7 +10,7 @@ namespace classLib
 {
     public class DbQ
     {
-        static SqlDataAdapter adapt;
+       public static SqlDataAdapter adapt;
 
         public static void loadProfile(string empId, Label name, Label id, Label dept, PictureBox pB)
         {
@@ -164,7 +164,7 @@ namespace classLib
                             {
                                 if (dr.Read() && btn.Text != "UPDATE")
                                 {
-                                    msg.subExits();
+                                    msg.alExits();
                                     code.Focus();
                                 }
                                 else
@@ -1259,7 +1259,54 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void loadStudents(string empId, ComboBox cB, DataGridView gV)
+        public static void loadSet2(ComboBox cB, string empId, string sub, ComboBox code)
+        {
+            try
+            {
+                cB.Text = "";
+                cB.Items.Clear();
+                code.Text = "";
+                code.Items.Clear();
+                using (var con  = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Distinct QSet from quesTB where empId = @ID " +
+                            "and Subject = @Sub";
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Sub", sub);
+                        using(var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                cB.Items.Add(dr["QSet"]).ToString();
+                            }
+                        }
+                    }
+                    using (var cmd2 = con.CreateCommand())
+                    {
+                        cmd2.CommandText = "Select Distinct Code from quesTB where " +
+                            "empId = @ID and Subject = @Sub";
+                        cmd2.Parameters.AddWithValue("@ID", empId);
+                        cmd2.Parameters.AddWithValue("@Sub", sub);
+                        using (var dr2 = cmd2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                code.Items.Add(dr2["Code"]).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadStudents(string empId, DataGridView gV)
         {
             try
             {
@@ -1274,7 +1321,6 @@ namespace classLib
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
-                    loadSub(empId, cB);
                 }
             }
             catch (Exception e)
@@ -1814,7 +1860,7 @@ namespace classLib
                             {
                                 if (dr.Read())
                                 {
-                                    msg.subExits();
+                                    msg.alExits();
                                 }
                                 else
                                 {
@@ -1944,6 +1990,7 @@ namespace classLib
                                 num.Value = Convert.ToInt32(dr["No"].ToString());
                                 ques.Text = dr["Question"].ToString();
                                 ans.Text = val;
+                                cho.Text = val;
                                 btn.Text = "UPDATE";
                             }
                             else
@@ -1951,14 +1998,10 @@ namespace classLib
                                 using (var cmd2 = con.CreateCommand())
                                 {
                                     cmd2.CommandText = "Select * from choiceTB where Code = @Code and empId = @ID " +
-                                    "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ " +
-                                    "and Choices = @Val";
+                                    "and QSet = @Set and Choices = @Val";
                                     cmd2.Parameters.AddWithValue("@Code", code);
                                     cmd2.Parameters.AddWithValue("@ID", empId);
-                                    cmd2.Parameters.AddWithValue("@Sub", sub);
-                                    cmd2.Parameters.AddWithValue("@Per", period);
                                     cmd2.Parameters.AddWithValue("@Set", set);
-                                    cmd2.Parameters.AddWithValue("@Typ", type);
                                     cmd2.Parameters.AddWithValue("@Val", val);
 
                                     using (var dr2 = cmd2.ExecuteReader())
@@ -1985,23 +2028,154 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void loadCho(DataGridView gV, string empId, string code, string sub,
-            string period, string set, string type)
+        public static void loadCho(DataGridView gV, string empId, string code, string set,
+            NumericUpDown num)
         {
             try
             {
+                
                 using (var con = DBInfo.getCon())
                 {
                     con.Open();
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select No, Question, Choices from choiceTB where " +
-                        "Code = '" + code + "' and empId = '" + empId + "' and Subject = '" + sub + "' " +
-                        "and Period = '" + period + "' and Date = '" + msg.date + "' " +
-                        "and QSet = '" + set + "' and Type = '" + type + "' ORDER BY CAST (No AS INT) ASC", con);
+                        "Code = '" + code + "' and empId = '" + empId + "' and QSet = '" + set + "' and No = '" + num.Value.ToString() + "' " +
+                        "ORDER BY CAST (No AS INT) ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
                     misc.sortGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void dispQues2(DataGridView gV, string empId, ComboBox cB, TextBox sub, TextBox per)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from quesTB where Code = @Code and empId = @ID ";
+                        cmd.Parameters.AddWithValue("@Code", cB.Text);
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                sub.Text = dr["Subject"].ToString();
+                                per.Text = dr["Period"].ToString();
+
+                                DataTable dt = new DataTable();
+                                adapt = new SqlDataAdapter("Select QSet, Type, No, Question, Answer from quesTB where Code = '" + cB.Text + "' and empId = '" + empId + "' ", con);
+                                adapt.Fill(dt);
+                                gV.DataSource = dt;
+                                misc.defGV(gV);
+                                misc.sortExam(gV);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void dispQues(GroupBox gB, ComboBox cB, string empId, TextBox code,
+            ComboBox sub, ComboBox per, TextBox set)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from quesTB where Code = @Code and empId = @ID ";
+                        cmd.Parameters.AddWithValue("@Code", cB.Text);
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                gB.Enabled = true;
+                                code.Text = dr["Code"].ToString();
+                                sub.Text = dr["Subject"].ToString();
+                                per.Text = dr["Period"].ToString();
+                                set.Text = dr["QSet"].ToString();
+                                sub.Enabled = false; per.Enabled = false; code.Enabled = false;
+                            }
+                        }
+                            
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadQuesCode2(ComboBox sub, string empId, ComboBox code)
+        {
+            try
+            {
+                code.Text = "";
+                code.Items.Clear();
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Distinct Code from quesTB where " +
+                            "empId = @ID and Subject = @Sub";
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Sub", sub);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                code.Items.Add(dr["Code"]).ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadQuesCode(ComboBox cB, string empId)
+        {
+            try
+            {
+                cB.Text = "";
+                cB.Items.Clear();
+                using(var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Distinct Code from quesTB where empId = @ID";
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                cB.Items.Add(dr["Code"].ToString());
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -2021,8 +2195,7 @@ namespace classLib
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select No, Question, Answer from quesTB where " +
                         "Code = '" + code + "' and empId = '" + empId + "' and Subject = '" + sub + "' " +
-                        "and Period = '" + period + "' and Date = '" + msg.date + "' " +
-                        "and QSet = '" + set + "' and Type = '" + type + "' ORDER BY CAST (No AS INT) ASC", con);
+                        "and Period = '" + period + "' and QSet = '" + set + "' and Type = '" + type + "' ORDER BY CAST (No AS INT) ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
@@ -2036,7 +2209,8 @@ namespace classLib
             }
         }
         public static void delQues(DataGridView gV, string empId, string code, string sub,
-            string period, string set, string type, TextBox quesT, TextBox ansT, Button btn)
+            string period, string set, string type, TextBox quesT, TextBox ansT, Button btn,
+            Button btnCho, TextBox cho, NumericUpDown num)
         {
             try
             {            
@@ -2049,6 +2223,7 @@ namespace classLib
                     else
                     {
                         string ans = gV.CurrentRow.Cells[2].Value.ToString();
+                        string ques = gV.CurrentRow.Cells[1].Value.ToString();
                         string colName = gV.Columns[2].Name;
                         
                         con.Open();
@@ -2068,24 +2243,35 @@ namespace classLib
                                 cmd.Parameters.AddWithValue("@Typ", type);
                                 cmd.Parameters.AddWithValue("@Ans", ans);
                                 cmd.ExecuteNonQuery();
+
+                                using (var cmd3 = con.CreateCommand())
+                                {
+                                    cmd3.CommandText = "Delete from choiceTB where Code = @Code and empId = @ID " +
+                                        "and QSet = @Set and Question = @Ques";
+                                    cmd3.Parameters.AddWithValue("@Code", code);
+                                    cmd3.Parameters.AddWithValue("@ID", empId);
+                                    cmd3.Parameters.AddWithValue("@Set", set);
+                                    cmd3.Parameters.AddWithValue("@Ques", ques);
+                                    cmd3.ExecuteNonQuery();
+                                }
                                 loadQues(gV, empId, code, sub, period, set, type);
                                 quesT.Text = ""; ansT.Text = ""; quesT.Focus();
                                 btn.Text = "ADD";
                             }
                             else
                             {
-                                cmd.CommandText = "Delete from choiceTB where Code = @Code and empId = @ID " +
-                                "and Subject = @Sub and Period = @Per and QSet = @Set and Type = @Typ " +
-                                "and Choices = @Ans";
-                                cmd.Parameters.AddWithValue("@Code", code);
-                                cmd.Parameters.AddWithValue("@ID", empId);
-                                cmd.Parameters.AddWithValue("@Sub", sub);
-                                cmd.Parameters.AddWithValue("@Per", period);
-                                cmd.Parameters.AddWithValue("@Set", set);
-                                cmd.Parameters.AddWithValue("@Typ", type);
-                                cmd.Parameters.AddWithValue("@Ans", ans);
-                                cmd.ExecuteNonQuery();
-                                loadCho(gV, empId, code, sub, period, set, type);
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Delete from choiceTB where Code = @Code and empId = @ID " +
+                                    "and QSet = @Set and Choices = @Ans";
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.Parameters.AddWithValue("@Set", set);
+                                    cmd2.Parameters.AddWithValue("@Ans", ans);
+                                    cmd2.ExecuteNonQuery();
+                                    btnCho.Text = "ADD"; cho.Text = ""; cho.Focus();
+                                    loadCho(gV, empId, code, set, num);
+                                }
                             }  
                         }
                     }
@@ -2097,8 +2283,52 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void addChoQues(Panel pane, DataGridView gV, string empId, string code, string sub,
-            string period, string set, string type, NumericUpDown num, TextBox ques, TextBox cho, Button btn)
+        public static void addChoDef(string empId, string code,
+            string set, NumericUpDown num, TextBox ques, TextBox ans)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from choiceTB where Code = @Code and empId = @ID " +
+                            "and QSet = @Set and Question = @Ques and Choices = @Ans";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("Ques", ques.Text);
+                        cmd.Parameters.AddWithValue("@Ans", ans.Text);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (!dr.Read())
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Insert into choiceTB Values(@Code, @ID, " +
+                                            "@Set, @Num, @Ques, @Cho)";
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.Parameters.AddWithValue("@Set", set);
+                                    cmd2.Parameters.AddWithValue("@Num", num.Value.ToString());
+                                    cmd2.Parameters.AddWithValue("@Ques", ques.Text);
+                                    cmd2.Parameters.AddWithValue("@Cho", ans.Text);
+                                    cmd2.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void addChoQues(Panel pane, DataGridView gV, string empId, string code, 
+            string set, NumericUpDown num, TextBox ques, TextBox cho, Button btn)
         {
             try
             {
@@ -2115,13 +2345,9 @@ namespace classLib
                         using (var cmd = con.CreateCommand())
                         {
                             cmd.CommandText = "Select * from choiceTB where Code = @Code and empId = @ID " +
-                                "and Subject = @Sub and Period = @Per and Type = @Type and QSet = @Set " +
-                                "and No = @Num and Choices = @Cho";
+                                " and QSet = @Set and No = @Num and Choices = @Cho";
                             cmd.Parameters.AddWithValue("@Code", code);
                             cmd.Parameters.AddWithValue("@ID", empId);
-                            cmd.Parameters.AddWithValue("@Sub", sub);
-                            cmd.Parameters.AddWithValue("@Per", period);
-                            cmd.Parameters.AddWithValue("@Type", type);
                             cmd.Parameters.AddWithValue("@Set", set);
                             cmd.Parameters.AddWithValue("@Num", num.Value.ToString());
                             cmd.Parameters.AddWithValue("@Cho", cho.Text);
@@ -2129,7 +2355,7 @@ namespace classLib
                             {
                                 if (dr.Read() && btn.Text != "UPDATE")
                                 {
-                                    msg.quesUse();
+                                    msg.alExits();
                                 }
                                 else
                                 {
@@ -2137,19 +2363,16 @@ namespace classLib
                                     {
                                         using (var cmd2 = con.CreateCommand())
                                         {
-                                            cmd2.CommandText = "Insert into choiceTB Values(@Code, @ID, @Sub, " +
-                                            "@Per, @Date, @Set, @Type, @Num, @Ques, @Cho)";
+                                            cmd2.CommandText = "Insert into choiceTB Values(@Code, @ID, " +
+                                            "@Set, @Num, @Ques, @Cho)";
                                             cmd2.Parameters.AddWithValue("@Code", code);
                                             cmd2.Parameters.AddWithValue("@ID", empId);
-                                            cmd2.Parameters.AddWithValue("@Sub", sub);
-                                            cmd2.Parameters.AddWithValue("@Per", period);
-                                            cmd2.Parameters.AddWithValue("@Date", msg.date);
-                                            cmd2.Parameters.AddWithValue("@Type", type);
                                             cmd2.Parameters.AddWithValue("@Set", set);
                                             cmd2.Parameters.AddWithValue("@Num", num.Value.ToString());
                                             cmd2.Parameters.AddWithValue("@Ques", ques.Text);
                                             cmd2.Parameters.AddWithValue("@Cho", cho.Text);
                                             cmd2.ExecuteNonQuery();
+                                            cho.Text = "";
                                         }
                                     }
                                     else
@@ -2157,16 +2380,12 @@ namespace classLib
                                         string val = gV.CurrentRow.Cells[2].Value.ToString();
                                         using (var cmd3 = con.CreateCommand())
                                         {
-                                            cmd3.CommandText = "Update choiceTB Set Question = @Ques, Choice = @Ans where " +
-                                                "Code = @Code and empId = @ID and Subject = @Sub and Period = @Per and " +
-                                                "Type = @Type and QSet = @Set and Answer = @valA";
+                                            cmd3.CommandText = "Update choiceTB Set Question = @Ques, Choices = @Ans where " +
+                                                "Code = @Code and empId = @ID and QSet = @Set and Choices = @valA";
                                             cmd3.Parameters.AddWithValue("@Ques", ques.Text);
                                             cmd3.Parameters.AddWithValue("@Ans", cho.Text);
                                             cmd3.Parameters.AddWithValue("@Code", code);
-                                            cmd3.Parameters.AddWithValue("@ID", empId);
-                                            cmd3.Parameters.AddWithValue("@Sub", sub);
-                                            cmd3.Parameters.AddWithValue("@Per", period);
-                                            cmd3.Parameters.AddWithValue("@Type", type);
+                                            cmd3.Parameters.AddWithValue("@ID", empId);                        
                                             cmd3.Parameters.AddWithValue("@Set", set);
                                             cmd3.Parameters.AddWithValue("@valA", val);
                                             cmd3.ExecuteNonQuery();
@@ -2174,7 +2393,7 @@ namespace classLib
                                         }
                                     }
                                     cho.Focus();
-                                    loadCho(gV, empId, code, sub, period, set, type);
+                                    loadCho(gV, empId, code,set, num);
                                 }
                             }
                         }
@@ -2264,7 +2483,7 @@ namespace classLib
 
                         if (stat == false)
                         {
-                            msg.quesUse();
+                            msg.alExits();
                         }
                         else
                         {
@@ -2299,7 +2518,6 @@ namespace classLib
                             else
                             {
                                 string valA = gV.CurrentRow.Cells[2].Value.ToString();
-
                                 using (var cmd3 = con.CreateCommand())
                                 {
                                     cmd3.CommandText = "Update quesTB Set Question = @Ques, Answer = @Ans where " +
@@ -2321,6 +2539,417 @@ namespace classLib
                             }
                             lbl.Text = type;
                             loadQues(gV, empId, code, sub, period, set, type);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadStudSet(DataGridView gV, string empId, string sub, string code)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select studSet AS QSet, studId AS StudID from studSetTB where " +
+                        "empId = '" + empId + "' and Subject = '" + sub + "' and Code = '" + code + "' Order By studSet ASC", con);
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                    misc.sortGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void delStudSet(DataGridView gV, string code, string sub, string empId)
+        {
+            try
+            {
+                string id = gV.CurrentRow.Cells[1].Value.ToString();
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Delete from studSetTB where Code = @Code and empId = @emp " +
+                            "and studId = @ID";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@emp", empId);
+                        cmd.Parameters.AddWithValue("@ID", id);
+                        cmd.ExecuteNonQuery();
+                        loadStudSet(gV, empId, sub, code);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void insStudSet(DataGridView gV, string code, string empId, 
+            string sub, ComboBox set, DataGridView gV2)
+        {
+            try
+            {
+                string studId = gV.CurrentRow.Cells[0].Value.ToString();
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from studSetTB where " +
+                            "Code = @Code and empId = @Emp and Subject = @Sub " +
+                            "and studId = @ID";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Emp", empId);
+                        cmd.Parameters.AddWithValue("@Sub", sub);
+
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                msg.studSet();
+                            }
+                            else
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Insert into studSetTB Values(@Code, @ID, " +
+                                        "@Sub, @studID, @Set)";
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.Parameters.AddWithValue("@Sub", sub);
+                                    cmd2.Parameters.AddWithValue("@studID", studId);
+                                    cmd2.Parameters.AddWithValue("@Set", set.Text);
+                                    cmd2.ExecuteNonQuery();
+                                    loadStudSet(gV2, empId, sub, code);
+                                    set.Text = "";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+
+        public static void loadGrade(DataGridView gV, string empId)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select Percentage, Grade, Remarks, LastUpdate from gradeTB " +
+                        "where empId = '" + empId + "' ORDER BY CAST (Percentage AS INT) DESC", con);
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                    misc.sortGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void editGrade(string empId, NumericUpDown per, TextBox grade, ComboBox mark,
+            DataGridView gV, Button btn)
+        {
+            try
+            {
+                string val = gV.CurrentRow.Cells[0].Value.ToString();
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from gradeTB where empId = @ID and Percentage = @Per";
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Per", val);
+
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                per.Value = Convert.ToInt32(dr["Percentage"].ToString());
+                                grade.Text = dr["Grade"].ToString();
+                                mark.Text = dr["Remarks"].ToString();
+                                btn.Text = "UPDATE";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void addGrade(string empId, NumericUpDown per, TextBox grade, ComboBox mark,
+            DataGridView gV, Button btn)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from gradeTB where" +
+                            " empId = @ID and Percentage = @Per";
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Per", per.Value.ToString());
+                        
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read() && btn.Text != "UPDATE")
+                            {
+                                msg.alExits();
+                            }
+                            else
+                            {
+                                if (btn.Text == "ADD")
+                                {
+                                    using (var cmd2 = con.CreateCommand())
+                                    {
+                                        cmd2.CommandText = "Insert into gradeTB Values(@ID, @Per," +
+                                            "@Grade, @Mark, @Date)";
+                                        cmd2.Parameters.AddWithValue("@ID", empId);
+                                        cmd2.Parameters.AddWithValue("@Per", per.Value.ToString());
+                                        cmd2.Parameters.AddWithValue("@Grade", grade.Text);
+                                        cmd2.Parameters.AddWithValue("@Mark", mark.Text);
+                                        cmd2.Parameters.AddWithValue("@Date", msg.date);
+                                        cmd2.ExecuteNonQuery();
+                                    }
+                                }
+                                else
+                                {
+                                    string valPer = gV.CurrentRow.Cells[0].Value.ToString();
+                                    string valGr = gV.CurrentRow.Cells[1].Value.ToString();
+
+                                    using (var cmd3 = con.CreateCommand())
+                                    {
+                                        cmd3.CommandText = "Update gradeTB Set Percentage = @Per, " +
+                                            "Grade = @Grade, Remarks = @Mark, LastUpdate = @Date where " +
+                                            "empId = @ID and Percentage = @vPer";
+                                        cmd3.Parameters.AddWithValue("@ID", empId);
+                                        cmd3.Parameters.AddWithValue("@Per", per.Value.ToString());
+                                        cmd3.Parameters.AddWithValue("@Grade", grade.Text);
+                                        cmd3.Parameters.AddWithValue("@Mark", mark.Text);
+                                        cmd3.Parameters.AddWithValue("@Date", msg.date);
+                                        cmd3.Parameters.AddWithValue("@vPer", valPer);
+                                        cmd3.Parameters.AddWithValue("@vGrade", valGr);
+                                        cmd3.ExecuteNonQuery();
+                                        btn.Text = "ADD";
+                                    }
+                                }
+                                mark.Text = ""; grade.Text = "";
+                                loadGrade(gV, empId);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadStudLog(DataGridView gV, string code)
+        {
+            try
+            {
+                using(var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select studLogTB.studId AS StudID, dbo.allCap(Course) as Course, Lastname, Firstname, IP, Status from studLogTB " +
+                        "FULL OUTER JOIN studTB on studLogTB.studId = studTB.studId where studLogTB.Code = '" + code + "'", con);
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                    misc.sortGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void addTestSet(string empId, ComboBox code, 
+            string sub, string per, NumericUpDown num, Button btn)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using(var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from testSetTB where empId = @ID and Code = @Code " +
+                            "and Status = @Stat";
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.Parameters.AddWithValue("@Code", code.Text);
+                        cmd.Parameters.AddWithValue("@Stat", msg.start);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                msg.examUse();
+                            }
+                            else
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Insert into testSetTB Values (@ID, @Code, @Sub, @Per," +
+                                        "@Dur, @Date, @Time, @Stat)";
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.Parameters.AddWithValue("@Code", code.Text);
+                                    cmd2.Parameters.AddWithValue("@Sub", sub);
+                                    cmd2.Parameters.AddWithValue("@Per", per);
+                                    cmd2.Parameters.AddWithValue("@Dur", num.Value.ToString());
+                                    cmd2.Parameters.AddWithValue("@Date", msg.date);
+                                    cmd2.Parameters.AddWithValue("@Time", msg.time);
+                                    cmd2.Parameters.AddWithValue("@Stat", msg.start);
+                                    cmd2.ExecuteNonQuery();
+                                    msg.examStart();
+                                    btn.Enabled = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void studSet(string studId, ComboBox cB, TextBox set)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from studSetTB where studId = @ID and " +
+                            "Code = @Code";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", cB.Text);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                set.Text = dr["studSet"].ToString();
+                                cB.Enabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+
+        [Obsolete]
+        public static void studLog(string studId, string code, string set,
+            Timer time)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from studLogTB where studId = @ID " +
+                            "and Code = @Code and Date = @Date";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
+
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                msg.accAl();
+                            }
+                            else
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Insert into studLogTB Values(@ID, @Code, " +
+                                        "@Date, @Time, @IP, @Stat)";
+                                    cmd2.Parameters.AddWithValue("@ID", studId);
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@Date", msg.date);
+                                    cmd2.Parameters.AddWithValue("@Time", msg.time);
+                                    cmd2.Parameters.AddWithValue("@IP", misc.ip);
+                                    cmd2.Parameters.AddWithValue("@Stat", msg.slogIn);
+                                    cmd2.ExecuteNonQuery();
+                                    time.Start();
+                                    msg.logSuc();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadStudCode (TextBox studId, ComboBox cB)
+        {
+            try
+            {
+                cB.Items.Clear(); cB.Text = "";
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Distinct Code from studSetTB " +
+                            "where studId = @ID";
+                        cmd.Parameters.AddWithValue("@ID", studId.Text);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                cB.Items.Add(dr["Code"].ToString());
+                                cB.Focus();
+                                studId.Enabled = false;
+                            }
                         }
                     }
                 }

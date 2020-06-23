@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.paneMain = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.pBClose = new System.Windows.Forms.PictureBox();
+            this.gBDet = new System.Windows.Forms.GroupBox();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.gVList = new System.Windows.Forms.DataGridView();
             this.gBInfo = new System.Windows.Forms.GroupBox();
             this.btnRef = new System.Windows.Forms.Button();
             this.paneInfo = new System.Windows.Forms.Panel();
@@ -65,19 +71,13 @@
             this.tBID = new System.Windows.Forms.TextBox();
             this.pBImg = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.gBDet = new System.Windows.Forms.GroupBox();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.tbSearch = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.gVList = new System.Windows.Forms.DataGridView();
             this.paneMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).BeginInit();
+            this.gBDet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVList)).BeginInit();
             this.gBInfo.SuspendLayout();
             this.paneInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBImg)).BeginInit();
-            this.gBDet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gVList)).BeginInit();
             this.SuspendLayout();
             // 
             // paneMain
@@ -119,6 +119,114 @@
             this.pBClose.TabIndex = 4;
             this.pBClose.TabStop = false;
             this.pBClose.Click += new System.EventHandler(this.pBClose_Click);
+            // 
+            // gBDet
+            // 
+            this.gBDet.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.gBDet.Controls.Add(this.btnPrint);
+            this.gBDet.Controls.Add(this.btnEdit);
+            this.gBDet.Controls.Add(this.tbSearch);
+            this.gBDet.Controls.Add(this.label6);
+            this.gBDet.Controls.Add(this.gVList);
+            this.gBDet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gBDet.ForeColor = System.Drawing.Color.White;
+            this.gBDet.Location = new System.Drawing.Point(12, 57);
+            this.gBDet.Name = "gBDet";
+            this.gBDet.Size = new System.Drawing.Size(726, 479);
+            this.gBDet.TabIndex = 35;
+            this.gBDet.TabStop = false;
+            this.gBDet.Text = "Employee List:";
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = global::PROJ_admin_.Properties.Resources.print_icon;
+            this.btnPrint.Location = new System.Drawing.Point(6, 443);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(30, 30);
+            this.btnPrint.TabIndex = 9;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::PROJ_admin_.Properties.Resources.edit;
+            this.btnEdit.Location = new System.Drawing.Point(690, 443);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(30, 30);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.tbSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSearch.ForeColor = System.Drawing.Color.White;
+            this.tbSearch.Location = new System.Drawing.Point(545, 38);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(175, 26);
+            this.tbSearch.TabIndex = 2;
+            this.tbSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(468, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 20);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Search:";
+            // 
+            // gVList
+            // 
+            this.gVList.AllowUserToAddRows = false;
+            this.gVList.AllowUserToResizeRows = false;
+            this.gVList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gVList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.gVList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gVList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gVList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gVList.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gVList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gVList.GridColor = System.Drawing.Color.DodgerBlue;
+            this.gVList.Location = new System.Drawing.Point(6, 78);
+            this.gVList.Name = "gVList";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gVList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gVList.RowHeadersVisible = false;
+            this.gVList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gVList.Size = new System.Drawing.Size(714, 363);
+            this.gVList.TabIndex = 0;
             // 
             // gBInfo
             // 
@@ -512,114 +620,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID Number:";
             // 
-            // gBDet
-            // 
-            this.gBDet.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gBDet.Controls.Add(this.btnPrint);
-            this.gBDet.Controls.Add(this.btnEdit);
-            this.gBDet.Controls.Add(this.tbSearch);
-            this.gBDet.Controls.Add(this.label6);
-            this.gBDet.Controls.Add(this.gVList);
-            this.gBDet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBDet.ForeColor = System.Drawing.Color.White;
-            this.gBDet.Location = new System.Drawing.Point(12, 57);
-            this.gBDet.Name = "gBDet";
-            this.gBDet.Size = new System.Drawing.Size(726, 479);
-            this.gBDet.TabIndex = 35;
-            this.gBDet.TabStop = false;
-            this.gBDet.Text = "Employee List:";
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrint.FlatAppearance.BorderSize = 0;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = global::PROJ_admin_.Properties.Resources.print_icon;
-            this.btnPrint.Location = new System.Drawing.Point(6, 447);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(30, 30);
-            this.btnPrint.TabIndex = 9;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::PROJ_admin_.Properties.Resources.edit;
-            this.btnEdit.Location = new System.Drawing.Point(690, 447);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(30, 30);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // tbSearch
-            // 
-            this.tbSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.tbSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSearch.ForeColor = System.Drawing.Color.White;
-            this.tbSearch.Location = new System.Drawing.Point(545, 38);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(175, 26);
-            this.tbSearch.TabIndex = 2;
-            this.tbSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
-            this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(468, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 20);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Search:";
-            // 
-            // gVList
-            // 
-            this.gVList.AllowUserToAddRows = false;
-            this.gVList.AllowUserToResizeRows = false;
-            this.gVList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gVList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.gVList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gVList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.gVList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gVList.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gVList.DefaultCellStyle = dataGridViewCellStyle11;
-            this.gVList.GridColor = System.Drawing.Color.DodgerBlue;
-            this.gVList.Location = new System.Drawing.Point(6, 78);
-            this.gVList.Name = "gVList";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gVList.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.gVList.RowHeadersVisible = false;
-            this.gVList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gVList.Size = new System.Drawing.Size(714, 363);
-            this.gVList.TabIndex = 0;
-            // 
             // empBio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -635,14 +635,14 @@
             this.Load += new System.EventHandler(this.empBio_Load);
             this.paneMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).EndInit();
+            this.gBDet.ResumeLayout(false);
+            this.gBDet.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVList)).EndInit();
             this.gBInfo.ResumeLayout(false);
             this.gBInfo.PerformLayout();
             this.paneInfo.ResumeLayout(false);
             this.paneInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBImg)).EndInit();
-            this.gBDet.ResumeLayout(false);
-            this.gBDet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gVList)).EndInit();
             this.ResumeLayout(false);
 
         }

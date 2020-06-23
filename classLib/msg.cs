@@ -30,6 +30,8 @@ namespace classLib
         public static string empList = "EMPLOYEE LIST";
         public static string appClose = "Application Shutdown";
         public static string ver = " VERIFY";
+        public static string start = "STARTED";
+        public static string slogIn = "LOGIN";
        
         public static string updEmp(string empId)
         {
@@ -146,9 +148,9 @@ namespace classLib
         {
             MessageBox.Show("Numbers Only!", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        public static void subExits()
+        public static void alExits()
         {
-            MessageBox.Show("Subject already exits!", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Already Exits!", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         public static void emailAbuse()
         {
@@ -162,9 +164,21 @@ namespace classLib
         {
             MessageBox.Show("Code Already been Used!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-        public static void quesUse()
+        public static void studSet()
         {
-            MessageBox.Show("Question / Answer Already Exits!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Student has already been set!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        public static void examUse()
+        {
+            MessageBox.Show("Exam Already Started!", err, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        public static void examStart()
+        {
+            MessageBox.Show("Test Started!", suc, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        public static void accAl()
+        {
+            MessageBox.Show("Account Already LogIn!", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

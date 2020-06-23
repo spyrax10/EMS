@@ -273,15 +273,7 @@ namespace PROJ_admin_
                 timer1.Stop();
                 timer2.Stop();
                 paneLogo.Visible = false;
-
-                if (DBInfo.conStat() == true)
-                {
-                    gBMain.Visible = true;
-                }
-                else
-                {
-                    msg.serverErr();
-                }
+                gBMain.Visible = true;
             }
         }
     }

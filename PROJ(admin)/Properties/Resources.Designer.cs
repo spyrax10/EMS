@@ -173,6 +173,16 @@ namespace PROJ_admin_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Button_Upload_icon {
+            get {
+                object obj = ResourceManager.GetObject("Button-Upload-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cartoon_geeky_nerd_kid_is_typing_notebook_enthusiastically_9633_12 {
             get {
                 object obj = ResourceManager.GetObject("cartoon-geeky-nerd-kid-is-typing-notebook-enthusiastically_9633-12", resourceCulture);
@@ -253,6 +263,16 @@ namespace PROJ_admin_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap down {
+            get {
+                object obj = ResourceManager.GetObject("down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap download {
             get {
                 object obj = ResourceManager.GetObject("download", resourceCulture);
@@ -296,6 +316,16 @@ namespace PROJ_admin_.Properties {
         internal static System.Drawing.Bitmap Go_back_icon {
             get {
                 object obj = ResourceManager.GetObject("Go-back-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap google_code_32 {
+            get {
+                object obj = ResourceManager.GetObject("google-code-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -16,14 +16,18 @@ namespace PROJ_admin_
             DbQ.loadEmpSub(gVSub, frmMain.empId);
             misc.clrCont(paneSub);
             gBPro.Visible = true;
-            gBStud.Visible = false;
+            gBGrade.Visible = false;
             btnSub.Text = "ADD";
         }
-        public void showStud()
+        public void showGrade()
         {
             gBPro.Visible = false;
-            gBStud.Visible = true;
-            DbQ.loadStudents(frmMain.empId, cBSub, gVStud);        
+            gBGrade.Visible = true;
+            btnGrade.Text = "ADD";
+            cBRemarks.Text = "";
+            tBGrade.Text = "";
+            numPer.Value = 0;
+            DbQ.loadGrade(gVGrade, frmMain.empId);        
         }
 
         private void frmPro_Load(object sender, EventArgs e)
@@ -53,17 +57,36 @@ namespace PROJ_admin_
 
         private void btnStud_Click(object sender, EventArgs e)
         {
-            showStud();
-        }
-
-        private void cBSub_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DbQ.loadEmpStud(frmMain.empId, cBSub, gVStud);
+            showGrade();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             def();
+        }
+
+        private void btnGrade_Click(object sender, EventArgs e)
+        {
+            if (cBRemarks.Text == "" || tBGrade.Text == "")
+            {
+                msg.incMsg();
+            }
+            else
+            {
+                DbQ.addGrade(frmMain.empId, numPer,tBGrade, cBRemarks, gVGrade, btnGrade);
+            } 
+        }
+
+        private void gVGrade_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gVGrade.Rows.Count <= 0)
+            {
+                msg.dataEmpty();
+            }
+            else
+            {
+                DbQ.editGrade(frmMain.empId, numPer, tBGrade, cBRemarks, gVGrade, btnGrade);
+            }
         }
     }
 }

@@ -9,6 +9,9 @@ using Microsoft.VisualBasic.Devices;
 using Microsoft.Win32;
 using System.Drawing;
 using System.Data.SqlClient;
+using System.Data;
+using System.Net;
+using System.Net.Sockets;
 
 namespace classLib
 {
@@ -18,9 +21,18 @@ namespace classLib
         public static string imgLoc = "";
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
-        
+
+        [Obsolete]
+        public static string ip = Dns.GetHostByName(Environment.MachineName).AddressList[2].ToString();
+
         public static Form activeForm = null;
 
+        public static void fullScr(Form frm)
+        {
+            frm.TopMost = true;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.WindowState = FormWindowState.Maximized;
+        }
         public static void passChar(TextBox tB)
         {
             if (tB.PasswordChar != '\0')
@@ -32,6 +44,62 @@ namespace classLib
                 tB.PasswordChar = '*';
             }
         }
+        public static void sortExam(DataGridView gV)
+        {
+            if (gV.Rows.Count != 0)
+            {
+                string val1 = gV.Rows[0].Cells[1].Value.ToString();
+                string val2 = gV.Rows[0].Cells[0].Value.ToString();
+                string val3 = gV.Rows[0].Cells[2].Value.ToString();
+                string val4 = gV.Rows[0].Cells[3].Value.ToString();
+
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[3].Value.ToString() == val4)
+                    {
+                        gV.Rows[i].Cells[3].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val4 = gV.Rows[i].Cells[3].Value.ToString();
+                    }
+                }
+
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[1].Value.ToString() == val1)
+                    {
+                        gV.Rows[i].Cells[1].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val1 = gV.Rows[i].Cells[1].Value.ToString();
+                    }
+                }
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[0].Value.ToString() == val2)
+                    {
+                        gV.Rows[i].Cells[0].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val2 = gV.Rows[i].Cells[0].Value.ToString();
+                    }
+                }
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[2].Value.ToString() == val3)
+                    {
+                        gV.Rows[i].Cells[2].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val3 = gV.Rows[i].Cells[2].Value.ToString();
+                    }
+                }
+            }
+        }
 
         public static void sortGV(DataGridView gV)
         {
@@ -39,7 +107,7 @@ namespace classLib
             {
                 string val1 = gV.Rows[0].Cells[1].Value.ToString();
                 string val2 = gV.Rows[0].Cells[0].Value.ToString();
-
+               
                 for (int i = 1; i < gV.Rows.Count; i++)
                 {
                     if (gV.Rows[i].Cells[1].Value.ToString() == val1)
@@ -115,6 +183,7 @@ namespace classLib
         {
             gV.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             gV.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold);
+            gV.Columns[0].Width = 95;
         }
         public static void capFirst(Object sender)
         {

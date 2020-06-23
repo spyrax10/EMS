@@ -49,6 +49,7 @@
             this.paneDiv = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnTest = new System.Windows.Forms.Button();
             this.paneMain.SuspendLayout();
             this.paneCont.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBPro)).BeginInit();
@@ -161,6 +162,7 @@
             // paneMenu
             // 
             this.paneMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneMenu.Controls.Add(this.btnTest);
             this.paneMenu.Controls.Add(this.btnQues);
             this.paneMenu.Controls.Add(this.paneSlide);
             this.paneMenu.Controls.Add(this.btnPro);
@@ -298,6 +300,26 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnTest
+            // 
+            this.btnTest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.btnTest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTest.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTest.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnTest.Image = global::PROJ_admin_.Properties.Resources.google_code_32;
+            this.btnTest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTest.Location = new System.Drawing.Point(20, 248);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnTest.Size = new System.Drawing.Size(175, 44);
+            this.btnTest.TabIndex = 18;
+            this.btnTest.Text = "Test Section";
+            this.btnTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnTest.UseVisualStyleBackColor = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // frmEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -350,5 +372,6 @@
         public System.Windows.Forms.Panel paneSlide;
         public System.Windows.Forms.Button btnPro;
         public System.Windows.Forms.Button btnQues;
+        public System.Windows.Forms.Button btnTest;
     }
 }

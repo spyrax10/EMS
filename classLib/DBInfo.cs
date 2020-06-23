@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Windows.Forms;
@@ -11,7 +10,6 @@ namespace classLib
         public static string cs = ConfigurationManager.ConnectionStrings["defCon"].ConnectionString;
         public static string username = ConfigurationManager.AppSettings["Username"];
         public static string password = ConfigurationManager.AppSettings["Password"];
-
         public static SqlConnection getCon()
         {
             var con = new SqlConnection();
