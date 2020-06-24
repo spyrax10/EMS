@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Net;
 using System.Net.Sockets;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace classLib
 {
@@ -26,12 +27,51 @@ namespace classLib
         public static string ip = Dns.GetHostByName(Environment.MachineName).AddressList[2].ToString();
 
         public static Form activeForm = null;
+        public static int second = 59;
+        public static int minute(string code)
+        {
+            int min = 0;
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from testSetTB where Code = @Code and Status = @Stat";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Stat", msg.start);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                min = Convert.ToInt32(dr["Duration"].ToString()) -1;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+            return min;
+        }
 
+        public static string aZero(double str)
+        {
+            if (str <= 9)
+                return "0" + str;
+            else
+                return str.ToString();
+        }
         public static void fullScr(Form frm)
         {
             frm.TopMost = true;
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.WindowState = FormWindowState.Maximized;
+            frm.BringToFront();
         }
         public static void passChar(TextBox tB)
         {
@@ -204,8 +244,7 @@ namespace classLib
             else
             {
                 return false;
-            }
-            
+            }       
         }
         public static void hideCont(Control comp)
         {

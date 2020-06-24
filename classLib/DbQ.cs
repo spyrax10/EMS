@@ -2799,7 +2799,7 @@ namespace classLib
             }
         }
         public static void addTestSet(string empId, ComboBox code, 
-            string sub, string per, NumericUpDown num, Button btn)
+            string sub, string per, NumericUpDown num, Button btn, Timer time)
         {
             try
             {
@@ -2834,8 +2834,10 @@ namespace classLib
                                     cmd2.Parameters.AddWithValue("@Time", msg.time);
                                     cmd2.Parameters.AddWithValue("@Stat", msg.start);
                                     cmd2.ExecuteNonQuery();
-                                    msg.examStart();
                                     btn.Enabled = false;
+                                    num.Enabled = false;
+                                    time.Start();
+                                    msg.examStart();     
                                 }
                             }
                         }
@@ -2881,7 +2883,7 @@ namespace classLib
 
         [Obsolete]
         public static void studLog(string studId, string code, string set,
-            Timer time)
+            Timer time, Timer colTime, Label disp, Button btn)
         {
             try
             {
@@ -2913,12 +2915,71 @@ namespace classLib
                                     cmd2.Parameters.AddWithValue("@Date", msg.date);
                                     cmd2.Parameters.AddWithValue("@Time", msg.time);
                                     cmd2.Parameters.AddWithValue("@IP", misc.ip);
-                                    cmd2.Parameters.AddWithValue("@Stat", msg.slogIn);
+                                    cmd2.Parameters.AddWithValue("@Stat", msg.online);
                                     cmd2.ExecuteNonQuery();
+                                    time.Enabled = true;
                                     time.Start();
+                                    disp.Visible = true;
+                                    btn.Enabled = false;
+                                    colTime.Start();
                                     msg.logSuc();
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static  void delTime(string empId, string code)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Delete from testSetTB where empId = @ID and Code = @Code";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@ID", empId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void updTime(string empId, string code, string time)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        int time2 = Convert.ToInt32(time);
+
+                        if (time2 >= 0)
+                        {
+                            con.Open();
+                            cmd.CommandText = "Update testSetTB Set Duration = @Dur " +
+                                "where empId = @ID and Code = @Code";
+                            cmd.Parameters.AddWithValue("@Dur", time);
+                            cmd.Parameters.AddWithValue("@Code", code);
+                            cmd.Parameters.AddWithValue("@ID", empId);
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            delTime(empId, code);
                         }
                     }
                 }

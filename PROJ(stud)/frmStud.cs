@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using classLib;
 
@@ -6,12 +7,31 @@ namespace PROJ_stud_
 {
     public partial class frmStud : Form
     {
-        int move, left = 5;
+        int move, left = 5, min = 0, second = 59, sec = 59;
         public frmStud()
         {
             InitializeComponent();
         }
 
+        public void def()
+        {
+            timer1.Stop();
+            timer2.Stop();
+            timer.Stop();
+            paneLogo.Visible = false;
+            gBDet.Visible = true;
+            gBExam.Visible = false;
+            lblTime.Visible = false;
+        }
+        public void showExam()
+        {
+            lblTime.Visible = true;
+            lblDisp.Visible = false;
+            gBDet.Visible = false;
+            gBExam.Visible = true;
+            gBExam.BringToFront();
+            misc.fullScr(this);
+        }
         private void pBClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -59,13 +79,57 @@ namespace PROJ_stud_
             cBCode.Items.Clear();
             cBCode.Enabled = true;
             tBSet.Text = "";
+            btnStart.Enabled = true;
             tBID.Focus();
         }
 
         [Obsolete]
         private void btnStart_Click(object sender, EventArgs e)
         {
-            DbQ.studLog(tBID.Text, cBCode.Text, tBSet.Text, timer);
+            DbQ.studLog(tBID.Text, cBCode.Text, tBSet.Text, examTimer, colTime,
+                lblDisp, btnStart);
+        }
+
+        private void colTime_Tick(object sender, EventArgs e)
+        {
+            if (lblDisp.ForeColor == Color.DodgerBlue)
+            {
+                lblDisp.ForeColor = Color.White;
+            }
+            else
+            {
+                lblDisp.ForeColor = Color.DodgerBlue;
+            }
+        }
+
+        private void examTimer_Tick(object sender, EventArgs e)
+        {
+            if (misc.minute(cBCode.Text) > 0)
+            {
+                examTimer.Stop();
+                min = misc.minute(cBCode.Text);
+                showExam();
+                timer.Start();
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            second--;
+            if (second == 0)
+            {
+                min--;
+                second = 59;
+            }
+            if (min == 0)
+            {
+                sec--;
+                if (sec == 0)
+                {
+                    timer.Stop();
+                }
+            }
+            lblTime.Text = misc.aZero(min) + " : " + misc.aZero(second);
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -73,10 +137,7 @@ namespace PROJ_stud_
             left--;
             if (left == 0)
             {
-                timer1.Stop();
-                timer2.Stop();
-                paneLogo.Visible = false;
-                gBDet.Visible = true;
+                def();
             }
         }
     }

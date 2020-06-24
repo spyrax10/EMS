@@ -31,7 +31,7 @@ namespace classLib
         public static string appClose = "Application Shutdown";
         public static string ver = " VERIFY";
         public static string start = "STARTED";
-        public static string slogIn = "LOGIN";
+        public static string online = "ONLINE";
        
         public static string updEmp(string empId)
         {

@@ -7,6 +7,7 @@ namespace PROJ_admin_
     public partial class examBio : Form
     {
         public static string code;
+        int min, second = 59, sec = 59;
         public examBio()
         {
             InitializeComponent();
@@ -43,7 +44,9 @@ namespace PROJ_admin_
         {
             if (misc.isEmptyFields(gBDet) == false && gVData.Rows.Count != 0)
             {
-                DbQ.addTestSet(frmMain.empId, cBCode, tBSub.Text, tBPer.Text, numLimit, btnStart);
+                DbQ.addTestSet(frmMain.empId, cBCode, tBSub.Text, tBPer.Text, numLimit, 
+                    btnStart, timer);
+                min = Convert.ToInt32(numLimit.Value);
             }
             else
             {
@@ -63,6 +66,29 @@ namespace PROJ_admin_
             {
                 msg.dataEmpty();
             }  
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            second--;
+            if (second == 0)
+            {
+                min--;
+                second = 59;
+                DbQ.updTime(frmMain.empId, cBCode.Text, lblTime.Text);
+            }
+            if (min == 0)
+            {
+                sec--;
+                if (sec == 0)
+                {
+                    timer.Stop();
+                    DbQ.delTime(frmMain.empId, cBCode.Text);
+                    MessageBox.Show("Exam ended!");
+                }
+            }
+
+            lblTime.Text = min.ToString();
         }
     }
 }
