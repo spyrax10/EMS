@@ -424,18 +424,25 @@ namespace classLib
         }
         public static void crashDet(string path, string stat)
         {
-            string usr = System.Environment.UserName;
-            using (StreamWriter sw = new StreamWriter(path))
+            try
             {
-                sw.WriteLine("Date: " + msg.date);
-                sw.WriteLine("Time: " + msg.time + Environment.NewLine);
-                sw.WriteLine("Current User: " + usr);
-                sw.WriteLine("OS Build Info: " + new ComputerInfo().OSFullName + " | " + buildInfo());
-                sw.WriteLine("SQL Version: " + getSql() + Environment.NewLine);
-                sw.WriteLine("Total Memory: " + new ComputerInfo().TotalPhysicalMemory);
-                sw.WriteLine("Available Memory: " + new ComputerInfo().AvailablePhysicalMemory + Environment.NewLine);
-                sw.WriteLine("Reason: " + stat);
+                string usr = System.Environment.UserName;
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.WriteLine("Date: " + msg.date);
+                    sw.WriteLine("Time: " + msg.time + Environment.NewLine);
+                    sw.WriteLine("Current User: " + usr);
+                    sw.WriteLine("OS Build Info: " + new ComputerInfo().OSFullName + " | " + buildInfo());
+                    sw.WriteLine("SQL Version: " + getSql() + Environment.NewLine);
+                    sw.WriteLine("Total Memory: " + new ComputerInfo().TotalPhysicalMemory);
+                    sw.WriteLine("Available Memory: " + new ComputerInfo().AvailablePhysicalMemory + Environment.NewLine);
+                    sw.WriteLine("Reason: " + stat);
+                }
             }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+            }   
         }
         private static string fname(string fileName)
         {

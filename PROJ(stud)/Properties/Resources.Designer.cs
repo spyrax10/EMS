@@ -73,6 +73,16 @@ namespace PROJ_stud_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Actions_trash_empty_icon {
+            get {
+                object obj = ResourceManager.GetObject("Actions-trash-empty-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Button_Refresh_icon24 {
             get {
                 object obj = ResourceManager.GetObject("Button-Refresh-icon24", resourceCulture);

@@ -2836,8 +2836,7 @@ namespace classLib
                                     cmd2.ExecuteNonQuery();
                                     btn.Enabled = false;
                                     num.Enabled = false;
-                                    time.Start();
-                                    msg.examStart();     
+                                    time.Start();  
                                 }
                             }
                         }
@@ -2957,6 +2956,30 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
+        public static void studStart(string studId, string code)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Update studLogTB Set Status = @Stat where " +
+                            "studId = @ID and Code = @Code";
+                        cmd.Parameters.AddWithValue("@Stat", msg.start);
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
         public static void updTime(string empId, string code, string time)
         {
             try
@@ -2976,12 +2999,99 @@ namespace classLib
                             cmd.Parameters.AddWithValue("@Code", code);
                             cmd.Parameters.AddWithValue("@ID", empId);
                             cmd.ExecuteNonQuery();
-                        }
-                        else
-                        {
-                            delTime(empId, code);
+                            
+                            if (time2 == 0)
+                            {
+                                using (var cmd2 = con.CreateCommand())
+                                {
+                                    cmd2.CommandText = "Update testSetTB Set Status = @Stat " +
+                                    "where empId = @ID and Code = @Code";
+                                    cmd2.Parameters.AddWithValue("@Stat", msg.ended);
+                                    cmd2.Parameters.AddWithValue("@Code", code);
+                                    cmd2.Parameters.AddWithValue("@ID", empId);
+                                    cmd2.ExecuteNonQuery();
+                                }    
+                            }
                         }
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void loadType(string code, string set, ComboBox cB)
+        {
+            try
+            {
+                cB.Text = ""; cB.Items.Clear();
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Distinct Type from quesTB " +
+                            "where Code = @Code and QSet = @Set";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                cB.Items.Add(dr["Type"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void studOffline(string studId)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Update studLogTB SET Status = @Stat where studId = @ID";
+                        cmd.Parameters.AddWithValue("@Stat", msg.offline);
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void dispStudQues(DataGridView gVQues, string code, string set, string type,
+            Label num, TextBox ques, TextBox ans)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select Distinct No, Question from quesTB " +
+                        "where Code = '" + code + "' and QSet = '" + set + "' and Type = '" + type + "' " +
+                        " ORDER BY No ASC", con);
+                    adapt.Fill(dt);
+                    gVQues.DataSource = dt;
+                    misc.defGV(gVQues);
+                    num.Text = gVQues.CurrentRow.Cells[0].Value.ToString();
+                    ques.Text = gVQues.CurrentRow.Cells[1].Value.ToString();
+                    ans.Text = "";  ans.Focus();
                 }
             }
             catch (Exception e)

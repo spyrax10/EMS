@@ -32,6 +32,8 @@ namespace classLib
         public static string ver = " VERIFY";
         public static string start = "STARTED";
         public static string online = "ONLINE";
+        public static string ended = "ENDED";
+        public static string offline = "OFFLINE";
        
         public static string updEmp(string empId)
         {

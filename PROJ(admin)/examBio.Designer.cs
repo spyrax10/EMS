@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(examBio));
             this.paneMain = new System.Windows.Forms.Panel();
             this.gBTest = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
-            this.paneDiv = new System.Windows.Forms.Panel();
             this.btnStud = new System.Windows.Forms.Button();
             this.gVData = new System.Windows.Forms.DataGridView();
             this.gBDet = new System.Windows.Forms.GroupBox();
@@ -76,7 +75,6 @@
             this.gBTest.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gBTest.Controls.Add(this.label6);
             this.gBTest.Controls.Add(this.lblTime);
-            this.gBTest.Controls.Add(this.paneDiv);
             this.gBTest.Controls.Add(this.btnStud);
             this.gBTest.Controls.Add(this.gVData);
             this.gBTest.Controls.Add(this.gBDet);
@@ -109,22 +107,13 @@
             this.lblTime.TabIndex = 104;
             this.lblTime.Text = "0";
             // 
-            // paneDiv
-            // 
-            this.paneDiv.BackColor = System.Drawing.Color.Lime;
-            this.paneDiv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneDiv.Location = new System.Drawing.Point(46, 148);
-            this.paneDiv.Name = "paneDiv";
-            this.paneDiv.Size = new System.Drawing.Size(726, 5);
-            this.paneDiv.TabIndex = 10;
-            // 
             // btnStud
             // 
             this.btnStud.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStud.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStud.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.btnStud.Location = new System.Drawing.Point(330, 419);
+            this.btnStud.Location = new System.Drawing.Point(12, 419);
             this.btnStud.Name = "btnStud";
             this.btnStud.Size = new System.Drawing.Size(158, 27);
             this.btnStud.TabIndex = 103;
@@ -139,35 +128,35 @@
             this.gVData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gVData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.gVData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gVData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gVData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gVData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gVData.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gVData.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gVData.DefaultCellStyle = dataGridViewCellStyle2;
             this.gVData.GridColor = System.Drawing.Color.DodgerBlue;
             this.gVData.Location = new System.Drawing.Point(12, 166);
             this.gVData.Name = "gVData";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gVData.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gVData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gVData.RowHeadersVisible = false;
             this.gVData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gVData.Size = new System.Drawing.Size(768, 247);
@@ -229,10 +218,21 @@
             0,
             0,
             0});
+            this.numLimit.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.numLimit.Name = "numLimit";
             this.numLimit.Size = new System.Drawing.Size(64, 34);
             this.numLimit.TabIndex = 104;
+            this.numLimit.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.numLimit.ValueChanged += new System.EventHandler(this.numLimit_ValueChanged);
+            this.numLimit.Enter += new System.EventHandler(this.numLimit_ValueChanged);
             // 
             // tBPer
             // 
@@ -378,7 +378,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tBPer;
         private System.Windows.Forms.TextBox tBSub;
-        private System.Windows.Forms.Panel paneDiv;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timer;

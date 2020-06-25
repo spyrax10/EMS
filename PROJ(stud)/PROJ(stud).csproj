@@ -102,5 +102,8 @@
   <ItemGroup>
     <None Include="Resources\Button-Refresh-icon24.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-trash-empty-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

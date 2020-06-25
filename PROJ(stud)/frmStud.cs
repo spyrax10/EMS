@@ -13,27 +13,40 @@ namespace PROJ_stud_
             InitializeComponent();
         }
 
+        public void info()
+        {
+            lblID.Text = tBID.Text;
+            lblCode.Text = cBCode.Text;
+            lblTStart.Text = msg.time;
+            lblSet.Text = tBSet.Text;
+        }
         public void def()
         {
             timer1.Stop();
             timer2.Stop();
             timer.Stop();
             paneLogo.Visible = false;
-            gBDet.Visible = true;
-            gBExam.Visible = false;
+            paneExam.Visible = false;
             lblTime.Visible = false;
+            gBDet.Visible = true;
         }
         public void showExam()
         {
             lblTime.Visible = true;
             lblDisp.Visible = false;
             gBDet.Visible = false;
-            gBExam.Visible = true;
-            gBExam.BringToFront();
+            info();
+            DbQ.loadType(cBCode.Text, tBSet.Text, cBType);
+            DbQ.studStart(tBID.Text, cBCode.Text);
+            gBChoice.Visible = false;
+            paneExam.Visible = true;
+            paneExam.BringToFront();
+            tBAns.Focus();
             misc.fullScr(this);
         }
         private void pBClose_Click(object sender, EventArgs e)
         {
+            DbQ.studOffline(lblID.Text);
             Application.Exit();
         }
 
@@ -88,6 +101,15 @@ namespace PROJ_stud_
         {
             DbQ.studLog(tBID.Text, cBCode.Text, tBSet.Text, examTimer, colTime,
                 lblDisp, btnStart);
+        }
+
+        private void cBType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBType.Text != "")
+            {
+                DbQ.dispStudQues(gVQues, lblCode.Text, lblSet.Text, 
+                    cBType.Text, lblNum, tBQues, tBAns);
+            }
         }
 
         private void colTime_Tick(object sender, EventArgs e)

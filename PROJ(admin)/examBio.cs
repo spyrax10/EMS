@@ -12,7 +12,16 @@ namespace PROJ_admin_
         {
             InitializeComponent();
         }
-
+        public void def()
+        {
+            misc.clrCont(gBDet);
+            numLimit.Value = 20;
+            gVData.DataSource = null;
+            cBCode.Text = "";
+            btnStart.Enabled = false;
+            numLimit.Enabled = true;
+            cBCode.Focus();
+        }
         private void pBClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -75,7 +84,7 @@ namespace PROJ_admin_
             {
                 min--;
                 second = 59;
-                DbQ.updTime(frmMain.empId, cBCode.Text, lblTime.Text);
+                DbQ.updTime(frmMain.empId, cBCode.Text, min.ToString());
             }
             if (min == 0)
             {
@@ -83,8 +92,9 @@ namespace PROJ_admin_
                 if (sec == 0)
                 {
                     timer.Stop();
-                    DbQ.delTime(frmMain.empId, cBCode.Text);
+                    DbQ.updTime(frmMain.empId, cBCode.Text, min.ToString());
                     MessageBox.Show("Exam ended!");
+                    def();
                 }
             }
 
