@@ -3284,6 +3284,37 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
+        public static void topQues(string type, string set, string code, Label num, TextBox ques)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select TOP 1 * from quesTB where Type = @Type and QSet = @Set " +
+                            "and Code = @Code";
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                num.Text = dr["No"].ToString();
+                                ques.Text = dr["Question"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
         public static void nextQues(string studId, string code, string set, string type,
             Label num, TextBox ques, TextBox ans, Button btn, DataGridView gVChoice, TextBox cAns)
         {
@@ -3308,17 +3339,17 @@ namespace classLib
                             {
                                 ques.Text = dr["Question"].ToString();
                                 num.Text = newNum.ToString();
-                                ansExits(studId, code, set, type, num, ques, ans, btn);
-                                curAns(studId, code, set, type, cAns, ques, num);
                             }
                             else
                             {
-
+                                topQues(type, set, code, num, ques);
                             }
-                            if (type == "Multiple Choice")
-                            {
-                                dispChoice(gVChoice, code, set, num.Text);
-                            }
+                            ansExits(studId, code, set, type, num, ques, ans, btn);
+                            curAns(studId, code, set, type, cAns, ques, num);
+                        }
+                        if (type == "Multiple Choice")
+                        {
+                            dispChoice(gVChoice, code, set, num.Text);
                         }
                     }
                 }
