@@ -190,6 +190,10 @@ namespace classLib
         {
             MessageBox.Show("Please Select a Question...", err, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        public static void alAns()
+        {
+            MessageBox.Show("Duplicate Answer!", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
     }
 }

@@ -3100,9 +3100,17 @@ namespace classLib
                             {
                                 num.Text = dr["No"].ToString();
                                 ques.Text = dr["QuesTion"].ToString();
-                                ans.Text = val; curAns.Text = val; curAns.Visible = true;
-                                btn.Text = "UPDATE";
-                                ans.Focus();
+
+                                if (misc.enuAns(studId, code, set, num.Text, ques.Text) == false)
+                                {
+                                    ans.Text = ""; ans.Focus(); btn.Text = "SUBMIT";
+                                }
+                                else
+                                {
+                                    ans.Text = val; curAns.Text = val; curAns.Visible = true;
+                                    btn.Text = "UPDATE";
+                                    ans.Focus();
+                                }       
                             }
                         }
                     }
@@ -3364,8 +3372,7 @@ namespace classLib
             TextBox ans, TextBox ques, Label num)
         {
             try
-            {
-               
+            {          
                 using (var con = DBInfo.getCon())
                 {
                     using (var cmd = con.CreateCommand())
@@ -3416,63 +3423,84 @@ namespace classLib
                     else
                     {
                         con.Open();
-                        if (btn.Text == "SUBMIT")
+                        using (var scmd = con.CreateCommand())
                         {
-                            using (var cmd = con.CreateCommand())
+                            scmd.CommandText = "Select * from studAnsTB where studId = @ID and Code = @Code and " +
+                                "QSet = @Set and Type = @Type and SAnswer = @Ans";
+                            scmd.Parameters.AddWithValue("@ID", studId);
+                            scmd.Parameters.AddWithValue("@Code", code);
+                            scmd.Parameters.AddWithValue("@Set", set);
+                            scmd.Parameters.AddWithValue("@Type", type);
+                            scmd.Parameters.AddWithValue("@Ans", ans.Text);
+                            using (var dr = scmd.ExecuteReader())
                             {
-
-                                cmd.CommandText = "Insert into studAnsTB Values (@ID, @Code, @Set, @Type, " +
-                                    "@Num, @Ques, @Ans, @Stat)";
-                                cmd.Parameters.AddWithValue("@ID", studId);
-                                cmd.Parameters.AddWithValue("@Code", code);
-                                cmd.Parameters.AddWithValue("@Set", set);
-                                cmd.Parameters.AddWithValue("@Type", type);
-                                cmd.Parameters.AddWithValue("@Num", num.Text);
-                                cmd.Parameters.AddWithValue("@Ques", ques.Text);
-
-                                if (ans.Text == "")
-                                    cmd.Parameters.AddWithValue("@Ans", msg.empty);
-                                else
-                                    cmd.Parameters.AddWithValue("@Ans", ans.Text);
-
-                                cmd.Parameters.AddWithValue("@Stat", msg.tbu);
-                                cmd.ExecuteNonQuery();
-
-                                if (type == "Enumeration")
+                                if (dr.Read() && btn.Text != "UPDATE")
                                 {
-                                    if (misc.enuAns(studId, code, set, num.Text, ques.Text) == true)
+                                    msg.alAns();
+                                    ans.Text = ""; ans.Focus();
+                                }
+                                else
+                                {
+                                    if (btn.Text == "SUBMIT")
                                     {
-                                        nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                                        using (var cmd = con.CreateCommand())
+                                        {
+
+                                            cmd.CommandText = "Insert into studAnsTB Values (@ID, @Code, @Set, @Type, " +
+                                                "@Num, @Ques, @Ans, @Stat)";
+                                            cmd.Parameters.AddWithValue("@ID", studId);
+                                            cmd.Parameters.AddWithValue("@Code", code);
+                                            cmd.Parameters.AddWithValue("@Set", set);
+                                            cmd.Parameters.AddWithValue("@Type", type);
+                                            cmd.Parameters.AddWithValue("@Num", num.Text);
+                                            cmd.Parameters.AddWithValue("@Ques", ques.Text);
+
+                                            if (ans.Text == "")
+                                                cmd.Parameters.AddWithValue("@Ans", msg.empty);
+                                            else
+                                                cmd.Parameters.AddWithValue("@Ans", ans.Text);
+
+                                            cmd.Parameters.AddWithValue("@Stat", msg.tbu);
+                                            cmd.ExecuteNonQuery();
+
+                                            if (type == "Enumeration")
+                                            {
+                                                if (misc.enuAns(studId, code, set, num.Text, ques.Text) == true)
+                                                {
+                                                    nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                                                }
+                                                else
+                                                {
+                                                    ans.Text = ""; ans.Focus();
+                                                }
+                                            }
+                                            else
+                                            {
+                                                nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        ans.Text = ""; ans.Focus();
+                                        using (var cmd2 = con.CreateCommand())
+                                        {
+                                            cmd2.CommandText = "Update studAnsTB Set SAnswer = @Ans where Code = @Code " +
+                                                "and studId = @ID and Type = @Type and QSet = @Set " +
+                                                "and No = @Num and Question = @Ques and SAnswer = @Val";
+                                            cmd2.Parameters.AddWithValue("@ID", studId);
+                                            cmd2.Parameters.AddWithValue("@Code", code);
+                                            cmd2.Parameters.AddWithValue("@Set", set);
+                                            cmd2.Parameters.AddWithValue("@Type", type);
+                                            cmd2.Parameters.AddWithValue("@Num", num.Text);
+                                            cmd2.Parameters.AddWithValue("@Ques", ques.Text);
+                                            cmd2.Parameters.AddWithValue("@Ans", ans.Text);
+                                            cmd2.Parameters.AddWithValue("@Val", curAns.Text);
+                                            cmd2.ExecuteNonQuery();
+                                            btn.Text = "SUBMIT";
+                                            nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                                        }
                                     }
                                 }
-                                else
-                                {
-                                    nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            using (var cmd2 = con.CreateCommand())
-                            {
-                                cmd2.CommandText = "Update studAnsTB Set SAnswer = @Ans where Code = @Code " +
-                                    "and studId = @ID and Type = @Type and QSet = @Set " +
-                                    "and No = @Num and Question = @Ques and SAnswer = @Val";
-                                cmd2.Parameters.AddWithValue("@ID", studId);
-                                cmd2.Parameters.AddWithValue("@Code", code);
-                                cmd2.Parameters.AddWithValue("@Set", set);
-                                cmd2.Parameters.AddWithValue("@Type", type);
-                                cmd2.Parameters.AddWithValue("@Num", num.Text);
-                                cmd2.Parameters.AddWithValue("@Ques", ques.Text);
-                                cmd2.Parameters.AddWithValue("@Ans", ans.Text);
-                                cmd2.Parameters.AddWithValue("@Val", curAns.Text);
-                                cmd2.ExecuteNonQuery();
-                                btn.Text = "SUBMIT";
-                                nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
                             }
                         }
                         dispStudAns(gVAns, studId, code, set, type);
