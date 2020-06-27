@@ -28,7 +28,19 @@ namespace PROJ_stud_
             paneLogo.Visible = false;
             paneExam.Visible = false;
             lblTime.Visible = false;
+            tBCurAns.Visible = false;
             gBDet.Visible = true;
+        }
+        public void refresh()
+        {
+            tBID.Text = "";
+            tBID.Enabled = true;
+            cBCode.Text = "";
+            cBCode.Items.Clear();
+            cBCode.Enabled = true;
+            tBSet.Text = "";
+            btnStart.Enabled = true;
+            tBID.Focus();
         }
         public void showExam()
         {
@@ -38,11 +50,11 @@ namespace PROJ_stud_
             info();
             DbQ.loadType(cBCode.Text, tBSet.Text, cBType);
             DbQ.studStart(tBID.Text, cBCode.Text);
-            gBChoice.Visible = false;
+            paneChoice.Visible = false;
             paneExam.Visible = true;
             paneExam.BringToFront();
             tBAns.Focus();
-            misc.fullScr(this);
+            //misc.fullScr(this);
         }
         private void pBClose_Click(object sender, EventArgs e)
         {
@@ -86,21 +98,14 @@ namespace PROJ_stud_
 
         private void btnRef_Click(object sender, EventArgs e)
         {
-            tBID.Text = "";
-            tBID.Enabled = true;
-            cBCode.Text = "";
-            cBCode.Items.Clear();
-            cBCode.Enabled = true;
-            tBSet.Text = "";
-            btnStart.Enabled = true;
-            tBID.Focus();
+            refresh();
         }
 
         [Obsolete]
         private void btnStart_Click(object sender, EventArgs e)
         {
             DbQ.studLog(tBID.Text, cBCode.Text, tBSet.Text, examTimer, colTime,
-                lblDisp, btnStart);
+                lblDisp, btnStart, refresh);
         }
 
         private void cBType_SelectedIndexChanged(object sender, EventArgs e)
@@ -108,8 +113,82 @@ namespace PROJ_stud_
             if (cBType.Text != "")
             {
                 DbQ.dispStudQues(gVQues, lblCode.Text, lblSet.Text, 
-                    cBType.Text, lblNum, tBQues, tBAns);
+                    cBType.Text, lblNum, tBQues, paneChoice, gVChoice, lblID.Text, tBAns, btnOk, tBCurAns);
+                DbQ.dispStudAns(gVAns, lblID.Text, lblCode.Text, lblSet.Text, cBType.Text);
             }
+        }
+
+        private void gVQues_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gVQues.Rows.Count > 0)
+            {
+                DbQ.editSQues(gVQues, lblID.Text, lblCode.Text, cBType.Text, lblSet.Text,
+                    lblNum, tBQues, tBAns, btnOk, tBCurAns);
+                if (cBType.Text == "Multiple Choice")
+                {
+                    DbQ.dispChoice(gVChoice, lblCode.Text, lblSet.Text, lblNum.Text);
+                    paneChoice.Visible = true;
+                }
+                else
+                {
+                    paneChoice.Visible = false;
+                }
+            }
+            else
+            {
+                msg.dataEmpty();
+            }
+        }
+
+        private void gVChoice_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gVChoice.Rows.Count > 0)
+            {
+                tBAns.Text = gVChoice.CurrentRow.Cells[0].Value.ToString();
+            }
+            else
+            {
+                msg.dataEmpty();
+            }    
+        }
+
+        private void gVAns_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gVAns.Rows.Count > 0)
+            {
+                DbQ.editStudAns(gVAns, lblID.Text, lblCode.Text, lblSet.Text, cBType.Text,
+                    lblNum, tBQues, tBAns, btnOk, tBCurAns);
+            }
+            else
+            {
+                msg.dataEmpty();
+            }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (gVQues.Rows.Count > 0 || cBType.Text != "")
+            {
+                DbQ.studAns(lblID.Text, lblCode.Text, lblSet.Text, cBType.Text,
+                    lblNum, tBQues, tBAns, gVAns, btnOk, gVChoice, tBCurAns);
+            }
+            else
+            {
+                msg.dataEmpty();
+            }
+        }
+
+        private void btnPass_Click(object sender, EventArgs e)
+        {
+            if (gVQues.Rows.Count > 0 || cBType.Text != "")
+            {
+                DbQ.nextQues(lblID.Text, lblCode.Text, lblSet.Text, cBType.Text,
+                    lblNum, tBQues, tBAns, btnOk, gVChoice, tBCurAns);
+            }
+            else
+            {
+                msg.dataEmpty();
+            }     
         }
 
         private void colTime_Tick(object sender, EventArgs e)

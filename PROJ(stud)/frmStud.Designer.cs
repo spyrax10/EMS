@@ -41,12 +41,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStud));
             this.paneMain = new System.Windows.Forms.Panel();
             this.paneExam = new System.Windows.Forms.Panel();
-            this.gBChoice = new System.Windows.Forms.GroupBox();
+            this.paneChoice = new System.Windows.Forms.Panel();
             this.gVChoice = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tBAns = new System.Windows.Forms.TextBox();
+            this.tBQues = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblNum = new System.Windows.Forms.Label();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnPass = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.cBType = new System.Windows.Forms.ComboBox();
-            this.btnPass = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.paneInfo = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
@@ -56,13 +62,9 @@
             this.lblTStart = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.tBAns = new System.Windows.Forms.TextBox();
             this.gVQues = new System.Windows.Forms.DataGridView();
             this.btnDelAns = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblNum = new System.Windows.Forms.Label();
-            this.tBQues = new System.Windows.Forms.TextBox();
             this.gVAns = new System.Windows.Forms.DataGridView();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblDisp = new System.Windows.Forms.Label();
@@ -86,11 +88,12 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.colTime = new System.Windows.Forms.Timer(this.components);
             this.examTimer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.tBCurAns = new System.Windows.Forms.TextBox();
             this.paneMain.SuspendLayout();
             this.paneExam.SuspendLayout();
-            this.gBChoice.SuspendLayout();
+            this.paneChoice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gVChoice)).BeginInit();
+            this.panel2.SuspendLayout();
             this.paneInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gVQues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gVAns)).BeginInit();
@@ -119,20 +122,14 @@
             // 
             this.paneExam.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.paneExam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneExam.Controls.Add(this.label2);
-            this.paneExam.Controls.Add(this.gBChoice);
+            this.paneExam.Controls.Add(this.paneChoice);
+            this.paneExam.Controls.Add(this.panel2);
             this.paneExam.Controls.Add(this.label7);
             this.paneExam.Controls.Add(this.cBType);
-            this.paneExam.Controls.Add(this.btnPass);
-            this.paneExam.Controls.Add(this.label6);
             this.paneExam.Controls.Add(this.paneInfo);
-            this.paneExam.Controls.Add(this.btnOk);
-            this.paneExam.Controls.Add(this.tBAns);
             this.paneExam.Controls.Add(this.gVQues);
             this.paneExam.Controls.Add(this.btnDelAns);
             this.paneExam.Controls.Add(this.label3);
-            this.paneExam.Controls.Add(this.lblNum);
-            this.paneExam.Controls.Add(this.tBQues);
             this.paneExam.Controls.Add(this.gVAns);
             this.paneExam.Location = new System.Drawing.Point(12, 67);
             this.paneExam.Name = "paneExam";
@@ -140,18 +137,13 @@
             this.paneExam.TabIndex = 79;
             this.paneExam.Visible = false;
             // 
-            // gBChoice
+            // paneChoice
             // 
-            this.gBChoice.Controls.Add(this.gVChoice);
-            this.gBChoice.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBChoice.ForeColor = System.Drawing.Color.Yellow;
-            this.gBChoice.Location = new System.Drawing.Point(17, 443);
-            this.gBChoice.Name = "gBChoice";
-            this.gBChoice.Size = new System.Drawing.Size(385, 167);
-            this.gBChoice.TabIndex = 120;
-            this.gBChoice.TabStop = false;
-            this.gBChoice.Text = "Choices:";
-            this.gBChoice.Visible = false;
+            this.paneChoice.Controls.Add(this.gVChoice);
+            this.paneChoice.Location = new System.Drawing.Point(17, 363);
+            this.paneChoice.Name = "paneChoice";
+            this.paneChoice.Size = new System.Drawing.Size(266, 237);
+            this.paneChoice.TabIndex = 124;
             // 
             // gVChoice
             // 
@@ -162,7 +154,7 @@
             this.gVChoice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gainsboro;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -172,18 +164,19 @@
             this.gVChoice.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gVChoice.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gVChoice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gVChoice.GridColor = System.Drawing.Color.DodgerBlue;
-            this.gVChoice.Location = new System.Drawing.Point(6, 37);
+            this.gVChoice.Location = new System.Drawing.Point(0, 0);
             this.gVChoice.Name = "gVChoice";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -191,8 +184,112 @@
             this.gVChoice.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gVChoice.RowHeadersVisible = false;
             this.gVChoice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gVChoice.Size = new System.Drawing.Size(373, 122);
+            this.gVChoice.Size = new System.Drawing.Size(266, 237);
             this.gVChoice.TabIndex = 113;
+            this.gVChoice.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gVChoice_CellClick);
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panel2.Controls.Add(this.tBCurAns);
+            this.panel2.Controls.Add(this.tBAns);
+            this.panel2.Controls.Add(this.tBQues);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.lblNum);
+            this.panel2.Controls.Add(this.btnOk);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.btnPass);
+            this.panel2.Location = new System.Drawing.Point(306, 363);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(471, 237);
+            this.panel2.TabIndex = 123;
+            // 
+            // tBAns
+            // 
+            this.tBAns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.tBAns.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tBAns.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBAns.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBAns.Location = new System.Drawing.Point(69, 109);
+            this.tBAns.Multiline = true;
+            this.tBAns.Name = "tBAns";
+            this.tBAns.Size = new System.Drawing.Size(349, 71);
+            this.tBAns.TabIndex = 113;
+            this.tBAns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tBQues
+            // 
+            this.tBQues.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.tBQues.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tBQues.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBQues.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBQues.Location = new System.Drawing.Point(3, 34);
+            this.tBQues.Multiline = true;
+            this.tBQues.Name = "tBQues";
+            this.tBQues.Size = new System.Drawing.Size(462, 31);
+            this.tBQues.TabIndex = 107;
+            this.tBQues.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.LightSlateGray;
+            this.label2.Location = new System.Drawing.Point(1, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 24);
+            this.label2.TabIndex = 121;
+            this.label2.Text = "No.";
+            // 
+            // lblNum
+            // 
+            this.lblNum.AutoSize = true;
+            this.lblNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNum.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblNum.Location = new System.Drawing.Point(40, 4);
+            this.lblNum.Name = "lblNum";
+            this.lblNum.Size = new System.Drawing.Size(21, 24);
+            this.lblNum.TabIndex = 108;
+            this.lblNum.Text = "1";
+            // 
+            // btnOk
+            // 
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOk.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.btnOk.Location = new System.Drawing.Point(334, 195);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(84, 27);
+            this.btnOk.TabIndex = 114;
+            this.btnOk.Text = "SUBMIT";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.LightSlateGray;
+            this.label6.Location = new System.Drawing.Point(65, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 20);
+            this.label6.TabIndex = 116;
+            this.label6.Text = "Answer:";
+            // 
+            // btnPass
+            // 
+            this.btnPass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPass.ForeColor = System.Drawing.Color.Lime;
+            this.btnPass.Location = new System.Drawing.Point(69, 195);
+            this.btnPass.Name = "btnPass";
+            this.btnPass.Size = new System.Drawing.Size(130, 27);
+            this.btnPass.TabIndex = 117;
+            this.btnPass.Text = "NEXT QUESTION";
+            this.btnPass.UseVisualStyleBackColor = true;
+            this.btnPass.Click += new System.EventHandler(this.btnPass_Click);
             // 
             // label7
             // 
@@ -216,30 +313,6 @@
             this.cBType.Size = new System.Drawing.Size(189, 28);
             this.cBType.TabIndex = 118;
             this.cBType.SelectedIndexChanged += new System.EventHandler(this.cBType_SelectedIndexChanged);
-            // 
-            // btnPass
-            // 
-            this.btnPass.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPass.ForeColor = System.Drawing.Color.Lime;
-            this.btnPass.Location = new System.Drawing.Point(425, 562);
-            this.btnPass.Name = "btnPass";
-            this.btnPass.Size = new System.Drawing.Size(143, 27);
-            this.btnPass.TabIndex = 117;
-            this.btnPass.Text = "NEXT QUESTION";
-            this.btnPass.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.label6.Location = new System.Drawing.Point(421, 443);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 20);
-            this.label6.TabIndex = 116;
-            this.label6.Text = "Answer:";
             // 
             // paneInfo
             // 
@@ -345,32 +418,6 @@
             this.label8.TabIndex = 121;
             this.label8.Text = "ID Number:";
             // 
-            // btnOk
-            // 
-            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.btnOk.Location = new System.Drawing.Point(690, 562);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(84, 27);
-            this.btnOk.TabIndex = 114;
-            this.btnOk.Text = "SUBMIT";
-            this.btnOk.UseVisualStyleBackColor = true;
-            // 
-            // tBAns
-            // 
-            this.tBAns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.tBAns.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tBAns.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBAns.ForeColor = System.Drawing.Color.Gainsboro;
-            this.tBAns.Location = new System.Drawing.Point(425, 476);
-            this.tBAns.Multiline = true;
-            this.tBAns.Name = "tBAns";
-            this.tBAns.Size = new System.Drawing.Size(349, 71);
-            this.tBAns.TabIndex = 113;
-            this.tBAns.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // gVQues
             // 
             this.gVQues.AllowUserToAddRows = false;
@@ -411,6 +458,7 @@
             this.gVQues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gVQues.Size = new System.Drawing.Size(760, 299);
             this.gVQues.TabIndex = 112;
+            this.gVQues.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gVQues_CellClick);
             // 
             // btnDelAns
             // 
@@ -420,7 +468,7 @@
             this.btnDelAns.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelAns.ForeColor = System.Drawing.Color.Red;
             this.btnDelAns.Image = global::PROJ_stud_.Properties.Resources.Actions_trash_empty_icon;
-            this.btnDelAns.Location = new System.Drawing.Point(836, 523);
+            this.btnDelAns.Location = new System.Drawing.Point(836, 524);
             this.btnDelAns.Name = "btnDelAns";
             this.btnDelAns.Size = new System.Drawing.Size(30, 30);
             this.btnDelAns.TabIndex = 111;
@@ -436,30 +484,6 @@
             this.label3.Size = new System.Drawing.Size(125, 20);
             this.label3.TabIndex = 110;
             this.label3.Text = "Your Answers:";
-            // 
-            // lblNum
-            // 
-            this.lblNum.AutoSize = true;
-            this.lblNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNum.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblNum.Location = new System.Drawing.Point(53, 359);
-            this.lblNum.Name = "lblNum";
-            this.lblNum.Size = new System.Drawing.Size(21, 24);
-            this.lblNum.TabIndex = 108;
-            this.lblNum.Text = "1";
-            // 
-            // tBQues
-            // 
-            this.tBQues.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.tBQues.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tBQues.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBQues.ForeColor = System.Drawing.Color.Gainsboro;
-            this.tBQues.Location = new System.Drawing.Point(17, 389);
-            this.tBQues.Multiline = true;
-            this.tBQues.Name = "tBQues";
-            this.tBQues.Size = new System.Drawing.Size(760, 31);
-            this.tBQues.TabIndex = 107;
-            this.tBQues.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // gVAns
             // 
@@ -501,6 +525,7 @@
             this.gVAns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gVAns.Size = new System.Drawing.Size(378, 465);
             this.gVAns.TabIndex = 47;
+            this.gVAns.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gVAns_CellClick);
             // 
             // lblTime
             // 
@@ -742,16 +767,18 @@
             this.examTimer.Interval = 1000;
             this.examTimer.Tick += new System.EventHandler(this.examTimer_Tick);
             // 
-            // label2
+            // tBCurAns
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.label2.Location = new System.Drawing.Point(13, 359);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 24);
-            this.label2.TabIndex = 121;
-            this.label2.Text = "No.";
+            this.tBCurAns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.tBCurAns.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tBCurAns.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBCurAns.ForeColor = System.Drawing.Color.LightSlateGray;
+            this.tBCurAns.Location = new System.Drawing.Point(344, 7);
+            this.tBCurAns.Name = "tBCurAns";
+            this.tBCurAns.Size = new System.Drawing.Size(121, 19);
+            this.tBCurAns.TabIndex = 122;
+            this.tBCurAns.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tBCurAns.Visible = false;
             // 
             // frmStud
             // 
@@ -771,8 +798,10 @@
             this.paneMain.PerformLayout();
             this.paneExam.ResumeLayout(false);
             this.paneExam.PerformLayout();
-            this.gBChoice.ResumeLayout(false);
+            this.paneChoice.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gVChoice)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.paneInfo.ResumeLayout(false);
             this.paneInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gVQues)).EndInit();
@@ -831,13 +860,15 @@
         private System.Windows.Forms.Button btnPass;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cBType;
-        private System.Windows.Forms.GroupBox gBChoice;
         private System.Windows.Forms.DataGridView gVChoice;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel paneChoice;
+        private System.Windows.Forms.TextBox tBCurAns;
     }
 }
 

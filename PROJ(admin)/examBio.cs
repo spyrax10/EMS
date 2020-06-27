@@ -35,6 +35,14 @@ namespace PROJ_admin_
         private void cBCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             DbQ.dispQues2(gVData, frmMain.empId, cBCode, tBSub, tBPer);
+            if (numLimit.Value != 0)
+            {
+                btnStart.Enabled = true;
+            }
+            else
+            {
+                btnStart.Enabled = false;
+            }
         }
 
         private void numLimit_ValueChanged(object sender, EventArgs e)

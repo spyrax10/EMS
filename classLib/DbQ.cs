@@ -2818,6 +2818,7 @@ namespace classLib
                             if (dr.Read())
                             {
                                 msg.examUse();
+                                btn.Enabled = true; num.Enabled = true;
                             }
                             else
                             {
@@ -2882,7 +2883,7 @@ namespace classLib
 
         [Obsolete]
         public static void studLog(string studId, string code, string set,
-            Timer time, Timer colTime, Label disp, Button btn)
+            Timer time, Timer colTime, Label disp, Button btn, MethodInvoker meth)
         {
             try
             {
@@ -2902,6 +2903,7 @@ namespace classLib
                             if (dr.Read())
                             {
                                 msg.accAl();
+                                meth();
                             }
                             else
                             {
@@ -3074,8 +3076,108 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
+        public static void editStudAns(DataGridView gVAns, string studId, string code, string set, string type, 
+            Label num, TextBox ques, TextBox ans, Button btn, TextBox curAns)
+        {
+            try
+            {
+                string val = gVAns.CurrentRow.Cells[1].Value.ToString();
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from studAnsTB where studId = @ID and " +
+                            "Code = @Code and QSet = @Set and Type = @Type and SAnswer = @Ans";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Ans", val);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                num.Text = dr["No"].ToString();
+                                ques.Text = dr["QuesTion"].ToString();
+                                ans.Text = val; curAns.Text = val; curAns.Visible = true;
+                                btn.Text = "UPDATE";
+                                ans.Focus();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void dispStudAns(DataGridView gVAns, string studId, string code, string set, string type)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select No, SAnswer as Answer from studAnsTB " +
+                        "where studId = '" + studId + "' and Code = '" + code + "' " +
+                        "and QSet = '" + set + "' and Type = '" + type + "'", con);
+                    adapt.Fill(dt);
+                    gVAns.DataSource = dt;
+                    misc.defGV(gVAns);
+                    misc.sortStud(gVAns);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void editSQues(DataGridView gVQues, string studId, string code, string type, string set,
+            Label num, TextBox ques, TextBox ans, Button btn, TextBox cAns)
+        {
+            try
+            {
+                num.Text = gVQues.CurrentRow.Cells[0].Value.ToString();
+                ques.Text = gVQues.CurrentRow.Cells[1].Value.ToString();
+                ans.Focus();
+                ansExits(studId, code, set, type, num, ques, ans, btn);
+                curAns(studId, code, set, type, cAns, ques, num);
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void dispChoice(DataGridView gV, string code, string set, string num)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select Choices from choiceTB where " +
+                        "Code = '" + code + "'and QSet = '" + set + "' and No = '" + num + "'", con);
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
         public static void dispStudQues(DataGridView gVQues, string code, string set, string type,
-            Label num, TextBox ques, TextBox ans)
+            Label num, TextBox ques, Panel gBChoice, DataGridView gVChoice, string studId, 
+            TextBox ans, Button btn, TextBox cAns)
         {
             try
             {
@@ -3091,7 +3193,18 @@ namespace classLib
                     misc.defGV(gVQues);
                     num.Text = gVQues.CurrentRow.Cells[0].Value.ToString();
                     ques.Text = gVQues.CurrentRow.Cells[1].Value.ToString();
-                    ans.Text = "";  ans.Focus();
+                
+                    if (type == "Multiple Choice")
+                    {
+                        gBChoice.Visible = true;
+                        dispChoice(gVChoice, code, set, num.Text);
+                    }
+                    else
+                    {
+                        gBChoice.Visible = false;
+                    }
+                    ansExits(studId, code, set, type, num, ques, ans, btn);
+                    curAns(studId, code, set, type, cAns, ques, num);
                 }
             }
             catch (Exception e)
@@ -3122,6 +3235,216 @@ namespace classLib
                                 studId.Enabled = false;
                             }
                         }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void ansExits(string studId, string code, string set, string type, 
+            Label num, TextBox ques, TextBox ans, Button btn)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select TOP 1 SAnswer from studAnsTB where studId = @ID and " +
+                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Num", num.Text);
+                        cmd.Parameters.AddWithValue("Ques", ques.Text);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                ans.Text = dr["SAnswer"].ToString();
+                                ans.Focus();
+                                btn.Text = "UPDATE";
+                            }
+                            else
+                            {
+                                ans.Text = ""; ans.Focus(); btn.Text = "SUBMIT";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void nextQues(string studId, string code, string set, string type,
+            Label num, TextBox ques, TextBox ans, Button btn, DataGridView gVChoice, TextBox cAns)
+        {
+            try
+            {
+                int newNum = Convert.ToInt32(num.Text) + 1;
+
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    using (var cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = "Select * from quesTB where Code = @Code and QSet = @Set " +
+                            "and Type = @Type and No = @Num";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Num", newNum.ToString());
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                ques.Text = dr["Question"].ToString();
+                                num.Text = newNum.ToString();
+                                ansExits(studId, code, set, type, num, ques, ans, btn);
+                                curAns(studId, code, set, type, cAns, ques, num);
+                            }
+                            else
+                            {
+
+                            }
+                            if (type == "Multiple Choice")
+                            {
+                                dispChoice(gVChoice, code, set, num.Text);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void curAns(string studId, string code, string set, string type, 
+            TextBox ans, TextBox ques, Label num)
+        {
+            try
+            {
+               
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select TOP 1 SAnswer from studAnsTB where studId = @ID and " +
+                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Num", num.Text);
+                        cmd.Parameters.AddWithValue("@Ques", ques.Text);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                ans.Visible = true;
+                                ans.Text = dr["SAnswer"].ToString();
+                            }
+                            else
+                            {
+                                ans.Visible = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void studAns(string studId, string code, string set, string type,
+            Label num, TextBox ques, TextBox ans, DataGridView gVAns, 
+            Button btn, DataGridView gVChoice, TextBox curAns)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                  
+                    if (ques.Text == "")
+                    {
+                        msg.selQues();
+                    }
+                    else
+                    {
+                        con.Open();
+                        if (btn.Text == "SUBMIT")
+                        {
+                            using (var cmd = con.CreateCommand())
+                            {
+
+                                cmd.CommandText = "Insert into studAnsTB Values (@ID, @Code, @Set, @Type, " +
+                                    "@Num, @Ques, @Ans, @Stat)";
+                                cmd.Parameters.AddWithValue("@ID", studId);
+                                cmd.Parameters.AddWithValue("@Code", code);
+                                cmd.Parameters.AddWithValue("@Set", set);
+                                cmd.Parameters.AddWithValue("@Type", type);
+                                cmd.Parameters.AddWithValue("@Num", num.Text);
+                                cmd.Parameters.AddWithValue("@Ques", ques.Text);
+
+                                if (ans.Text == "")
+                                    cmd.Parameters.AddWithValue("@Ans", msg.empty);
+                                else
+                                    cmd.Parameters.AddWithValue("@Ans", ans.Text);
+
+                                cmd.Parameters.AddWithValue("@Stat", msg.tbu);
+                                cmd.ExecuteNonQuery();
+
+                                if (type == "Enumeration")
+                                {
+                                    if (misc.enuAns(studId, code, set, num.Text, ques.Text) == true)
+                                    {
+                                        nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                                    }
+                                    else
+                                    {
+                                        ans.Text = ""; ans.Focus();
+                                    }
+                                }
+                                else
+                                {
+                                    nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (var cmd2 = con.CreateCommand())
+                            {
+                                cmd2.CommandText = "Update studAnsTB Set SAnswer = @Ans where Code = @Code " +
+                                    "and studId = @ID and Type = @Type and QSet = @Set " +
+                                    "and No = @Num and Question = @Ques and SAnswer = @Val";
+                                cmd2.Parameters.AddWithValue("@ID", studId);
+                                cmd2.Parameters.AddWithValue("@Code", code);
+                                cmd2.Parameters.AddWithValue("@Set", set);
+                                cmd2.Parameters.AddWithValue("@Type", type);
+                                cmd2.Parameters.AddWithValue("@Num", num.Text);
+                                cmd2.Parameters.AddWithValue("@Ques", ques.Text);
+                                cmd2.Parameters.AddWithValue("@Ans", ans.Text);
+                                cmd2.Parameters.AddWithValue("@Val", curAns.Text);
+                                cmd2.ExecuteNonQuery();
+                                btn.Text = "SUBMIT";
+                                nextQues(studId, code, set, type, num, ques, ans, btn, gVChoice, curAns);
+                            }
+                        }
+                        dispStudAns(gVAns, studId, code, set, type);
                     }
                 }
             }

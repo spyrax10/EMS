@@ -28,6 +28,53 @@ namespace classLib
 
         public static Form activeForm = null;
         public static int second = 59;
+
+        public static bool enuAns(string studId, string code, string set, string num, string ques)
+        {
+            bool stat = false; int c1, c2;
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    using (var cmd = con.CreateCommand())
+                    {                  
+                        cmd.CommandText = "Select Count(Answer) from quesTB where Code = @Code and QSet = @Set " +
+                            "and Type = @Type and No = @Num and Question = @Ques";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", "Enumeration");
+                        cmd.Parameters.AddWithValue("@Num", num);
+                        cmd.Parameters.AddWithValue("@Ques", ques);
+                        object ob = cmd.ExecuteScalar();
+                        c1 = Convert.ToInt32(ob);
+                    }
+                    using (var cmd2 = con.CreateCommand())
+                    {
+                        cmd2.CommandText = "Select Count(SAnswer) from studAnsTB where studId = @ID and " +
+                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques";
+                        cmd2.Parameters.AddWithValue("@ID", studId);
+                        cmd2.Parameters.AddWithValue("@Code", code);
+                        cmd2.Parameters.AddWithValue("@Set", set);
+                        cmd2.Parameters.AddWithValue("@Type", "Enumeration");
+                        cmd2.Parameters.AddWithValue("@Num", num);
+                        cmd2.Parameters.AddWithValue("@Ques", ques);
+                        object ob2 = cmd2.ExecuteScalar();
+                        c2 = Convert.ToInt32(ob2);
+                    }
+                    if (c1 == c2)
+                    {
+                        stat = true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                crashRep(e.Message);
+            }
+            return stat;
+        }
         public static int minute(string code)
         {
             int min = 0;
@@ -82,6 +129,25 @@ namespace classLib
             else
             {
                 tB.PasswordChar = '*';
+            }
+        }
+        public static void sortStud(DataGridView gV)
+        {
+            if (gV.Rows.Count != 0)
+            {
+                string val = gV.Rows[0].Cells[0].Value.ToString();
+                
+                for (int i = 1; i < gV.Rows.Count; i++)
+                {
+                    if (gV.Rows[i].Cells[0].Value.ToString() == val)
+                    {
+                        gV.Rows[i].Cells[0].Value = string.Empty;
+                    }
+                    else
+                    {
+                        val = gV.Rows[i].Cells[0].Value.ToString();
+                    }
+                }
             }
         }
         public static void sortExam(DataGridView gV)
@@ -143,7 +209,7 @@ namespace classLib
 
         public static void sortGV(DataGridView gV)
         {
-            if (gV.Rows.Count != 0)
+            if (gV.Rows.Count > 0)
             {
                 string val1 = gV.Rows[0].Cells[1].Value.ToString();
                 string val2 = gV.Rows[0].Cells[0].Value.ToString();
@@ -170,7 +236,8 @@ namespace classLib
                         val2 = gV.Rows[i].Cells[0].Value.ToString();
                     }
                 }
-            }   
+            }
+            
         }
         public static bool emailCount(string email, string id)
         {

@@ -34,6 +34,10 @@ namespace classLib
         public static string online = "ONLINE";
         public static string ended = "ENDED";
         public static string offline = "OFFLINE";
+        public static string empty = "-----";
+        public static string cor = "CORRECT";
+        public static string wro = "WRONG";
+        public static string tbu = "TBU";
        
         public static string updEmp(string empId)
         {
@@ -182,5 +186,10 @@ namespace classLib
         {
             MessageBox.Show("Account Already LogIn!", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        public static void selQues()
+        {
+            MessageBox.Show("Please Select a Question...", err, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 }
