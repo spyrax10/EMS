@@ -20,6 +20,23 @@ namespace PROJ_stud_
             lblTStart.Text = msg.time;
             lblSet.Text = tBSet.Text;
         }
+        public void info2()
+        {
+            lblID2.Text = lblID.Text;
+            lblCode2.Text = lblCode.Text;
+            lblTStart.Text = lblTStart2.Text;
+            lblSet2.Text = lblSet.Text;
+            lblTEnd.Text = msg.time;
+        }
+        public void showScore()
+        {
+            timer.Stop();
+            paneExam.Visible = false;
+            info2();
+            gBRes.Visible = true;
+            gBRes.BringToFront();
+            DbQ.dispAns(gVRes, lblID.Text, lblCode.Text, lblSet.Text);
+        }
         public void def()
         {
             timer1.Stop();
@@ -47,6 +64,7 @@ namespace PROJ_stud_
             lblTime.Visible = true;
             lblDisp.Visible = false;
             gBDet.Visible = false;
+            gBRes.Visible = false;
             info();
             DbQ.loadType(cBCode.Text, tBSet.Text, cBType);
             DbQ.studStart(tBID.Text, cBCode.Text);
@@ -54,11 +72,13 @@ namespace PROJ_stud_
             paneExam.Visible = true;
             paneExam.BringToFront();
             tBAns.Focus();
-            //misc.fullScr(this);
+            // misc.fullScr(this);
+            //misc.disableTask();
         }
         private void pBClose_Click(object sender, EventArgs e)
         {
             DbQ.studOffline(lblID.Text);
+            //misc.enableTask();
             Application.Exit();
         }
 
@@ -189,6 +209,11 @@ namespace PROJ_stud_
             {
                 msg.dataEmpty();
             }     
+        }
+
+        private void btnScore_Click(object sender, EventArgs e)
+        {
+            showScore();
         }
 
         private void colTime_Tick(object sender, EventArgs e)

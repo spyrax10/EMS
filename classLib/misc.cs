@@ -29,6 +29,35 @@ namespace classLib
         public static Form activeForm = null;
         public static int second = 59;
 
+        public static void enableTask()
+        {
+            try
+            {
+                RegistryKey objRegistryKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System");
+                objRegistryKey.DeleteValue("DisableTaskMgr");
+                objRegistryKey.Close();
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                crashRep(e.Message);
+            }
+        }
+
+        public static void disableTask()
+        {
+            try
+            {
+                RegistryKey objRegistryKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System");
+                if (objRegistryKey.GetValue("DisableTaskMgr") == null)
+                    objRegistryKey.SetValue("DisableTaskMgr", "1");
+            }
+            catch(Exception e)
+            {
+                msg.expMsg(e.Message);
+                crashRep(e.Message);
+            }
+        }
         public static bool enuAns(string studId, string code, string set, string num, string ques)
         {
             bool stat = false; int c1, c2;

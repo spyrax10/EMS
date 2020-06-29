@@ -3513,5 +3513,114 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
+        public static void dispAns(DataGridView gVAns, string studId, string code, string set)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select Type, No, Question, SAnswer as Answer, Status from studAnsTB " +
+                        "where studId = '" + studId + "' and Code = '" + code + "' and QSet = '" + set + "' " +
+                        "ORDER BY Type, CAST(No AS INT) ASC ", con);
+                    adapt.Fill(dt);
+                    gVAns.DataSource = dt;
+                    misc.defGV(gVAns);
+                    misc.sortGV(gVAns);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static int totQues(string code, string set, string type)
+        {
+            int count = 0;
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Count(Answer) from quesTB where code = @Code and " +
+                            "QSet = @Set and Type = @Type";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        object ob = cmd.ExecuteScalar();
+                        count = Convert.ToInt32(ob);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+            return count;
+        }
+
+        public static int corAns(string studId, string code, string set, string type)
+        {
+            int count = 0;
+            try
+            {
+               using (var con = DBInfo.getCon())
+               {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Count(Status) from studAnsTB where studId = @ID and " +
+                            "Code = @Code and QSet = @Set and Type = @Type and Status = @Cor";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Cor", msg.cor);
+                        object ob = cmd.ExecuteScalar();
+                        count = Convert.ToInt32(ob);
+                    }
+               }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+            return count;
+        }
+        public static int wroAns(string studId, string code, string set, string type)
+        {
+            int count = 0;
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Count(Status) from studAnsTB where studId = @ID and " +
+                            "Code = @Code and QSet = @Set and Type = @Type and Status = @Wro";
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@Type", type);
+                        cmd.Parameters.AddWithValue("@Wro", msg.wro);
+                        object ob = cmd.ExecuteScalar();
+                        count = Convert.ToInt32(ob);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+            return count;
+        }
     }
 }
