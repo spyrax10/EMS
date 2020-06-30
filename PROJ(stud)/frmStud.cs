@@ -24,7 +24,8 @@ namespace PROJ_stud_
         {
             lblID2.Text = lblID.Text;
             lblCode2.Text = lblCode.Text;
-            lblTStart.Text = lblTStart2.Text;
+            lblPer2.Text = lblPer.Text;
+            lblTStart2.Text = lblTStart.Text;
             lblSet2.Text = lblSet.Text;
             lblTEnd.Text = msg.time;
         }
@@ -33,9 +34,13 @@ namespace PROJ_stud_
             timer.Stop();
             paneExam.Visible = false;
             info2();
+            DbQ.checkAns(lblID.Text, lblCode.Text, lblSet.Text);
             gBRes.Visible = true;
             gBRes.BringToFront();
             DbQ.dispAns(gVRes, lblID.Text, lblCode.Text, lblSet.Text);
+            DbQ.calScore(lblID.Text, lblCode.Text, lblSet.Text,
+               tBIdenCor, tBIdenTot, tBEnuCor, tBEnuTot, tBMulCor, tBMulTot,
+               tBTotCor, tBTotAns, tBGrade);
         }
         public void def()
         {
@@ -65,6 +70,7 @@ namespace PROJ_stud_
             lblDisp.Visible = false;
             gBDet.Visible = false;
             gBRes.Visible = false;
+            pBClose.Visible = false;
             info();
             DbQ.loadType(cBCode.Text, tBSet.Text, cBType);
             DbQ.studStart(tBID.Text, cBCode.Text);
@@ -72,14 +78,18 @@ namespace PROJ_stud_
             paneExam.Visible = true;
             paneExam.BringToFront();
             tBAns.Focus();
-            // misc.fullScr(this);
-            //misc.disableTask();
+            misc.fullScr(this);
+            misc.disableTask();
+        }
+        public void close()
+        {
+            DbQ.studOffline(lblID.Text);
+            misc.enableTask();
+            Application.Exit();
         }
         private void pBClose_Click(object sender, EventArgs e)
         {
-            DbQ.studOffline(lblID.Text);
-            //misc.enableTask();
-            Application.Exit();
+            close();
         }
 
         private void tBID_KeyPress(object sender, KeyPressEventArgs e)
@@ -125,7 +135,7 @@ namespace PROJ_stud_
         private void btnStart_Click(object sender, EventArgs e)
         {
             DbQ.studLog(tBID.Text, cBCode.Text, tBSet.Text, examTimer, colTime,
-                lblDisp, btnStart, refresh);
+                lblDisp, btnStart, refresh, lblPer);
         }
 
         private void cBType_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,7 +223,26 @@ namespace PROJ_stud_
 
         private void btnScore_Click(object sender, EventArgs e)
         {
-            showScore();
+            if (gVAns.Rows.Count > 0)
+            {
+                showScore();
+            }
+            else
+            {
+                msg.dataEmpty();
+            }         
+        }
+
+        private void frmStud_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Alt || Control.ModifierKeys == Keys.F4)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                close();
+            }
         }
 
         private void colTime_Tick(object sender, EventArgs e)

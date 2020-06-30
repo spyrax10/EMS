@@ -38,6 +38,11 @@ namespace classLib
         public static string cor = "CORRECT";
         public static string wro = "WRONG";
         public static string tbu = "TBU";
+        public static string iden = "Identification";
+        public static string enu = "Enumeration";
+        public static string mul = "Multiple Choice";
+        public static string pass = "PASSED";
+        public static string fail = "FAILED";
        
         public static string updEmp(string empId)
         {

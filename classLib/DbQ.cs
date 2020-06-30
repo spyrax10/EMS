@@ -265,7 +265,8 @@ namespace classLib
                         if(MessageBox.Show("This will clear System Log, Are you Sure?", " Verify", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==
                             DialogResult.Yes)
                         {
-                            cmd.CommandText = "Delete from systemLog";
+                            cmd.CommandText = "Delete from systemLog where Action != @Act";
+                            cmd.Parameters.AddWithValue("@Act", "System Logs Clear");
                             cmd.ExecuteNonQuery();
                             sysLog(empId, msg.time, msg.date, "System Logs Clear");
                             loadSysLog(gV);                   
@@ -2073,7 +2074,9 @@ namespace classLib
                                 per.Text = dr["Period"].ToString();
 
                                 DataTable dt = new DataTable();
-                                adapt = new SqlDataAdapter("Select QSet, Type, No, Question, Answer from quesTB where Code = '" + cB.Text + "' and empId = '" + empId + "' ", con);
+                                adapt = new SqlDataAdapter("Select QSet, Type, No, Question, Answer from quesTB " +
+                                    "where Code = '" + cB.Text + "' and empId = '" + empId + "' " +
+                                    "Order by QSet, Type, Cast(No as INT) ASC", con);
                                 adapt.Fill(dt);
                                 gV.DataSource = dt;
                                 misc.defGV(gV);
@@ -2880,10 +2883,36 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-
+        public static void getPeriod(string code, Label lbl)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from quesTB where Code = @Code";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                lbl.Text = dr["Period"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
         [Obsolete]
         public static void studLog(string studId, string code, string set,
-            Timer time, Timer colTime, Label disp, Button btn, MethodInvoker meth)
+            Timer time, Timer colTime, Label disp, Button btn, MethodInvoker meth, Label lbl)
         {
             try
             {
@@ -2923,6 +2952,7 @@ namespace classLib
                                     disp.Visible = true;
                                     btn.Enabled = false;
                                     colTime.Start();
+                                    getPeriod(code, lbl);
                                     msg.logSuc();
                                 }
                             }
@@ -3301,11 +3331,12 @@ namespace classLib
                     using (var cmd = con.CreateCommand())
                     {
                         con.Open();
-                        cmd.CommandText = "Select TOP 1 * from quesTB where Type = @Type and QSet = @Set " +
-                            "and Code = @Code";
+                        cmd.CommandText = "Select * from quesTB where Type = @Type and QSet = @Set " +
+                            "and Code = @Code and No = @Num";
                         cmd.Parameters.AddWithValue("@Type", type);
                         cmd.Parameters.AddWithValue("@Set", set);
                         cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Num", "1");
                         using (var dr = cmd.ExecuteReader())
                         {
                             if (dr.Read())
@@ -3536,9 +3567,9 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static int totQues(string code, string set, string type)
+        public static double totQues(string code, string set, string type)
         {
-            int count = 0;
+            double count = 0;
             try
             {
                 using (var con = DBInfo.getCon())
@@ -3552,7 +3583,7 @@ namespace classLib
                         cmd.Parameters.AddWithValue("@Set", set);
                         cmd.Parameters.AddWithValue("@Type", type);
                         object ob = cmd.ExecuteScalar();
-                        count = Convert.ToInt32(ob);
+                        count = Convert.ToDouble(ob);
                     }
                 }
             }
@@ -3564,9 +3595,9 @@ namespace classLib
             return count;
         }
 
-        public static int corAns(string studId, string code, string set, string type)
+        public static double corAns(string studId, string code, string set, string type)
         {
-            int count = 0;
+            double count = 0;
             try
             {
                using (var con = DBInfo.getCon())
@@ -3582,7 +3613,7 @@ namespace classLib
                         cmd.Parameters.AddWithValue("@Type", type);
                         cmd.Parameters.AddWithValue("@Cor", msg.cor);
                         object ob = cmd.ExecuteScalar();
-                        count = Convert.ToInt32(ob);
+                        count = Convert.ToDouble(ob);
                     }
                }
             }
@@ -3621,6 +3652,93 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
             return count;
+        }
+
+        public static void calScore(string studId, string code, string set,
+            TextBox idenCor, TextBox idenTot, TextBox enuCor, TextBox enuTot, 
+            TextBox mulCor, TextBox mulTot, TextBox totScor, TextBox totAns, TextBox scoreGrade)
+        {
+            try
+            {
+                double idenScore = corAns(studId, code, set, msg.iden);
+                double idenTotScore = totQues(code, set, msg.iden);
+                double enuScore = corAns(studId, code, set, msg.enu);
+                double enuTotScore = totQues(code, set, msg.enu);
+                double mulScore = corAns(studId, code, set, msg.mul);
+                double mulTotScore = totQues(code, set, msg.mul);
+
+                double TotalScore = idenScore + enuScore + mulScore;
+                double TotalItems = idenTotScore + enuTotScore + mulTotScore;
+                double percent = Math.Round((TotalScore / TotalItems) * 100);
+
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select Grade, Remarks from gradeTB where Percentage = @Per";
+                        cmd.Parameters.AddWithValue("@Per", percent.ToString());
+
+                        using(var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                string remark = dr["Remarks"].ToString();
+               
+                                if(remark == msg.pass)
+                                {
+                                    scoreGrade.ForeColor = Color.Lime;
+                                }
+                                else
+                                {
+                                    scoreGrade.ForeColor = Color.Red;
+                                }
+                                scoreGrade.Text = dr["Grade"].ToString();
+                            }
+                        }
+                    }
+                }
+                idenCor.Text = idenScore.ToString(); idenTot.Text = idenTotScore.ToString();
+                enuCor.Text = enuScore.ToString(); enuTot.Text = enuTotScore.ToString();
+                mulCor.Text = mulScore.ToString(); mulTot.Text = mulTotScore.ToString();
+                totScor.Text = TotalScore.ToString(); totAns.Text = TotalItems.ToString();
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void checkAns(string studId, string code, string set)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Update studAnsTB SET studAnsTB.Status = " +
+                            "(Case WHEN studAnsTB.SAnswer in (Select quesTB.Answer from quesTB where quesTB.Code = @Code " +
+                            "and studAnsTB.Code = @Code and quesTB.Code = @Code " +
+                            "and studAnsTB.QSet = @Set and quesTB.QSet = @Set " +
+                            "and studAnsTB.No = quesTB.No and studAnsTB.studId = @ID) " +
+                            "THEN @Cor ELSE @Wro END)";
+                        
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@ID", studId);
+                        cmd.Parameters.AddWithValue("@Cor", msg.cor);
+                        cmd.Parameters.AddWithValue("@Wro", msg.wro);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
         }
     }
 }
