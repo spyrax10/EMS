@@ -183,7 +183,14 @@ namespace PROJ_admin_
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            DbQ.print(gVList, msg.empList);
+            if (gVList.Rows.Count > 0)
+            {
+                DbQ.print(gVList, msg.empList);
+            }
+            else
+            {
+                msg.dataEmpty();
+            }
         }
     }
 }

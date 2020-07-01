@@ -217,22 +217,17 @@ namespace PROJ_admin_
 
         private void lblAdLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (DBInfo.conStat() == true)
+            if (DBInfo.admChk() == false)
             {
-                if (DBInfo.admChk() == false)
-                {
-                    gBadmCre.Visible = true;
-                }
-                else if (DBInfo.admChk() == true)
-                {
-                    gBLog.Visible = true;
-                }
-                gBMain.Visible = false;
+                gBadmCre.Visible = true;
+                tBId.Focus();
             }
-            else
+            else if (DBInfo.admChk() == true)
             {
-                msg.serverErr();
+                gBLog.Visible = true;
+                tBLUser.Focus();
             }
+            gBMain.Visible = false;
         }
         private void tBForCode_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -257,12 +252,20 @@ namespace PROJ_admin_
             if (e.KeyChar == (char)Keys.Enter)
             {
                 DBInfo.chkEmp(tBIdMain, gBMain, gBLog, gBadmCre, tBId);
+                tBLUser.Focus(); tBCUser.Focus();
             }
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             DbQ.sysLog(msg.sysName, msg.time, msg.date, msg.appClose);
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            gBLog.Visible = false;
+            gBMain.Visible = true;
+            tBIdMain.Focus();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -273,7 +276,8 @@ namespace PROJ_admin_
                 timer1.Stop();
                 timer2.Stop();
                 paneLogo.Visible = false;
-                gBMain.Visible = true;
+                gBLog.Visible = true;
+                tBLUser.Focus();
             }
         }
     }

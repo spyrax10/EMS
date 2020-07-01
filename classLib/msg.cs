@@ -43,6 +43,8 @@ namespace classLib
         public static string mul = "Multiple Choice";
         public static string pass = "PASSED";
         public static string fail = "FAILED";
+        public static string testSum = "TEST RECORD SUMMARY";
+        public static string score = "SCORE BREAKDOWN";
        
         public static string updEmp(string empId)
         {

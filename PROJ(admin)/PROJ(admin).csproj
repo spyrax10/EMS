@@ -55,12 +55,6 @@
     <Compile Include="empBio.Designer.cs">
       <DependentUpon>empBio.cs</DependentUpon>
     </Compile>
-    <Compile Include="acdmBio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="acdmBio.Designer.cs">
-      <DependentUpon>acdmBio.cs</DependentUpon>
-    </Compile>
     <Compile Include="examBio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +97,12 @@
     <Compile Include="frmQues.Designer.cs">
       <DependentUpon>frmQues.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRec.Designer.cs">
+      <DependentUpon>frmRec.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,9 +126,6 @@
     <EmbeddedResource Include="empBio.resx">
       <DependentUpon>empBio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="acdmBio.resx">
-      <DependentUpon>acdmBio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="examBio.resx">
       <DependentUpon>examBio.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmQues.resx">
       <DependentUpon>frmQues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRec.resx">
+      <DependentUpon>frmRec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSet.resx">
       <DependentUpon>frmSet.cs</DependentUpon>
@@ -344,6 +344,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\google-code-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shop-Records-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

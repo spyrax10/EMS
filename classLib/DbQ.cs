@@ -10,8 +10,66 @@ namespace classLib
 {
     public class DbQ
     {
-       public static SqlDataAdapter adapt;
+        public static SqlDataAdapter adapt;
 
+        public static string codeSub(string code)
+        {
+            string sub = "";
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from quesTB where Code = @Code";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                sub = dr["Subject"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+            return sub;
+        }
+        public static string codeEmp(string code)
+        {
+            string empId = "";
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Select * from quesTB where Code = @Code";
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                empId = dr["empId"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+            return empId;
+        }
         public static void loadProfile(string empId, Label name, Label id, Label dept, PictureBox pB)
         {
             try
@@ -1438,7 +1496,7 @@ namespace classLib
                     con.Open();
                     adapt = new SqlDataAdapter("Select studId as StudId, " +
                         "dbo.allCap(Department) as Department, dbo.allCap(Course) as Course , " +
-                        "Lastname, Firstname, Email from studTB", con);
+                        "Lastname, Firstname, Email from studTB Order by StudId ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
@@ -1459,7 +1517,7 @@ namespace classLib
                 {
                     con.Open();
                     adapt = new SqlDataAdapter("Select empId as EmpId, " +
-                        "Department, Lastname, Firstname, Mobile, Email from empTB", con);
+                        "Department, Lastname, Firstname, Mobile, Email from empTB Order By EmpId ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
@@ -2788,7 +2846,8 @@ namespace classLib
                     con.Open();
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select studLogTB.studId AS StudID, dbo.allCap(Course) as Course, Lastname, Firstname, IP, Status from studLogTB " +
-                        "FULL OUTER JOIN studTB on studLogTB.studId = studTB.studId where studLogTB.Code = '" + code + "'", con);
+                        "FULL OUTER JOIN studTB on studLogTB.studId = studTB.studId where studLogTB.Code = '" + code + "' " +
+                        "Order by studLogTB.studId ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
@@ -3162,7 +3221,8 @@ namespace classLib
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select No, SAnswer as Answer from studAnsTB " +
                         "where studId = '" + studId + "' and Code = '" + code + "' " +
-                        "and QSet = '" + set + "' and Type = '" + type + "'", con);
+                        "and QSet = '" + set + "' and Type = '" + type + "' " +
+                        "Order by Cast(No as INT) ASC", con);
                     adapt.Fill(dt);
                     gVAns.DataSource = dt;
                     misc.defGV(gVAns);
@@ -3201,7 +3261,8 @@ namespace classLib
                     con.Open();
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select Choices from choiceTB where " +
-                        "Code = '" + code + "'and QSet = '" + set + "' and No = '" + num + "'", con);
+                        "Code = '" + code + "'and QSet = '" + set + "' and No = '" + num + "' " +
+                        "Order By Choices ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
                     misc.defGV(gV);
@@ -3559,6 +3620,7 @@ namespace classLib
                     gVAns.DataSource = dt;
                     misc.defGV(gVAns);
                     misc.sortGV(gVAns);
+                    misc.disOrd(gVAns);
                 }
             }
             catch (Exception e)
@@ -3654,12 +3716,14 @@ namespace classLib
             return count;
         }
 
-        public static void calScore(string studId, string code, string set,
+        public static void calScore(string studId, string code, string set, 
             TextBox idenCor, TextBox idenTot, TextBox enuCor, TextBox enuTot, 
-            TextBox mulCor, TextBox mulTot, TextBox totScor, TextBox totAns, TextBox scoreGrade)
+            TextBox mulCor, TextBox mulTot, TextBox totScor, TextBox totAns, TextBox scoreGrade,
+            string per)
         {
             try
             {
+                checkAns(studId, code, set);
                 double idenScore = corAns(studId, code, set, msg.iden);
                 double idenTotScore = totQues(code, set, msg.iden);
                 double enuScore = corAns(studId, code, set, msg.enu);
@@ -3702,6 +3766,9 @@ namespace classLib
                 enuCor.Text = enuScore.ToString(); enuTot.Text = enuTotScore.ToString();
                 mulCor.Text = mulScore.ToString(); mulTot.Text = mulTotScore.ToString();
                 totScor.Text = TotalScore.ToString(); totAns.Text = TotalItems.ToString();
+
+                recordAns(code, studId, per, set, 
+                    TotalScore.ToString(), TotalItems.ToString(), scoreGrade.Text);
             }
             catch (Exception e)
             {
@@ -3733,6 +3800,120 @@ namespace classLib
                         cmd.ExecuteNonQuery();
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void recordAns(string code, string studId, string per, string set,
+            string score, string item, string grade)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        con.Open();
+                        cmd.CommandText = "Insert into recordTB Values(@empId, @Code, @Sub, @Per," +
+                            "@Set, @studId, @Date, @Score, @Item, @Grade)";
+                        cmd.Parameters.AddWithValue("@empId", codeEmp(code));
+                        cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Sub", codeSub(code));
+                        cmd.Parameters.AddWithValue("@Per", per);
+                        cmd.Parameters.AddWithValue("@Set", set);
+                        cmd.Parameters.AddWithValue("@studId", studId);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
+                        cmd.Parameters.AddWithValue("@Score", score);
+                        cmd.Parameters.AddWithValue("@Item", item);
+                        cmd.Parameters.AddWithValue("@Grade", grade);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void sortResult(DataGridView gV, string empId, string code)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select Subject, Period, Date, " +
+                        "studId as StudID, Score, Items, Grade from recordTB where empId = '" + empId + "' " +
+                        "and Code = '" + code + "'", con);
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void dispResult(DataGridView gV, string empId)
+        {
+            try
+            {
+                using (var con = DBInfo.getCon())
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    adapt = new SqlDataAdapter("Select Subject, Period, Date, " +
+                        "studId as StudID, Score, Items, Grade from recordTB " +
+                        "where empId = '" + empId + "'", con);           
+                    adapt.Fill(dt);
+                    gV.DataSource = dt;
+                    misc.defGV(gV);
+                    misc.sortGV(gV);
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                misc.crashRep(e.Message);
+            }
+        }
+        public static void ansBreak(DataGridView gVSum, DataGridView gVScore, 
+            ComboBox code, MethodInvoker meth)
+        {
+            try
+            {
+                string studId = gVSum.CurrentRow.Cells[3].Value.ToString();
+
+                if (code.Text == "" || gVSum.Rows.Count == 0)
+                {
+                    msg.dataEmpty();
+                    code.Focus();
+                }
+                else
+                {
+                    using (var con = DBInfo.getCon())
+                    {
+                        con.Open();
+                        DataTable dt = new DataTable();
+                        adapt = new SqlDataAdapter("Select Type, No, Question, SAnswer as Answer, Status from studAnsTB " +
+                            "where studId = '" + studId + "' and Code = '" + code.Text + "' " +
+                            "ORDER BY Type, CAST(No AS INT) ASC", con);
+                        adapt.Fill(dt);
+                        gVScore.DataSource = dt;
+                        meth();
+                        misc.defGV(gVScore);
+                        misc.sortGV(gVScore);
+                        misc.disOrd(gVScore);
+                    }
+                }
+             
             }
             catch (Exception e)
             {

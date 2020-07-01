@@ -39,6 +39,8 @@
             this.btnShut = new System.Windows.Forms.Button();
             this.pBHide = new System.Windows.Forms.PictureBox();
             this.paneMenu = new System.Windows.Forms.Panel();
+            this.btnRec = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             this.btnQues = new System.Windows.Forms.Button();
             this.paneSlide = new System.Windows.Forms.Panel();
             this.btnPro = new System.Windows.Forms.Button();
@@ -49,7 +51,6 @@
             this.paneDiv = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnTest = new System.Windows.Forms.Button();
             this.paneMain.SuspendLayout();
             this.paneCont.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBPro)).BeginInit();
@@ -162,6 +163,7 @@
             // paneMenu
             // 
             this.paneMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneMenu.Controls.Add(this.btnRec);
             this.paneMenu.Controls.Add(this.btnTest);
             this.paneMenu.Controls.Add(this.btnQues);
             this.paneMenu.Controls.Add(this.paneSlide);
@@ -175,6 +177,46 @@
             this.paneMenu.Size = new System.Drawing.Size(200, 573);
             this.paneMenu.TabIndex = 0;
             // 
+            // btnRec
+            // 
+            this.btnRec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.btnRec.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRec.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.btnRec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRec.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRec.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnRec.Image = global::PROJ_admin_.Properties.Resources.Shop_Records_icon;
+            this.btnRec.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRec.Location = new System.Drawing.Point(17, 307);
+            this.btnRec.Name = "btnRec";
+            this.btnRec.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnRec.Size = new System.Drawing.Size(175, 44);
+            this.btnRec.TabIndex = 19;
+            this.btnRec.Text = "Record Section";
+            this.btnRec.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRec.UseVisualStyleBackColor = false;
+            this.btnRec.Click += new System.EventHandler(this.btnRec_Click);
+            // 
+            // btnTest
+            // 
+            this.btnTest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.btnTest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTest.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTest.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnTest.Image = global::PROJ_admin_.Properties.Resources.google_code_32;
+            this.btnTest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTest.Location = new System.Drawing.Point(17, 254);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnTest.Size = new System.Drawing.Size(175, 44);
+            this.btnTest.TabIndex = 18;
+            this.btnTest.Text = "Test Section";
+            this.btnTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnTest.UseVisualStyleBackColor = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // btnQues
             // 
             this.btnQues.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
@@ -185,7 +227,7 @@
             this.btnQues.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnQues.Image = global::PROJ_admin_.Properties.Resources.illustrator_old_school_icon;
             this.btnQues.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQues.Location = new System.Drawing.Point(20, 198);
+            this.btnQues.Location = new System.Drawing.Point(17, 201);
             this.btnQues.Name = "btnQues";
             this.btnQues.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnQues.Size = new System.Drawing.Size(175, 44);
@@ -214,7 +256,7 @@
             this.btnPro.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnPro.Image = global::PROJ_admin_.Properties.Resources.Books_icon;
             this.btnPro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPro.Location = new System.Drawing.Point(20, 148);
+            this.btnPro.Location = new System.Drawing.Point(17, 148);
             this.btnPro.Name = "btnPro";
             this.btnPro.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnPro.Size = new System.Drawing.Size(175, 44);
@@ -300,26 +342,6 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnTest
-            // 
-            this.btnTest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.btnTest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTest.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTest.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnTest.Image = global::PROJ_admin_.Properties.Resources.google_code_32;
-            this.btnTest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTest.Location = new System.Drawing.Point(20, 248);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnTest.Size = new System.Drawing.Size(175, 44);
-            this.btnTest.TabIndex = 18;
-            this.btnTest.Text = "Test Section";
-            this.btnTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnTest.UseVisualStyleBackColor = false;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
             // frmEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -373,5 +395,6 @@
         public System.Windows.Forms.Button btnPro;
         public System.Windows.Forms.Button btnQues;
         public System.Windows.Forms.Button btnTest;
+        public System.Windows.Forms.Button btnRec;
     }
 }

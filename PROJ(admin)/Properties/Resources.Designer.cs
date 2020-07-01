@@ -493,6 +493,16 @@ namespace PROJ_admin_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Shop_Records_icon {
+            get {
+                object obj = ResourceManager.GetObject("Shop-Records-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Teacher_male_icon {
             get {
                 object obj = ResourceManager.GetObject("Teacher-male-icon", resourceCulture);

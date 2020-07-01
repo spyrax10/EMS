@@ -131,5 +131,12 @@ namespace PROJ_admin_
             paneSlide.Top = btnTest.Top;
             misc.opnChild(paneCont, new examBio());
         }
+
+        private void btnRec_Click(object sender, EventArgs e)
+        {
+            paneSlide.Height = btnRec.Height;
+            paneSlide.Top = btnRec.Top;
+            misc.opnChild(paneCont, new frmRec());
+        }
     }
 }

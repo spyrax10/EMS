@@ -34,30 +34,29 @@
             this.paneCont = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.paneTop = new System.Windows.Forms.Panel();
-            this.paneMenu = new System.Windows.Forms.Panel();
-            this.paneDiv = new System.Windows.Forms.Panel();
-            this.paneLogo = new System.Windows.Forms.Panel();
-            this.lblEmpId = new System.Windows.Forms.Label();
-            this.paneSlide = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.paneTop = new System.Windows.Forms.Panel();
             this.btnShut = new System.Windows.Forms.Button();
             this.pBHide = new System.Windows.Forms.PictureBox();
-            this.btnAcd = new System.Windows.Forms.Button();
+            this.paneMenu = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnSys = new System.Windows.Forms.Button();
+            this.paneDiv = new System.Windows.Forms.Panel();
             this.btnStud = new System.Windows.Forms.Button();
+            this.paneLogo = new System.Windows.Forms.Panel();
             this.btnSet = new System.Windows.Forms.Button();
+            this.lblEmpId = new System.Windows.Forms.Label();
             this.pBHome = new System.Windows.Forms.PictureBox();
+            this.paneSlide = new System.Windows.Forms.Panel();
             this.btnEmp = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.paneMain.SuspendLayout();
             this.paneCont.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.paneTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBHide)).BeginInit();
             this.paneMenu.SuspendLayout();
             this.paneLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBHome)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,83 +109,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Spyrax10.com";
             // 
-            // paneTop
-            // 
-            this.paneTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.paneTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneTop.Controls.Add(this.btnShut);
-            this.paneTop.Controls.Add(this.pBHide);
-            this.paneTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.paneTop.Location = new System.Drawing.Point(200, 0);
-            this.paneTop.Name = "paneTop";
-            this.paneTop.Size = new System.Drawing.Size(750, 52);
-            this.paneTop.TabIndex = 4;
-            // 
-            // paneMenu
-            // 
-            this.paneMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.paneMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.paneMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneMenu.Controls.Add(this.btnAcd);
-            this.paneMenu.Controls.Add(this.btnLogOut);
-            this.paneMenu.Controls.Add(this.btnSys);
-            this.paneMenu.Controls.Add(this.paneDiv);
-            this.paneMenu.Controls.Add(this.btnStud);
-            this.paneMenu.Controls.Add(this.paneLogo);
-            this.paneMenu.Controls.Add(this.paneSlide);
-            this.paneMenu.Controls.Add(this.btnEmp);
-            this.paneMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.paneMenu.Location = new System.Drawing.Point(0, 0);
-            this.paneMenu.Name = "paneMenu";
-            this.paneMenu.Size = new System.Drawing.Size(200, 600);
-            this.paneMenu.TabIndex = 3;
-            // 
-            // paneDiv
-            // 
-            this.paneDiv.BackColor = System.Drawing.Color.White;
-            this.paneDiv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneDiv.Location = new System.Drawing.Point(14, 532);
-            this.paneDiv.Name = "paneDiv";
-            this.paneDiv.Size = new System.Drawing.Size(172, 1);
-            this.paneDiv.TabIndex = 7;
-            // 
-            // paneLogo
-            // 
-            this.paneLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneLogo.Controls.Add(this.btnSet);
-            this.paneLogo.Controls.Add(this.lblEmpId);
-            this.paneLogo.Controls.Add(this.pBHome);
-            this.paneLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.paneLogo.Location = new System.Drawing.Point(0, 0);
-            this.paneLogo.Name = "paneLogo";
-            this.paneLogo.Size = new System.Drawing.Size(198, 96);
-            this.paneLogo.TabIndex = 4;
-            // 
-            // lblEmpId
-            // 
-            this.lblEmpId.AutoSize = true;
-            this.lblEmpId.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmpId.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblEmpId.Location = new System.Drawing.Point(74, 17);
-            this.lblEmpId.Name = "lblEmpId";
-            this.lblEmpId.Size = new System.Drawing.Size(31, 23);
-            this.lblEmpId.TabIndex = 1;
-            this.lblEmpId.Text = "ID";
-            // 
-            // paneSlide
-            // 
-            this.paneSlide.BackColor = System.Drawing.Color.DodgerBlue;
-            this.paneSlide.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paneSlide.Location = new System.Drawing.Point(4, 148);
-            this.paneSlide.Name = "paneSlide";
-            this.paneSlide.Size = new System.Drawing.Size(10, 44);
-            this.paneSlide.TabIndex = 3;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -198,6 +120,18 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // paneTop
+            // 
+            this.paneTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.paneTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneTop.Controls.Add(this.btnShut);
+            this.paneTop.Controls.Add(this.pBHide);
+            this.paneTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.paneTop.Location = new System.Drawing.Point(200, 0);
+            this.paneTop.Name = "paneTop";
+            this.paneTop.Size = new System.Drawing.Size(750, 52);
+            this.paneTop.TabIndex = 4;
             // 
             // btnShut
             // 
@@ -226,25 +160,23 @@
             this.pBHide.TabStop = false;
             this.pBHide.Click += new System.EventHandler(this.pBHide_Click);
             // 
-            // btnAcd
+            // paneMenu
             // 
-            this.btnAcd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.btnAcd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAcd.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.btnAcd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAcd.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAcd.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAcd.Image = global::PROJ_admin_.Properties.Resources.Graduate_academic_cap_icon;
-            this.btnAcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAcd.Location = new System.Drawing.Point(18, 254);
-            this.btnAcd.Name = "btnAcd";
-            this.btnAcd.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnAcd.Size = new System.Drawing.Size(175, 44);
-            this.btnAcd.TabIndex = 12;
-            this.btnAcd.Text = "Academic Bio";
-            this.btnAcd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAcd.UseVisualStyleBackColor = false;
-            this.btnAcd.Click += new System.EventHandler(this.btnAcd_Click);
+            this.paneMenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.paneMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.paneMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneMenu.Controls.Add(this.btnLogOut);
+            this.paneMenu.Controls.Add(this.btnSys);
+            this.paneMenu.Controls.Add(this.paneDiv);
+            this.paneMenu.Controls.Add(this.btnStud);
+            this.paneMenu.Controls.Add(this.paneLogo);
+            this.paneMenu.Controls.Add(this.paneSlide);
+            this.paneMenu.Controls.Add(this.btnEmp);
+            this.paneMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.paneMenu.Location = new System.Drawing.Point(0, 0);
+            this.paneMenu.Name = "paneMenu";
+            this.paneMenu.Size = new System.Drawing.Size(200, 600);
+            this.paneMenu.TabIndex = 3;
             // 
             // btnLogOut
             // 
@@ -264,20 +196,29 @@
             this.btnSys.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             this.btnSys.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSys.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.btnSys.FlatAppearance.BorderSize = 0;
             this.btnSys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSys.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSys.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnSys.Image = global::PROJ_admin_.Properties.Resources.file_extension_log_icon;
             this.btnSys.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSys.Location = new System.Drawing.Point(143, 546);
+            this.btnSys.Location = new System.Drawing.Point(18, 254);
             this.btnSys.Name = "btnSys";
             this.btnSys.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnSys.Size = new System.Drawing.Size(43, 40);
+            this.btnSys.Size = new System.Drawing.Size(175, 44);
             this.btnSys.TabIndex = 10;
+            this.btnSys.Text = "System Logs";
             this.btnSys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSys.UseVisualStyleBackColor = false;
             this.btnSys.Click += new System.EventHandler(this.btnSys_Click);
+            // 
+            // paneDiv
+            // 
+            this.paneDiv.BackColor = System.Drawing.Color.White;
+            this.paneDiv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneDiv.Location = new System.Drawing.Point(14, 532);
+            this.paneDiv.Name = "paneDiv";
+            this.paneDiv.Size = new System.Drawing.Size(172, 1);
+            this.paneDiv.TabIndex = 7;
             // 
             // btnStud
             // 
@@ -289,7 +230,7 @@
             this.btnStud.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnStud.Image = global::PROJ_admin_.Properties.Resources.Teacher_male_icon;
             this.btnStud.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStud.Location = new System.Drawing.Point(18, 204);
+            this.btnStud.Location = new System.Drawing.Point(18, 201);
             this.btnStud.Name = "btnStud";
             this.btnStud.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnStud.Size = new System.Drawing.Size(175, 44);
@@ -298,6 +239,18 @@
             this.btnStud.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStud.UseVisualStyleBackColor = false;
             this.btnStud.Click += new System.EventHandler(this.btnStud_Click);
+            // 
+            // paneLogo
+            // 
+            this.paneLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneLogo.Controls.Add(this.btnSet);
+            this.paneLogo.Controls.Add(this.lblEmpId);
+            this.paneLogo.Controls.Add(this.pBHome);
+            this.paneLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.paneLogo.Location = new System.Drawing.Point(0, 0);
+            this.paneLogo.Name = "paneLogo";
+            this.paneLogo.Size = new System.Drawing.Size(198, 96);
+            this.paneLogo.TabIndex = 4;
             // 
             // btnSet
             // 
@@ -312,6 +265,17 @@
             this.btnSet.UseVisualStyleBackColor = true;
             this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
+            // lblEmpId
+            // 
+            this.lblEmpId.AutoSize = true;
+            this.lblEmpId.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmpId.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblEmpId.Location = new System.Drawing.Point(74, 17);
+            this.lblEmpId.Name = "lblEmpId";
+            this.lblEmpId.Size = new System.Drawing.Size(31, 23);
+            this.lblEmpId.TabIndex = 1;
+            this.lblEmpId.Text = "ID";
+            // 
             // pBHome
             // 
             this.pBHome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -324,6 +288,15 @@
             this.pBHome.TabIndex = 0;
             this.pBHome.TabStop = false;
             this.pBHome.Click += new System.EventHandler(this.pBHome_Click);
+            // 
+            // paneSlide
+            // 
+            this.paneSlide.BackColor = System.Drawing.Color.DodgerBlue;
+            this.paneSlide.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paneSlide.Location = new System.Drawing.Point(4, 148);
+            this.paneSlide.Name = "paneSlide";
+            this.paneSlide.Size = new System.Drawing.Size(10, 44);
+            this.paneSlide.TabIndex = 3;
             // 
             // btnEmp
             // 
@@ -344,6 +317,11 @@
             this.btnEmp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEmp.UseVisualStyleBackColor = false;
             this.btnEmp.Click += new System.EventHandler(this.btnEmp_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmAdm
             // 
@@ -366,12 +344,12 @@
             this.paneMain.ResumeLayout(false);
             this.paneCont.ResumeLayout(false);
             this.paneCont.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.paneTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBHide)).EndInit();
             this.paneMenu.ResumeLayout(false);
             this.paneLogo.ResumeLayout(false);
             this.paneLogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBHome)).EndInit();
             this.ResumeLayout(false);
 
@@ -398,6 +376,5 @@
         private System.Windows.Forms.PictureBox pBHome;
         public System.Windows.Forms.Panel paneSlide;
         private System.Windows.Forms.Button btnSet;
-        public System.Windows.Forms.Button btnAcd;
     }
 }

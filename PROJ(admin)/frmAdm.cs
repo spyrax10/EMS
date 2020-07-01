@@ -136,12 +136,5 @@ namespace PROJ_admin_
         {
             home();
         }
-
-        private void btnAcd_Click(object sender, EventArgs e)
-        {
-            paneSlide.Height = btnAcd.Height;
-            paneSlide.Top = btnAcd.Top;
-            misc.opnChild(paneCont, new acdmBio());
-        }
     }
 }

@@ -34,13 +34,12 @@ namespace PROJ_stud_
             timer.Stop();
             paneExam.Visible = false;
             info2();
-            DbQ.checkAns(lblID.Text, lblCode.Text, lblSet.Text);
+            DbQ.calScore(lblID.Text, lblCode.Text, lblSet.Text,
+                tBIdenCor, tBIdenTot, tBEnuCor, tBEnuTot, tBMulCor, tBMulTot,
+                tBTotCor, tBTotAns, tBGrade, lblPer.Text);
             gBRes.Visible = true;
             gBRes.BringToFront();
-            DbQ.dispAns(gVRes, lblID.Text, lblCode.Text, lblSet.Text);
-            DbQ.calScore(lblID.Text, lblCode.Text, lblSet.Text,
-               tBIdenCor, tBIdenTot, tBEnuCor, tBEnuTot, tBMulCor, tBMulTot,
-               tBTotCor, tBTotAns, tBGrade);
+            DbQ.dispAns(gVRes, lblID.Text, lblCode.Text, lblSet.Text);      
         }
         public void def()
         {
@@ -243,6 +242,11 @@ namespace PROJ_stud_
             {
                 close();
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            close();
         }
 
         private void colTime_Tick(object sender, EventArgs e)

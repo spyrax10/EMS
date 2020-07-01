@@ -41,8 +41,6 @@ namespace PROJ_admin_
         {
             lblType.Text = cBType.Text.ToUpper();
             paneIns.Visible = false;
-            paneQues.Visible = true;
-            paneQues.BringToFront();
             cBSub.Enabled = false;
             cBPer.Enabled = false;
             lblErr.Visible = false;
@@ -50,17 +48,18 @@ namespace PROJ_admin_
             tBAns.Text = "";
             tBQues.Focus();
             btnNum.Value = 1;
+            paneQues.Visible = true;
             DbQ.loadQues(gVData, frmMain.empId, tBCode.Text,
-                         cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text);
+                        cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text);
         }
         public void showCho()
         {
-            paneCho.Visible = true;
-            paneCho.BringToFront();
             tBCho.Text = "";
             paneCho.Focus();
             btnAddCho.Text = "ADD";
             DbQ.loadCho(gVData, frmMain.empId, tBCode.Text, tBSet.Text, btnNum);
+            paneCho.Visible = true;
+            paneCho.BringToFront();
         }
         public void Ref()
         {
@@ -142,9 +141,16 @@ namespace PROJ_admin_
 
         private void btnDropIden_Click(object sender, EventArgs e)
         {
-            DbQ.delQues(gVData, frmMain.empId, tBCode.Text, 
-                cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text, tBQues, tBAns, btnOk,
-                btnAddCho, tBCho, btnNum);
+            if (gVData.Rows.Count > 0)
+            {
+                DbQ.delQues(gVData, frmMain.empId, tBCode.Text,
+                     cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text, tBQues, tBAns, btnOk,
+                     btnAddCho, tBCho, btnNum);
+            }
+            else
+            {
+                msg.dataEmpty();
+            }
         }
 
         private void gVData_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -222,12 +228,13 @@ namespace PROJ_admin_
         {
             if (btnSet.Text == "STUDENT TEST SET")
             {
-                gBSet.Visible = true;
-                gBQues.Visible = false;
                 btnSet.Text = "QUESTIONAIRE";
-                DbQ.loadStudents(frmMain.empId, gVStud);
                 cBSet.Text = "";
                 cBSub2.Text = "";
+                gBSet.Visible = true;
+                DbQ.loadStudents(frmMain.empId, gVStud);
+                gBQues.Visible = false;
+
             }
             else
             {

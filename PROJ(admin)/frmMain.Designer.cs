@@ -80,6 +80,8 @@
             this.tBLUser = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.paneMain.SuspendLayout();
             this.paneLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -96,9 +98,9 @@
             // paneMain
             // 
             this.paneMain.BackColor = System.Drawing.Color.White;
-            this.paneMain.Controls.Add(this.paneLogo);
-            this.paneMain.Controls.Add(this.gBMain);
             this.paneMain.Controls.Add(this.gBadmCre);
+            this.paneMain.Controls.Add(this.gBMain);
+            this.paneMain.Controls.Add(this.paneLogo);
             this.paneMain.Controls.Add(this.gBNot);
             this.paneMain.Controls.Add(this.gBLog);
             this.paneMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -141,7 +143,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.paneSlide);
             this.panel1.Location = new System.Drawing.Point(108, 75);
@@ -151,7 +153,7 @@
             // 
             // paneSlide
             // 
-            this.paneSlide.BackColor = System.Drawing.Color.Black;
+            this.paneSlide.BackColor = System.Drawing.Color.White;
             this.paneSlide.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.paneSlide.Location = new System.Drawing.Point(266, -1);
             this.paneSlide.Name = "paneSlide";
@@ -162,7 +164,7 @@
             // 
             this.gBMain.Controls.Add(this.lblAdLog);
             this.gBMain.Controls.Add(this.tBIdMain);
-            this.gBMain.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold);
+            this.gBMain.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBMain.ForeColor = System.Drawing.Color.DodgerBlue;
             this.gBMain.Location = new System.Drawing.Point(288, 205);
             this.gBMain.Name = "gBMain";
@@ -177,7 +179,7 @@
             this.lblAdLog.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdLog.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.lblAdLog.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
-            this.lblAdLog.Location = new System.Drawing.Point(102, 112);
+            this.lblAdLog.Location = new System.Drawing.Point(104, 107);
             this.lblAdLog.Name = "lblAdLog";
             this.lblAdLog.Size = new System.Drawing.Size(92, 16);
             this.lblAdLog.TabIndex = 3;
@@ -189,7 +191,7 @@
             // 
             this.tBIdMain.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tBIdMain.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBIdMain.Location = new System.Drawing.Point(47, 69);
+            this.tBIdMain.Location = new System.Drawing.Point(40, 70);
             this.tBIdMain.Name = "tBIdMain";
             this.tBIdMain.Size = new System.Drawing.Size(207, 27);
             this.tBIdMain.TabIndex = 2;
@@ -331,7 +333,6 @@
             // 
             // gBNot
             // 
-            this.gBNot.Controls.Add(this.panel2);
             this.gBNot.Controls.Add(this.label7);
             this.gBNot.Controls.Add(this.lblReCode);
             this.gBNot.Controls.Add(this.paneCode);
@@ -341,6 +342,7 @@
             this.gBNot.Controls.Add(this.tBEmail);
             this.gBNot.Controls.Add(this.tBPath);
             this.gBNot.Controls.Add(this.label6);
+            this.gBNot.Controls.Add(this.panel2);
             this.gBNot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBNot.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBNot.ForeColor = System.Drawing.Color.DodgerBlue;
@@ -507,6 +509,8 @@
             // 
             // gBLog
             // 
+            this.gBLog.Controls.Add(this.linkLabel1);
+            this.gBLog.Controls.Add(this.label14);
             this.gBLog.Controls.Add(this.lblPass2);
             this.gBLog.Controls.Add(this.paneFor);
             this.gBLog.Controls.Add(this.lblForgot);
@@ -520,9 +524,9 @@
             this.gBLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBLog.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBLog.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.gBLog.Location = new System.Drawing.Point(254, 117);
+            this.gBLog.Location = new System.Drawing.Point(254, 90);
             this.gBLog.Name = "gBLog";
-            this.gBLog.Size = new System.Drawing.Size(358, 303);
+            this.gBLog.Size = new System.Drawing.Size(358, 356);
             this.gBLog.TabIndex = 12;
             this.gBLog.TabStop = false;
             this.gBLog.Text = "Login";
@@ -532,7 +536,7 @@
             this.lblPass2.AutoSize = true;
             this.lblPass2.Font = new System.Drawing.Font("Century", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPass2.ForeColor = System.Drawing.Color.Red;
-            this.lblPass2.Location = new System.Drawing.Point(3, 275);
+            this.lblPass2.Location = new System.Drawing.Point(7, 311);
             this.lblPass2.Name = "lblPass2";
             this.lblPass2.Size = new System.Drawing.Size(50, 16);
             this.lblPass2.TabIndex = 20;
@@ -542,7 +546,7 @@
             // 
             this.paneFor.Controls.Add(this.label13);
             this.paneFor.Controls.Add(this.tBForCode);
-            this.paneFor.Location = new System.Drawing.Point(115, 216);
+            this.paneFor.Location = new System.Drawing.Point(131, 274);
             this.paneFor.Name = "paneFor";
             this.paneFor.Size = new System.Drawing.Size(210, 33);
             this.paneFor.TabIndex = 19;
@@ -571,9 +575,9 @@
             // lblForgot
             // 
             this.lblForgot.AutoSize = true;
-            this.lblForgot.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblForgot.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblForgot.LinkColor = System.Drawing.Color.Red;
-            this.lblForgot.Location = new System.Drawing.Point(8, 191);
+            this.lblForgot.Location = new System.Drawing.Point(6, 281);
             this.lblForgot.Name = "lblForgot";
             this.lblForgot.Size = new System.Drawing.Size(119, 19);
             this.lblForgot.TabIndex = 18;
@@ -585,7 +589,7 @@
             // 
             this.btnLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLog.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLog.Location = new System.Drawing.Point(175, 179);
+            this.btnLog.Location = new System.Drawing.Point(175, 185);
             this.btnLog.Name = "btnLog";
             this.btnLog.Size = new System.Drawing.Size(145, 31);
             this.btnLog.TabIndex = 17;
@@ -596,33 +600,33 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label10.Location = new System.Drawing.Point(6, 147);
+            this.label10.Location = new System.Drawing.Point(5, 155);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(165, 23);
+            this.label10.Size = new System.Drawing.Size(161, 19);
             this.label10.TabIndex = 16;
             this.label10.Text = "Re-enter Password:";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label11.Location = new System.Drawing.Point(5, 110);
+            this.label11.Location = new System.Drawing.Point(5, 118);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(102, 27);
+            this.label11.Size = new System.Drawing.Size(113, 23);
             this.label11.TabIndex = 15;
             this.label11.Text = "Password:";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label12.Location = new System.Drawing.Point(5, 76);
+            this.label12.Location = new System.Drawing.Point(6, 85);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(110, 27);
+            this.label12.Size = new System.Drawing.Size(116, 23);
             this.label12.TabIndex = 14;
             this.label12.Text = "Username:";
             // 
@@ -630,7 +634,7 @@
             // 
             this.tBLPass2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBLPass2.ForeColor = System.Drawing.Color.Black;
-            this.tBLPass2.Location = new System.Drawing.Point(175, 145);
+            this.tBLPass2.Location = new System.Drawing.Point(175, 151);
             this.tBLPass2.Name = "tBLPass2";
             this.tBLPass2.PasswordChar = '*';
             this.tBLPass2.Size = new System.Drawing.Size(145, 28);
@@ -641,7 +645,7 @@
             // 
             this.tBLPass.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBLPass.ForeColor = System.Drawing.Color.Black;
-            this.tBLPass.Location = new System.Drawing.Point(175, 111);
+            this.tBLPass.Location = new System.Drawing.Point(175, 117);
             this.tBLPass.Name = "tBLPass";
             this.tBLPass.PasswordChar = '*';
             this.tBLPass.Size = new System.Drawing.Size(145, 28);
@@ -653,7 +657,7 @@
             // 
             this.tBLUser.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBLUser.ForeColor = System.Drawing.Color.Black;
-            this.tBLUser.Location = new System.Drawing.Point(175, 77);
+            this.tBLUser.Location = new System.Drawing.Point(175, 83);
             this.tBLUser.Name = "tBLUser";
             this.tBLUser.Size = new System.Drawing.Size(145, 28);
             this.tBLUser.TabIndex = 11;
@@ -670,6 +674,30 @@
             this.timer2.Enabled = true;
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.SlateGray;
+            this.label14.Location = new System.Drawing.Point(7, 244);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(194, 16);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Don\'t have an Account yet?";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.linkLabel1.Location = new System.Drawing.Point(201, 244);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(62, 16);
+            this.linkLabel1.TabIndex = 22;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "SignUp!";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // frmMain
             // 
@@ -758,6 +786,8 @@
         public System.Windows.Forms.TextBox tBIdMain;
         private System.Windows.Forms.LinkLabel lblAdLog;
         private System.Windows.Forms.LinkLabel lblForgot;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

@@ -115,7 +115,7 @@
             this.btnStud.ForeColor = System.Drawing.Color.LightSlateGray;
             this.btnStud.Location = new System.Drawing.Point(12, 419);
             this.btnStud.Name = "btnStud";
-            this.btnStud.Size = new System.Drawing.Size(158, 27);
+            this.btnStud.Size = new System.Drawing.Size(173, 27);
             this.btnStud.TabIndex = 103;
             this.btnStud.Text = "CHECK STUDENTS";
             this.btnStud.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label16.Location = new System.Drawing.Point(20, 29);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(56, 20);
@@ -274,7 +274,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label4.Location = new System.Drawing.Point(348, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 20);
@@ -285,7 +285,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label2.Location = new System.Drawing.Point(514, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 20);
@@ -296,7 +296,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label1.Location = new System.Drawing.Point(184, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 20);

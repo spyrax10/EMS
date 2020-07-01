@@ -39,7 +39,6 @@ namespace classLib
             }
             catch (Exception e)
             {
-                msg.expMsg(e.Message);
                 crashRep(e.Message);
             }
         }
@@ -314,6 +313,13 @@ namespace classLib
                 crashRep(e.Message);
             }
             return stat;
+        }
+        public static void disOrd(DataGridView gV)
+        {
+            foreach (DataGridViewColumn column in gV.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
         public static void defGV(DataGridView gV)
         {
