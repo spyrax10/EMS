@@ -98,7 +98,7 @@ namespace PROJ_admin_
 
         private void tBEmail_Leave(object sender, EventArgs e)
         {
-            if (!misc.valEmail(tBEmail.Text))
+            if (misc.valEmail(tBEmail.Text) == false)
             {
                 lblEmail.Visible = true;
                 tBEmail.Focus();
@@ -113,7 +113,16 @@ namespace PROJ_admin_
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                DbQ.IDExits(tBID, paneInfo);
+                if (DbQ.IDExits(tBID) == false)
+                {
+                    tBID.Enabled = false;
+                    paneInfo.Enabled = true;
+                }
+                else
+                {
+                    msg.idUse();
+                    paneInfo.Enabled = false;
+                }
             }
         }
 
@@ -164,7 +173,7 @@ namespace PROJ_admin_
 
         private void tBMob_Leave(object sender, EventArgs e)
         {
-            if (!misc.numFormat(tBMob.Text))
+            if (misc.numFormat(tBMob.Text) == false)
             {
                 lblEmail.Text = "Mobile Format Not Valid!";
                 lblEmail.Visible = true;

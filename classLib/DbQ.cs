@@ -1040,38 +1040,40 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void IDExits(Control ID, Control comp)
+        public static bool IDExits(TextBox ID)
         {
+            bool stat = false;
             try
             {
                 using (var con = DBInfo.getCon())
-                using (var cmd = con.CreateCommand())
                 {
-                    con.Open();
-
-                    cmd.CommandText = "Select * from empCre, empTB, studTB " +
-                        "where empCre.empId = @ID or empTB.empId = @ID or studTB.studId = @ID";
-                    cmd.Parameters.AddWithValue("@ID", ID.Text);
-                    using (var dr = cmd.ExecuteReader())
+                    using (var cmd = con.CreateCommand())
                     {
-                        if (dr.Read())
+                        con.Open();
+
+                        cmd.CommandText = "Select * from empCre where empId = @ID;" +
+                            "Select * from empTB where empId = @ID;" +
+                            "Select * from studTB where studId = @ID;";
+                        cmd.Parameters.AddWithValue("@ID", ID.Text);
+                        using (var dr = cmd.ExecuteReader())
                         {
-                            msg.idUse();
-                            comp.Enabled = false;
-                        }
-                        else
-                        {
-                            ID.Enabled = false;
-                            comp.Enabled = true;
+                            do
+                            {
+                                while (dr.Read())
+                                {
+                                    stat = true;
+                                }            
+                            } while (dr.NextResult());
                         }
                     }
-                }
+                }    
             }
             catch (Exception e)
             {
                 msg.expMsg(e.Message);
                 misc.crashRep(e.Message);
             }
+            return stat;
         }
 
         public static void empCreate (string empId, Control pane, string id, string dept, string first, 
@@ -3912,8 +3914,7 @@ namespace classLib
                         misc.sortGV(gVScore);
                         misc.disOrd(gVScore);
                     }
-                }
-             
+                }   
             }
             catch (Exception e)
             {

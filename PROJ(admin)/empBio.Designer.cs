@@ -28,18 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(empBio));
             this.paneMain = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.pBClose = new System.Windows.Forms.PictureBox();
-            this.gBDet = new System.Windows.Forms.GroupBox();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.tbSearch = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.gVList = new System.Windows.Forms.DataGridView();
             this.gBInfo = new System.Windows.Forms.GroupBox();
             this.btnRef = new System.Windows.Forms.Button();
             this.paneInfo = new System.Windows.Forms.Panel();
@@ -71,13 +66,19 @@
             this.tBID = new System.Windows.Forms.TextBox();
             this.pBImg = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.gBDet = new System.Windows.Forms.GroupBox();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.gVList = new System.Windows.Forms.DataGridView();
             this.paneMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).BeginInit();
-            this.gBDet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gVList)).BeginInit();
             this.gBInfo.SuspendLayout();
             this.paneInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBImg)).BeginInit();
+            this.gBDet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVList)).BeginInit();
             this.SuspendLayout();
             // 
             // paneMain
@@ -85,8 +86,8 @@
             this.paneMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.paneMain.Controls.Add(this.btnAdd);
             this.paneMain.Controls.Add(this.pBClose);
-            this.paneMain.Controls.Add(this.gBDet);
             this.paneMain.Controls.Add(this.gBInfo);
+            this.paneMain.Controls.Add(this.gBDet);
             this.paneMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paneMain.Location = new System.Drawing.Point(0, 0);
             this.paneMain.Name = "paneMain";
@@ -104,7 +105,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnAdd.Size = new System.Drawing.Size(40, 40);
-            this.btnAdd.TabIndex = 5;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -119,114 +120,6 @@
             this.pBClose.TabIndex = 4;
             this.pBClose.TabStop = false;
             this.pBClose.Click += new System.EventHandler(this.pBClose_Click);
-            // 
-            // gBDet
-            // 
-            this.gBDet.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gBDet.Controls.Add(this.btnPrint);
-            this.gBDet.Controls.Add(this.btnEdit);
-            this.gBDet.Controls.Add(this.tbSearch);
-            this.gBDet.Controls.Add(this.label6);
-            this.gBDet.Controls.Add(this.gVList);
-            this.gBDet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBDet.ForeColor = System.Drawing.Color.White;
-            this.gBDet.Location = new System.Drawing.Point(12, 57);
-            this.gBDet.Name = "gBDet";
-            this.gBDet.Size = new System.Drawing.Size(726, 479);
-            this.gBDet.TabIndex = 35;
-            this.gBDet.TabStop = false;
-            this.gBDet.Text = "Employee List:";
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrint.FlatAppearance.BorderSize = 0;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = global::PROJ_admin_.Properties.Resources.print_icon;
-            this.btnPrint.Location = new System.Drawing.Point(6, 443);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(30, 30);
-            this.btnPrint.TabIndex = 9;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::PROJ_admin_.Properties.Resources.edit;
-            this.btnEdit.Location = new System.Drawing.Point(690, 443);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(30, 30);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // tbSearch
-            // 
-            this.tbSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.tbSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSearch.ForeColor = System.Drawing.Color.White;
-            this.tbSearch.Location = new System.Drawing.Point(545, 35);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(175, 29);
-            this.tbSearch.TabIndex = 2;
-            this.tbSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
-            this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(468, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 20);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Search:";
-            // 
-            // gVList
-            // 
-            this.gVList.AllowUserToAddRows = false;
-            this.gVList.AllowUserToResizeRows = false;
-            this.gVList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gVList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.gVList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gVList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.gVList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gVList.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gVList.DefaultCellStyle = dataGridViewCellStyle5;
-            this.gVList.GridColor = System.Drawing.Color.DodgerBlue;
-            this.gVList.Location = new System.Drawing.Point(6, 78);
-            this.gVList.Name = "gVList";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gVList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.gVList.RowHeadersVisible = false;
-            this.gVList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gVList.Size = new System.Drawing.Size(714, 363);
-            this.gVList.TabIndex = 0;
             // 
             // gBInfo
             // 
@@ -254,11 +147,11 @@
             this.btnRef.FlatAppearance.BorderSize = 0;
             this.btnRef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRef.Image = global::PROJ_admin_.Properties.Resources.Button_Refresh_icon24;
-            this.btnRef.Location = new System.Drawing.Point(586, 128);
+            this.btnRef.Location = new System.Drawing.Point(586, 89);
             this.btnRef.Name = "btnRef";
             this.btnRef.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnRef.Size = new System.Drawing.Size(30, 29);
-            this.btnRef.TabIndex = 34;
+            this.btnRef.TabIndex = 6;
             this.btnRef.UseVisualStyleBackColor = true;
             this.btnRef.Click += new System.EventHandler(this.btnRef_Click);
             // 
@@ -316,7 +209,7 @@
             this.btnReg.Location = new System.Drawing.Point(481, 252);
             this.btnReg.Name = "btnReg";
             this.btnReg.Size = new System.Drawing.Size(215, 27);
-            this.btnReg.TabIndex = 50;
+            this.btnReg.TabIndex = 18;
             this.btnReg.Text = "REGISTER";
             this.btnReg.UseVisualStyleBackColor = true;
             this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
@@ -325,23 +218,23 @@
             // 
             this.cBBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.cBBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBBar.ForeColor = System.Drawing.Color.Gainsboro;
+            this.cBBar.ForeColor = System.Drawing.Color.White;
             this.cBBar.FormattingEnabled = true;
             this.cBBar.Location = new System.Drawing.Point(481, 169);
             this.cBBar.Name = "cBBar";
             this.cBBar.Size = new System.Drawing.Size(215, 26);
-            this.cBBar.TabIndex = 49;
+            this.cBBar.TabIndex = 16;
             this.cBBar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             // 
             // tBDept
             // 
             this.tBDept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBDept.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBDept.ForeColor = System.Drawing.Color.White;
             this.tBDept.Location = new System.Drawing.Point(163, 21);
             this.tBDept.Name = "tBDept";
             this.tBDept.Size = new System.Drawing.Size(400, 26);
-            this.tBDept.TabIndex = 15;
+            this.tBDept.TabIndex = 7;
             this.tBDept.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBDept.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             this.tBDept.Leave += new System.EventHandler(this.tBDept_Leave);
@@ -354,7 +247,7 @@
             this.tBPur.Location = new System.Drawing.Point(552, 207);
             this.tBPur.Name = "tBPur";
             this.tBPur.Size = new System.Drawing.Size(144, 26);
-            this.tBPur.TabIndex = 48;
+            this.tBPur.TabIndex = 17;
             this.tBPur.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBPur.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             this.tBPur.Leave += new System.EventHandler(this.tBDept_Leave);
@@ -363,12 +256,12 @@
             // 
             this.cBMun.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.cBMun.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBMun.ForeColor = System.Drawing.Color.Gainsboro;
+            this.cBMun.ForeColor = System.Drawing.Color.White;
             this.cBMun.FormattingEnabled = true;
             this.cBMun.Location = new System.Drawing.Point(481, 137);
             this.cBMun.Name = "cBMun";
             this.cBMun.Size = new System.Drawing.Size(215, 26);
-            this.cBMun.TabIndex = 47;
+            this.cBMun.TabIndex = 15;
             this.cBMun.SelectedIndexChanged += new System.EventHandler(this.cBMun_SelectedIndexChanged);
             this.cBMun.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             // 
@@ -376,12 +269,12 @@
             // 
             this.cBPro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.cBPro.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBPro.ForeColor = System.Drawing.Color.Gainsboro;
+            this.cBPro.ForeColor = System.Drawing.Color.White;
             this.cBPro.FormattingEnabled = true;
             this.cBPro.Location = new System.Drawing.Point(481, 105);
             this.cBPro.Name = "cBPro";
             this.cBPro.Size = new System.Drawing.Size(215, 26);
-            this.cBPro.TabIndex = 46;
+            this.cBPro.TabIndex = 14;
             this.cBPro.SelectedIndexChanged += new System.EventHandler(this.cBPro_SelectedIndexChanged);
             this.cBPro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             // 
@@ -389,6 +282,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label5.Location = new System.Drawing.Point(48, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 20);
@@ -399,6 +293,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label13.Location = new System.Drawing.Point(366, 213);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(180, 16);
@@ -409,6 +304,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label12.Location = new System.Drawing.Point(365, 171);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(90, 20);
@@ -419,6 +315,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label11.Location = new System.Drawing.Point(365, 139);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(107, 20);
@@ -429,6 +326,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label10.Location = new System.Drawing.Point(365, 107);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(82, 20);
@@ -439,12 +337,12 @@
             // 
             this.cBCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.cBCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBCount.ForeColor = System.Drawing.Color.Gainsboro;
+            this.cBCount.ForeColor = System.Drawing.Color.White;
             this.cBCount.FormattingEnabled = true;
             this.cBCount.Location = new System.Drawing.Point(481, 73);
             this.cBCount.Name = "cBCount";
             this.cBCount.Size = new System.Drawing.Size(215, 26);
-            this.cBCount.TabIndex = 41;
+            this.cBCount.TabIndex = 13;
             this.cBCount.SelectedIndexChanged += new System.EventHandler(this.cBCount_SelectedIndexChanged);
             this.cBCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             // 
@@ -452,11 +350,11 @@
             // 
             this.tBEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBEmail.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBEmail.ForeColor = System.Drawing.Color.White;
             this.tBEmail.Location = new System.Drawing.Point(119, 204);
             this.tBEmail.Name = "tBEmail";
             this.tBEmail.Size = new System.Drawing.Size(210, 24);
-            this.tBEmail.TabIndex = 40;
+            this.tBEmail.TabIndex = 12;
             this.tBEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBEmail.Leave += new System.EventHandler(this.tBEmail_Leave);
             // 
@@ -464,11 +362,11 @@
             // 
             this.tBMob.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBMob.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBMob.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBMob.ForeColor = System.Drawing.Color.White;
             this.tBMob.Location = new System.Drawing.Point(119, 172);
             this.tBMob.Name = "tBMob";
             this.tBMob.Size = new System.Drawing.Size(210, 26);
-            this.tBMob.TabIndex = 39;
+            this.tBMob.TabIndex = 11;
             this.tBMob.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBMob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBMob_KeyPress);
             this.tBMob.Leave += new System.EventHandler(this.tBMob_Leave);
@@ -477,11 +375,11 @@
             // 
             this.tBLast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBLast.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBLast.ForeColor = System.Drawing.Color.White;
             this.tBLast.Location = new System.Drawing.Point(119, 140);
             this.tBLast.Name = "tBLast";
             this.tBLast.Size = new System.Drawing.Size(210, 26);
-            this.tBLast.TabIndex = 38;
+            this.tBLast.TabIndex = 10;
             this.tBLast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBLast.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             this.tBLast.Leave += new System.EventHandler(this.tBDept_Leave);
@@ -490,11 +388,11 @@
             // 
             this.tBMid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBMid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBMid.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBMid.ForeColor = System.Drawing.Color.White;
             this.tBMid.Location = new System.Drawing.Point(119, 108);
             this.tBMid.Name = "tBMid";
             this.tBMid.Size = new System.Drawing.Size(210, 26);
-            this.tBMid.TabIndex = 37;
+            this.tBMid.TabIndex = 9;
             this.tBMid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBMid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             this.tBMid.Leave += new System.EventHandler(this.tBDept_Leave);
@@ -503,11 +401,11 @@
             // 
             this.tBFirst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBFirst.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tBFirst.ForeColor = System.Drawing.Color.White;
             this.tBFirst.Location = new System.Drawing.Point(119, 76);
             this.tBFirst.Name = "tBFirst";
             this.tBFirst.Size = new System.Drawing.Size(210, 26);
-            this.tBFirst.TabIndex = 36;
+            this.tBFirst.TabIndex = 8;
             this.tBFirst.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBFirst.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBDept_KeyPress);
             this.tBFirst.Leave += new System.EventHandler(this.tBDept_Leave);
@@ -516,6 +414,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label9.Location = new System.Drawing.Point(15, 175);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 20);
@@ -526,6 +425,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label8.Location = new System.Drawing.Point(15, 206);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 20);
@@ -536,6 +436,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label7.Location = new System.Drawing.Point(365, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 20);
@@ -546,6 +447,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label4.Location = new System.Drawing.Point(15, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 20);
@@ -556,6 +458,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label3.Location = new System.Drawing.Point(15, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 20);
@@ -566,6 +469,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label2.Location = new System.Drawing.Point(15, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 20);
@@ -590,11 +494,11 @@
             // 
             this.tBID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.tBID.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tBID.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.tBID.ForeColor = System.Drawing.Color.White;
             this.tBID.Location = new System.Drawing.Point(376, 89);
             this.tBID.Name = "tBID";
             this.tBID.Size = new System.Drawing.Size(204, 29);
-            this.tBID.TabIndex = 9;
+            this.tBID.TabIndex = 5;
             this.tBID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBID_KeyPress);
             // 
@@ -613,12 +517,120 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label1.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label1.Location = new System.Drawing.Point(254, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID Number:";
+            // 
+            // gBDet
+            // 
+            this.gBDet.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.gBDet.Controls.Add(this.btnPrint);
+            this.gBDet.Controls.Add(this.btnEdit);
+            this.gBDet.Controls.Add(this.tbSearch);
+            this.gBDet.Controls.Add(this.label6);
+            this.gBDet.Controls.Add(this.gVList);
+            this.gBDet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gBDet.ForeColor = System.Drawing.Color.White;
+            this.gBDet.Location = new System.Drawing.Point(12, 57);
+            this.gBDet.Name = "gBDet";
+            this.gBDet.Size = new System.Drawing.Size(726, 479);
+            this.gBDet.TabIndex = 35;
+            this.gBDet.TabStop = false;
+            this.gBDet.Text = "Employee List:";
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = global::PROJ_admin_.Properties.Resources.print_icon;
+            this.btnPrint.Location = new System.Drawing.Point(6, 443);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(30, 30);
+            this.btnPrint.TabIndex = 3;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::PROJ_admin_.Properties.Resources.edit;
+            this.btnEdit.Location = new System.Drawing.Point(690, 443);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(30, 30);
+            this.btnEdit.TabIndex = 2;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.tbSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSearch.ForeColor = System.Drawing.Color.White;
+            this.tbSearch.Location = new System.Drawing.Point(545, 35);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(175, 29);
+            this.tbSearch.TabIndex = 1;
+            this.tbSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(468, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 20);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Search:";
+            // 
+            // gVList
+            // 
+            this.gVList.AllowUserToAddRows = false;
+            this.gVList.AllowUserToResizeRows = false;
+            this.gVList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gVList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.gVList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gVList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gVList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gVList.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gVList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gVList.GridColor = System.Drawing.Color.DodgerBlue;
+            this.gVList.Location = new System.Drawing.Point(6, 78);
+            this.gVList.Name = "gVList";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gVList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gVList.RowHeadersVisible = false;
+            this.gVList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gVList.Size = new System.Drawing.Size(714, 363);
+            this.gVList.TabIndex = 0;
             // 
             // empBio
             // 
@@ -629,20 +641,21 @@
             this.Controls.Add(this.paneMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "empBio";
             this.Text = "empBio";
             this.Load += new System.EventHandler(this.empBio_Load);
             this.paneMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).EndInit();
-            this.gBDet.ResumeLayout(false);
-            this.gBDet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gVList)).EndInit();
             this.gBInfo.ResumeLayout(false);
             this.gBInfo.PerformLayout();
             this.paneInfo.ResumeLayout(false);
             this.paneInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBImg)).EndInit();
+            this.gBDet.ResumeLayout(false);
+            this.gBDet.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVList)).EndInit();
             this.ResumeLayout(false);
 
         }

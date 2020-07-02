@@ -13,6 +13,7 @@ using System.Data;
 using System.Net;
 using System.Net.Sockets;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System.Drawing.Imaging;
 
 namespace classLib
 {
@@ -29,6 +30,36 @@ namespace classLib
         public static Form activeForm = null;
         public static int second = 59;
 
+        public static void saveRes(string studId, Panel pane)
+        {
+            try
+            {
+                Bitmap bmp = new Bitmap(pane.Width, pane.Height, PixelFormat.Format32bppArgb);
+                Rectangle capRec = Screen.AllScreens[0].Bounds;
+                Graphics capGraph = Graphics.FromImage(bmp);
+                capGraph.CopyFromScreen(capRec.Left, capRec.Top, 0, 0, capRec.Size);
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = "Save Screenshot";
+                sfd.Filter = "PNG Image(*.png)|*.png|JPG Image(*.jpg)|*.jpg|BMP Image(*.bmp)|*.bmp";
+                sfd.FileName = studId;
+                ImageFormat format = ImageFormat.Png;
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string ext = Path.GetExtension(sfd.FileName);
+                    bmp.Save(sfd.FileName, format);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch(Exception e)
+            {
+                msg.expMsg(e.Message);
+                crashRep(e.Message);
+            }
+        }
         public static void enableTask()
         {
             try

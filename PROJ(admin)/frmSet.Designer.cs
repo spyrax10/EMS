@@ -31,11 +31,13 @@
             this.paneMain = new System.Windows.Forms.Panel();
             this.gBSet = new System.Windows.Forms.GroupBox();
             this.lblPass = new System.Windows.Forms.Label();
+            this.pBOk = new System.Windows.Forms.PictureBox();
             this.tBPass = new System.Windows.Forms.TextBox();
             this.tBUser = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnBrow = new System.Windows.Forms.Button();
             this.paneCode = new System.Windows.Forms.Panel();
             this.tBCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,13 +46,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tBFold = new System.Windows.Forms.TextBox();
             this.lblFold = new System.Windows.Forms.Label();
-            this.pBOk = new System.Windows.Forms.PictureBox();
-            this.btnBrow = new System.Windows.Forms.Button();
             this.pBClose = new System.Windows.Forms.PictureBox();
             this.paneMain.SuspendLayout();
             this.gBSet.SuspendLayout();
-            this.paneCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBOk)).BeginInit();
+            this.paneCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,6 +103,16 @@
             this.lblPass.Text = "label14";
             this.lblPass.Visible = false;
             // 
+            // pBOk
+            // 
+            this.pBOk.Image = global::PROJ_admin_.Properties.Resources.Ok_icon__1_;
+            this.pBOk.Location = new System.Drawing.Point(506, 246);
+            this.pBOk.Name = "pBOk";
+            this.pBOk.Size = new System.Drawing.Size(30, 30);
+            this.pBOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBOk.TabIndex = 61;
+            this.pBOk.TabStop = false;
+            // 
             // tBPass
             // 
             this.tBPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
@@ -110,7 +120,7 @@
             this.tBPass.Location = new System.Drawing.Point(260, 132);
             this.tBPass.Name = "tBPass";
             this.tBPass.Size = new System.Drawing.Size(189, 29);
-            this.tBPass.TabIndex = 60;
+            this.tBPass.TabIndex = 1;
             this.tBPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBPass.Enter += new System.EventHandler(this.tBPass_Enter);
             this.tBPass.Leave += new System.EventHandler(this.tBPass_Leave);
@@ -122,7 +132,7 @@
             this.tBUser.Location = new System.Drawing.Point(260, 88);
             this.tBUser.Name = "tBUser";
             this.tBUser.Size = new System.Drawing.Size(189, 29);
-            this.tBUser.TabIndex = 59;
+            this.tBUser.TabIndex = 0;
             this.tBUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
@@ -156,10 +166,22 @@
             this.btnSave.Location = new System.Drawing.Point(147, 333);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(353, 27);
-            this.btnSave.TabIndex = 55;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "UPDATE";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnBrow
+            // 
+            this.btnBrow.FlatAppearance.BorderSize = 0;
+            this.btnBrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrow.Image = global::PROJ_admin_.Properties.Resources.Folder_Generic_Green_icon;
+            this.btnBrow.Location = new System.Drawing.Point(506, 210);
+            this.btnBrow.Name = "btnBrow";
+            this.btnBrow.Size = new System.Drawing.Size(30, 30);
+            this.btnBrow.TabIndex = 3;
+            this.btnBrow.UseVisualStyleBackColor = true;
+            this.btnBrow.Click += new System.EventHandler(this.btnBrow_Click);
             // 
             // paneCode
             // 
@@ -178,7 +200,7 @@
             this.tBCode.Location = new System.Drawing.Point(141, 3);
             this.tBCode.Name = "tBCode";
             this.tBCode.Size = new System.Drawing.Size(99, 29);
-            this.tBCode.TabIndex = 13;
+            this.tBCode.TabIndex = 6;
             this.tBCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBCode_KeyPress);
             // 
@@ -202,7 +224,7 @@
             this.btnVer.Location = new System.Drawing.Point(409, 287);
             this.btnVer.Name = "btnVer";
             this.btnVer.Size = new System.Drawing.Size(91, 27);
-            this.btnVer.TabIndex = 51;
+            this.btnVer.TabIndex = 5;
             this.btnVer.Text = "CHANGE";
             this.btnVer.UseVisualStyleBackColor = true;
             this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
@@ -215,7 +237,7 @@
             this.tBEmail.Location = new System.Drawing.Point(147, 248);
             this.tBEmail.Name = "tBEmail";
             this.tBEmail.Size = new System.Drawing.Size(353, 26);
-            this.tBEmail.TabIndex = 12;
+            this.tBEmail.TabIndex = 4;
             this.tBEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tBEmail_KeyUp);
             // 
@@ -238,7 +260,7 @@
             this.tBFold.Location = new System.Drawing.Point(147, 213);
             this.tBFold.Name = "tBFold";
             this.tBFold.Size = new System.Drawing.Size(353, 26);
-            this.tBFold.TabIndex = 10;
+            this.tBFold.TabIndex = 2;
             this.tBFold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblFold
@@ -251,28 +273,6 @@
             this.lblFold.Size = new System.Drawing.Size(124, 24);
             this.lblFold.TabIndex = 1;
             this.lblFold.Text = "Folder Path:";
-            // 
-            // pBOk
-            // 
-            this.pBOk.Image = global::PROJ_admin_.Properties.Resources.Ok_icon__1_;
-            this.pBOk.Location = new System.Drawing.Point(506, 246);
-            this.pBOk.Name = "pBOk";
-            this.pBOk.Size = new System.Drawing.Size(30, 30);
-            this.pBOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBOk.TabIndex = 61;
-            this.pBOk.TabStop = false;
-            // 
-            // btnBrow
-            // 
-            this.btnBrow.FlatAppearance.BorderSize = 0;
-            this.btnBrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrow.Image = global::PROJ_admin_.Properties.Resources.Folder_Generic_Green_icon;
-            this.btnBrow.Location = new System.Drawing.Point(506, 210);
-            this.btnBrow.Name = "btnBrow";
-            this.btnBrow.Size = new System.Drawing.Size(30, 30);
-            this.btnBrow.TabIndex = 54;
-            this.btnBrow.UseVisualStyleBackColor = true;
-            this.btnBrow.Click += new System.EventHandler(this.btnBrow_Click);
             // 
             // pBClose
             // 
@@ -302,9 +302,9 @@
             this.paneMain.ResumeLayout(false);
             this.gBSet.ResumeLayout(false);
             this.gBSet.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBOk)).EndInit();
             this.paneCode.ResumeLayout(false);
             this.paneCode.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBOk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBClose)).EndInit();
             this.ResumeLayout(false);
 

@@ -82,7 +82,7 @@
             this.btnPrint.Location = new System.Drawing.Point(654, 441);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(30, 30);
-            this.btnPrint.TabIndex = 7;
+            this.btnPrint.TabIndex = 1;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
@@ -105,7 +105,7 @@
             this.dT.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dT.Name = "dT";
             this.dT.Size = new System.Drawing.Size(149, 22);
-            this.dT.TabIndex = 5;
+            this.dT.TabIndex = 0;
             this.dT.ValueChanged += new System.EventHandler(this.dT_ValueChanged);
             // 
             // btnEdit
@@ -117,7 +117,7 @@
             this.btnEdit.Location = new System.Drawing.Point(690, 441);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(30, 30);
-            this.btnEdit.TabIndex = 4;
+            this.btnEdit.TabIndex = 2;
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 

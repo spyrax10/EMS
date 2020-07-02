@@ -48,6 +48,7 @@ namespace PROJ_admin_
             tBAns.Text = "";
             tBQues.Focus();
             btnNum.Value = 1;
+            btnAdd.Visible = false;
             paneQues.Visible = true;
             DbQ.loadQues(gVData, frmMain.empId, tBCode.Text,
                         cBSub.Text, cBPer.Text, tBSet.Text, cBType.Text);

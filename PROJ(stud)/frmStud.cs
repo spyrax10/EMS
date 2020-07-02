@@ -84,6 +84,7 @@ namespace PROJ_stud_
         {
             DbQ.studOffline(lblID.Text);
             misc.enableTask();
+            misc.saveRes(lblID2.Text, paneMain);
             Application.Exit();
         }
         private void pBClose_Click(object sender, EventArgs e)
@@ -224,12 +225,21 @@ namespace PROJ_stud_
         {
             if (gVAns.Rows.Count > 0)
             {
-                showScore();
+                if (MessageBox.Show("Are your sure to submit your answers?, Remember you CAN'T GO BACK..., " +
+                "Continue Anyway?", msg.ver, MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    showScore();
+                }
+                else
+                {
+                    return;
+                }
             }
             else
             {
                 msg.dataEmpty();
-            }         
+            }
         }
 
         private void frmStud_FormClosing(object sender, FormClosingEventArgs e)
@@ -247,6 +257,14 @@ namespace PROJ_stud_
         private void btnExit_Click(object sender, EventArgs e)
         {
             close();
+        }
+
+        private void tBAns_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cBType.Text == "Multiple Choice")
+            {
+                e.Handled = true;
+            }
         }
 
         private void colTime_Tick(object sender, EventArgs e)

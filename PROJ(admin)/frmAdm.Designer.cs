@@ -187,7 +187,7 @@
             this.btnLogOut.Location = new System.Drawing.Point(11, 547);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(43, 40);
-            this.btnLogOut.TabIndex = 11;
+            this.btnLogOut.TabIndex = 4;
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
@@ -205,7 +205,7 @@
             this.btnSys.Name = "btnSys";
             this.btnSys.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnSys.Size = new System.Drawing.Size(175, 44);
-            this.btnSys.TabIndex = 10;
+            this.btnSys.TabIndex = 2;
             this.btnSys.Text = "System Logs";
             this.btnSys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSys.UseVisualStyleBackColor = false;
@@ -234,7 +234,7 @@
             this.btnStud.Name = "btnStud";
             this.btnStud.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnStud.Size = new System.Drawing.Size(175, 44);
-            this.btnStud.TabIndex = 5;
+            this.btnStud.TabIndex = 1;
             this.btnStud.Text = "Student Bio";
             this.btnStud.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStud.UseVisualStyleBackColor = false;
@@ -261,7 +261,7 @@
             this.btnSet.Location = new System.Drawing.Point(162, 61);
             this.btnSet.Name = "btnSet";
             this.btnSet.Size = new System.Drawing.Size(30, 30);
-            this.btnSet.TabIndex = 2;
+            this.btnSet.TabIndex = 3;
             this.btnSet.UseVisualStyleBackColor = true;
             this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
@@ -312,7 +312,7 @@
             this.btnEmp.Name = "btnEmp";
             this.btnEmp.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnEmp.Size = new System.Drawing.Size(175, 44);
-            this.btnEmp.TabIndex = 2;
+            this.btnEmp.TabIndex = 0;
             this.btnEmp.Text = "Employee Bio";
             this.btnEmp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEmp.UseVisualStyleBackColor = false;

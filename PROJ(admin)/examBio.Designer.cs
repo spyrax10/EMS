@@ -116,7 +116,7 @@
             this.btnStud.Location = new System.Drawing.Point(12, 419);
             this.btnStud.Name = "btnStud";
             this.btnStud.Size = new System.Drawing.Size(173, 27);
-            this.btnStud.TabIndex = 103;
+            this.btnStud.TabIndex = 3;
             this.btnStud.Text = "CHECK STUDENTS";
             this.btnStud.UseVisualStyleBackColor = true;
             this.btnStud.Click += new System.EventHandler(this.btnStud_Click);
@@ -203,7 +203,7 @@
             this.btnStart.Location = new System.Drawing.Point(639, 52);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(111, 27);
-            this.btnStart.TabIndex = 102;
+            this.btnStart.TabIndex = 2;
             this.btnStart.Text = "START";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -225,7 +225,7 @@
             0});
             this.numLimit.Name = "numLimit";
             this.numLimit.Size = new System.Drawing.Size(64, 34);
-            this.numLimit.TabIndex = 104;
+            this.numLimit.TabIndex = 1;
             this.numLimit.Value = new decimal(new int[] {
             20,
             0,
@@ -245,6 +245,7 @@
             this.tBPer.Name = "tBPer";
             this.tBPer.Size = new System.Drawing.Size(149, 32);
             this.tBPer.TabIndex = 106;
+            this.tBPer.TabStop = false;
             this.tBPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label16
@@ -267,7 +268,7 @@
             this.cBCode.Location = new System.Drawing.Point(24, 52);
             this.cBCode.Name = "cBCode";
             this.cBCode.Size = new System.Drawing.Size(149, 32);
-            this.cBCode.TabIndex = 86;
+            this.cBCode.TabIndex = 0;
             this.cBCode.SelectedIndexChanged += new System.EventHandler(this.cBCode_SelectedIndexChanged);
             // 
             // label4
@@ -314,6 +315,7 @@
             this.tBSub.Name = "tBSub";
             this.tBSub.Size = new System.Drawing.Size(149, 32);
             this.tBSub.TabIndex = 88;
+            this.tBSub.TabStop = false;
             this.tBSub.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pBClose

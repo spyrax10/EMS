@@ -76,7 +76,16 @@ namespace PROJ_admin_
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                DbQ.IDExits(tBID, paneCour);
+                if (DbQ.IDExits(tBID) == false)
+                {
+                    tBID.Enabled = false;
+                    paneCour.Enabled = true;
+                }
+                else
+                {
+                    msg.idUse();
+                    paneCour.Enabled = false;
+                }
             }
         }
 

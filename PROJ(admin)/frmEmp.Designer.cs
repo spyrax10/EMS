@@ -142,7 +142,7 @@
             this.btnShut.Location = new System.Drawing.Point(770, 0);
             this.btnShut.Name = "btnShut";
             this.btnShut.Size = new System.Drawing.Size(46, 50);
-            this.btnShut.TabIndex = 2;
+            this.btnShut.TabIndex = 5;
             this.btnShut.UseVisualStyleBackColor = true;
             this.btnShut.Click += new System.EventHandler(this.btnShut_Click);
             // 
@@ -191,7 +191,7 @@
             this.btnRec.Name = "btnRec";
             this.btnRec.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnRec.Size = new System.Drawing.Size(175, 44);
-            this.btnRec.TabIndex = 19;
+            this.btnRec.TabIndex = 3;
             this.btnRec.Text = "Record Section";
             this.btnRec.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRec.UseVisualStyleBackColor = false;
@@ -211,7 +211,7 @@
             this.btnTest.Name = "btnTest";
             this.btnTest.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnTest.Size = new System.Drawing.Size(175, 44);
-            this.btnTest.TabIndex = 18;
+            this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test Section";
             this.btnTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTest.UseVisualStyleBackColor = false;
@@ -231,7 +231,7 @@
             this.btnQues.Name = "btnQues";
             this.btnQues.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnQues.Size = new System.Drawing.Size(175, 44);
-            this.btnQues.TabIndex = 17;
+            this.btnQues.TabIndex = 1;
             this.btnQues.Text = "Questionaire";
             this.btnQues.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnQues.UseVisualStyleBackColor = false;
@@ -260,7 +260,7 @@
             this.btnPro.Name = "btnPro";
             this.btnPro.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnPro.Size = new System.Drawing.Size(175, 44);
-            this.btnPro.TabIndex = 15;
+            this.btnPro.TabIndex = 0;
             this.btnPro.Text = "Subject Profile";
             this.btnPro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPro.UseVisualStyleBackColor = false;
@@ -287,7 +287,7 @@
             this.btnSet.Location = new System.Drawing.Point(162, 61);
             this.btnSet.Name = "btnSet";
             this.btnSet.Size = new System.Drawing.Size(30, 30);
-            this.btnSet.TabIndex = 2;
+            this.btnSet.TabIndex = 4;
             this.btnSet.UseVisualStyleBackColor = true;
             this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
