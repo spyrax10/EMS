@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using classLib;
 
@@ -11,6 +12,7 @@ namespace PROJ_admin_
         {
             InitializeComponent();
             home();
+            SqlConnection.ClearAllPools();
         }
 
         public void home()
@@ -122,8 +124,8 @@ namespace PROJ_admin_
 
         private void btnSys_Click(object sender, EventArgs e)
         {
-            paneSlide.Height = btnEmp.Height;
-            paneSlide.Top = btnEmp.Top;
+            paneSlide.Height = btnSys.Height;
+            paneSlide.Top = btnSys.Top;
             misc.opnChild(paneCont, new frmLog());
         }
 

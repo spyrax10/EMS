@@ -58,7 +58,7 @@ namespace PROJ_admin_
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                DbQ.upAdmEmail(tBCode.Text, frmMain.empId, tBFold.Text, tBEmail);
+                DbQ.upAdmEmail(paneCode, tBCode.Text, frmMain.empId, tBFold.Text, tBEmail, load);
             }
         }
 

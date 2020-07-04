@@ -1,5 +1,6 @@
 ﻿using classLib;
 using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PROJ_admin_
@@ -14,6 +15,7 @@ namespace PROJ_admin_
         public frmMain()
         {
             InitializeComponent();
+            SqlConnection.ClearAllPools();
         }
         private void frmMain_Load(object sender, EventArgs e)
         {

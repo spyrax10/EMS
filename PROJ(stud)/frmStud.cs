@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using classLib;
@@ -11,6 +12,7 @@ namespace PROJ_stud_
         public frmStud()
         {
             InitializeComponent();
+            SqlConnection.ClearAllPools();
         }
 
         public void info()
@@ -84,7 +86,6 @@ namespace PROJ_stud_
         {
             DbQ.studOffline(lblID.Text);
             misc.enableTask();
-            misc.saveRes(lblID2.Text, paneMain);
             Application.Exit();
         }
         private void pBClose_Click(object sender, EventArgs e)
@@ -256,6 +257,7 @@ namespace PROJ_stud_
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            misc.saveRes(lblID2.Text, paneMain);
             close();
         }
 

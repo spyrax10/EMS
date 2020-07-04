@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using classLib;
 
@@ -11,6 +12,7 @@ namespace PROJ_admin_
         {
             InitializeComponent();
             home();
+            SqlConnection.ClearAllPools();
         }
         public void home()
         {

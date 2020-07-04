@@ -970,7 +970,8 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void upAdmEmail(string code, string empId, string path, TextBox email)
+        public static void upAdmEmail(Panel pane, string code, string empId, string path, TextBox email, 
+            MethodInvoker meth)
         {
             try
             {
@@ -1006,6 +1007,8 @@ namespace classLib
                                 cmd2.ExecuteNonQuery();
                             }
                         }
+                        pane.Visible = false;
+                        meth();
                         msg.emailVer();
                     }
                 }

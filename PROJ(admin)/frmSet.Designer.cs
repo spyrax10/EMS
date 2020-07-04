@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSet));
             this.paneMain = new System.Windows.Forms.Panel();
             this.gBSet = new System.Windows.Forms.GroupBox();
             this.lblPass = new System.Windows.Forms.Label();
@@ -295,6 +296,7 @@
             this.Controls.Add(this.paneMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSet";
             this.Text = "frmSet";
