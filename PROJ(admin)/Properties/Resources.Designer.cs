@@ -293,6 +293,26 @@ namespace PROJ_admin_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Eye_icon {
+            get {
+                object obj = ResourceManager.GetObject("Eye-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Eye_icon__24_ {
+            get {
+                object obj = ResourceManager.GetObject("Eye-icon (24)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file_extension_log_icon {
             get {
                 object obj = ResourceManager.GetObject("file-extension-log-icon", resourceCulture);

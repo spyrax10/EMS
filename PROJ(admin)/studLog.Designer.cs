@@ -46,7 +46,7 @@
             this.paneMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paneMain.Location = new System.Drawing.Point(0, 0);
             this.paneMain.Name = "paneMain";
-            this.paneMain.Size = new System.Drawing.Size(715, 333);
+            this.paneMain.Size = new System.Drawing.Size(846, 289);
             this.paneMain.TabIndex = 0;
             // 
             // gVData
@@ -89,7 +89,7 @@
             this.gVData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gVData.RowHeadersVisible = false;
             this.gVData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gVData.Size = new System.Drawing.Size(691, 309);
+            this.gVData.Size = new System.Drawing.Size(822, 265);
             this.gVData.TabIndex = 47;
             // 
             // timer1
@@ -103,7 +103,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.ClientSize = new System.Drawing.Size(715, 333);
+            this.ClientSize = new System.Drawing.Size(846, 289);
             this.Controls.Add(this.paneMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

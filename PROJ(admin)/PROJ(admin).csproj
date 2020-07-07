@@ -348,5 +348,11 @@
   <ItemGroup>
     <None Include="Resources\Shop-Records-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eye-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eye-icon %2824%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

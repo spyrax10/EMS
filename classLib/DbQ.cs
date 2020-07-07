@@ -2850,8 +2850,8 @@ namespace classLib
                 {
                     con.Open();
                     DataTable dt = new DataTable();
-                    adapt = new SqlDataAdapter("Select studLogTB.studId AS StudID, dbo.allCap(Course) as Course, Lastname, Firstname, IP, Status from studLogTB " +
-                        "FULL OUTER JOIN studTB on studLogTB.studId = studTB.studId where studLogTB.Code = '" + code + "' " +
+                    adapt = new SqlDataAdapter("Select studLogTB.studId AS StudID, dbo.allCap(Course) as Course, Lastname, Firstname, IP, PC, Status from studLogTB " +
+                        "FULL OUTER JOIN studTB on studLogTB.studId = studTB.studId where studLogTB.Code = '" + code + "' and Date = '" + msg.date + "'" +
                         "Order by studLogTB.studId ASC", con);
                     adapt.Fill(dt);
                     gV.DataSource = dt;
@@ -3003,12 +3003,13 @@ namespace classLib
                                 using (var cmd2 = con.CreateCommand())
                                 {
                                     cmd2.CommandText = "Insert into studLogTB Values(@ID, @Code, " +
-                                        "@Date, @Time, @IP, @Stat)";
+                                        "@Date, @Time, @IP, @PC, @Stat)";
                                     cmd2.Parameters.AddWithValue("@ID", studId);
                                     cmd2.Parameters.AddWithValue("@Code", code);
                                     cmd2.Parameters.AddWithValue("@Date", msg.date);
                                     cmd2.Parameters.AddWithValue("@Time", msg.time);
                                     cmd2.Parameters.AddWithValue("@IP", misc.ip);
+                                    cmd2.Parameters.AddWithValue("@PC", misc.getPC(misc.ip));
                                     cmd2.Parameters.AddWithValue("@Stat", msg.online);
                                     cmd2.ExecuteNonQuery();
                                     time.Enabled = true;
@@ -3216,7 +3217,7 @@ namespace classLib
                 misc.crashRep(e.Message);
             }
         }
-        public static void dispStudAns(DataGridView gVAns, string studId, string code, string set, string type)
+        public static void dispStudAns(DataGridView gVAns, string studId, string code, string set, string type, string date)
         {
             try
             {
@@ -3226,7 +3227,7 @@ namespace classLib
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select No, SAnswer as Answer from studAnsTB " +
                         "where studId = '" + studId + "' and Code = '" + code + "' " +
-                        "and QSet = '" + set + "' and Type = '" + type + "' " +
+                        "and QSet = '" + set + "' and Type = '" + type + "' and Date = '" + date + "'" +
                         "Order by Cast(No as INT) ASC", con);
                     adapt.Fill(dt);
                     gVAns.DataSource = dt;
@@ -3290,7 +3291,7 @@ namespace classLib
                     con.Open();
                     DataTable dt = new DataTable();
                     adapt = new SqlDataAdapter("Select Distinct No, Question from quesTB " +
-                        "where Code = '" + code + "' and QSet = '" + set + "' and Type = '" + type + "' " +
+                        "where Code = '" + code + "' and QSet = '" + set + "' and Type = '" + type + "'" +
                         " ORDER BY No ASC", con);
                     adapt.Fill(dt);
                     gVQues.DataSource = dt;
@@ -3359,9 +3360,11 @@ namespace classLib
                     {
                         con.Open();
                         cmd.CommandText = "Select TOP 1 SAnswer from studAnsTB where studId = @ID and " +
-                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques";
+                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques " +
+                            "and Date = @Date";
                         cmd.Parameters.AddWithValue("@ID", studId);
                         cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
                         cmd.Parameters.AddWithValue("@Set", set);
                         cmd.Parameters.AddWithValue("@Type", type);
                         cmd.Parameters.AddWithValue("@Num", num.Text);
@@ -3476,13 +3479,14 @@ namespace classLib
                     {
                         con.Open();
                         cmd.CommandText = "Select TOP 1 SAnswer from studAnsTB where studId = @ID and " +
-                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques";
+                            "Code = @Code and QSet = @Set and Type = @Type and No = @Num and Question = @Ques and Date = @Date";
                         cmd.Parameters.AddWithValue("@ID", studId);
                         cmd.Parameters.AddWithValue("@Code", code);
                         cmd.Parameters.AddWithValue("@Set", set);
                         cmd.Parameters.AddWithValue("@Type", type);
                         cmd.Parameters.AddWithValue("@Num", num.Text);
                         cmd.Parameters.AddWithValue("@Ques", ques.Text);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
                         using (var dr = cmd.ExecuteReader())
                         {
                             if (dr.Read())
@@ -3523,9 +3527,10 @@ namespace classLib
                         using (var scmd = con.CreateCommand())
                         {
                             scmd.CommandText = "Select * from studAnsTB where studId = @ID and Code = @Code and " +
-                                "QSet = @Set and Type = @Type and SAnswer = @Ans";
+                                "QSet = @Set and Type = @Type and SAnswer = @Ans and Date = @Date";
                             scmd.Parameters.AddWithValue("@ID", studId);
                             scmd.Parameters.AddWithValue("@Code", code);
+                            scmd.Parameters.AddWithValue("@Date", msg.date);
                             scmd.Parameters.AddWithValue("@Set", set);
                             scmd.Parameters.AddWithValue("@Type", type);
                             scmd.Parameters.AddWithValue("@Ans", ans.Text);
@@ -3543,10 +3548,11 @@ namespace classLib
                                         using (var cmd = con.CreateCommand())
                                         {
 
-                                            cmd.CommandText = "Insert into studAnsTB Values (@ID, @Code, @Set, @Type, " +
+                                            cmd.CommandText = "Insert into studAnsTB Values (@ID, @Code, @Date, @Set, @Type, " +
                                                 "@Num, @Ques, @Ans, @Stat)";
                                             cmd.Parameters.AddWithValue("@ID", studId);
                                             cmd.Parameters.AddWithValue("@Code", code);
+                                            cmd.Parameters.AddWithValue("@Date", msg.date);
                                             cmd.Parameters.AddWithValue("@Set", set);
                                             cmd.Parameters.AddWithValue("@Type", type);
                                             cmd.Parameters.AddWithValue("@Num", num.Text);
@@ -3600,7 +3606,7 @@ namespace classLib
                                 }
                             }
                         }
-                        dispStudAns(gVAns, studId, code, set, type);
+                        dispStudAns(gVAns, studId, code, set, type, msg.date);
                     }
                 }
             }
@@ -3673,12 +3679,13 @@ namespace classLib
                     {
                         con.Open();
                         cmd.CommandText = "Select Count(Status) from studAnsTB where studId = @ID and " +
-                            "Code = @Code and QSet = @Set and Type = @Type and Status = @Cor";
+                            "Code = @Code and QSet = @Set and Type = @Type and Status = @Cor and Date = @Date";
                         cmd.Parameters.AddWithValue("@ID", studId);
                         cmd.Parameters.AddWithValue("@Code", code);
                         cmd.Parameters.AddWithValue("@Set", set);
                         cmd.Parameters.AddWithValue("@Type", type);
                         cmd.Parameters.AddWithValue("@Cor", msg.cor);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
                         object ob = cmd.ExecuteScalar();
                         count = Convert.ToDouble(ob);
                     }
@@ -3794,10 +3801,11 @@ namespace classLib
                             "(Case WHEN studAnsTB.SAnswer in (Select quesTB.Answer from quesTB where quesTB.Code = @Code " +
                             "and studAnsTB.Code = @Code and quesTB.Code = @Code " +
                             "and studAnsTB.QSet = @Set and quesTB.QSet = @Set " +
-                            "and studAnsTB.No = quesTB.No and studAnsTB.studId = @ID) " +
-                            "THEN @Cor ELSE @Wro END)";
+                            "and studAnsTB.No = quesTB.No and studAnsTB.studId = @ID and studAnsTB.Date = @Date)" +
+                           "THEN @Cor ELSE @Wro END)";
                         
                         cmd.Parameters.AddWithValue("@Code", code);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
                         cmd.Parameters.AddWithValue("@Set", set);
                         cmd.Parameters.AddWithValue("@ID", studId);
                         cmd.Parameters.AddWithValue("@Cor", msg.cor);

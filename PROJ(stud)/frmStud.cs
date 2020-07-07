@@ -79,7 +79,7 @@ namespace PROJ_stud_
             paneExam.Visible = true;
             paneExam.BringToFront();
             tBAns.Focus();
-            misc.fullScr(this);
+           // misc.fullScr(this);
             misc.disableTask();
         }
         public void close()
@@ -145,7 +145,7 @@ namespace PROJ_stud_
             {
                 DbQ.dispStudQues(gVQues, lblCode.Text, lblSet.Text, 
                     cBType.Text, lblNum, tBQues, paneChoice, gVChoice, lblID.Text, tBAns, btnOk, tBCurAns);
-                DbQ.dispStudAns(gVAns, lblID.Text, lblCode.Text, lblSet.Text, cBType.Text);
+                DbQ.dispStudAns(gVAns, lblID.Text, lblCode.Text, lblSet.Text, cBType.Text, msg.date);
             }
         }
 

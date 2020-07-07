@@ -30,6 +30,24 @@ namespace classLib
         public static Form activeForm = null;
         public static int second = 59;
 
+        public static string getPC(string ip)
+        {
+            string pc = "";
+            try
+            {
+                IPHostEntry entry = Dns.GetHostEntry(ip);
+                if (entry != null)
+                {
+                    pc = entry.HostName.ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                msg.expMsg(e.Message);
+                crashRep(e.Message);
+            }
+            return pc;
+        }
         public static void saveRes(string studId, Panel pane)
         {
             try
@@ -144,9 +162,10 @@ namespace classLib
                     using (var cmd = con.CreateCommand())
                     {
                         con.Open();
-                        cmd.CommandText = "Select * from testSetTB where Code = @Code and Status = @Stat";
+                        cmd.CommandText = "Select * from testSetTB where Code = @Code and Status = @Stat and Date = @Date";
                         cmd.Parameters.AddWithValue("@Code", code);
                         cmd.Parameters.AddWithValue("@Stat", msg.start);
+                        cmd.Parameters.AddWithValue("@Date", msg.date);
                         using (var dr = cmd.ExecuteReader())
                         {
                             if (dr.Read())

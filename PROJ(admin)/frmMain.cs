@@ -270,6 +270,18 @@ namespace PROJ_admin_
             tBIdMain.Focus();
         }
 
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            misc.passChar(tBLPass);
+            misc.passChar(tBLPass2);
+        }
+
+        private void btnShow2_Click(object sender, EventArgs e)
+        {
+            misc.passChar(tBCPass);
+            misc.passChar(tBCPass2);
+        }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             left--;
