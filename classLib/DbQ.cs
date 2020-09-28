@@ -2850,7 +2850,7 @@ namespace classLib
                 {
                     con.Open();
                     DataTable dt = new DataTable();
-                    adapt = new SqlDataAdapter("Select studLogTB.studId AS StudID, dbo.allCap(Course) as Course, Lastname, Firstname, IP, PC, Status from studLogTB " +
+                    adapt = new SqlDataAdapter("Select studLogTB.studId AS StudID, dbo.allCap(Course) as Course, Lastname, Firstname, IP, Status from studLogTB " +
                         "FULL OUTER JOIN studTB on studLogTB.studId = studTB.studId where studLogTB.Code = '" + code + "' and Date = '" + msg.date + "'" +
                         "Order by studLogTB.studId ASC", con);
                     adapt.Fill(dt);
@@ -3003,13 +3003,12 @@ namespace classLib
                                 using (var cmd2 = con.CreateCommand())
                                 {
                                     cmd2.CommandText = "Insert into studLogTB Values(@ID, @Code, " +
-                                        "@Date, @Time, @IP, @PC, @Stat)";
+                                        "@Date, @Time, @IP, @Stat)";
                                     cmd2.Parameters.AddWithValue("@ID", studId);
                                     cmd2.Parameters.AddWithValue("@Code", code);
                                     cmd2.Parameters.AddWithValue("@Date", msg.date);
                                     cmd2.Parameters.AddWithValue("@Time", msg.time);
                                     cmd2.Parameters.AddWithValue("@IP", misc.ip);
-                                    cmd2.Parameters.AddWithValue("@PC", misc.getPC(misc.ip));
                                     cmd2.Parameters.AddWithValue("@Stat", msg.online);
                                     cmd2.ExecuteNonQuery();
                                     time.Enabled = true;

@@ -19,6 +19,7 @@ namespace PROJ_admin_
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            misc.createFold();
             hideForm();
         }
         public void LOG()
@@ -129,7 +130,6 @@ namespace PROJ_admin_
             misc.codeSend(tBEmail.Text, lblID.Text);
             if (misc.emailSent == true)
             {
-                msg.sentMsg();
                 paneCode.Visible = true;
                 btnVer.Enabled = false;
                 lblReCode.Visible = true;

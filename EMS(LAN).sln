@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "classLib", "classLib\classL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROJ(stud)", "PROJ(stud)\PROJ(stud).csproj", "{9F56E505-7EC5-4763-9F0B-53CA6E66D899}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{48A56319-54A3-40F5-833D-3843E52480A2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

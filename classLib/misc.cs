@@ -621,7 +621,7 @@ namespace classLib
             try
             {
                 string path = @"..\..\Log\" + user + ".txt";
-               // string path = "Log\\" + user + ".txt";
+
                 string code = randCode();
 
                 if (!File.Exists(path))
@@ -638,6 +638,22 @@ namespace classLib
             {
                 MessageBox.Show(e.Message);
             } 
+        }
+
+        public static void createFold()
+        {
+            string path = @"..\..\Log\";
+            string path2 = @"..\..\Log\Crash";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            if (!Directory.Exists(path2))
+            {
+                Directory.CreateDirectory(path2);
+            }
         }
 
         public static bool passMatch(TextBox pass, TextBox pass2)

@@ -79,7 +79,7 @@ namespace PROJ_stud_
             paneExam.Visible = true;
             paneExam.BringToFront();
             tBAns.Focus();
-           // misc.fullScr(this);
+            misc.fullScr(this);
             misc.disableTask();
         }
         public void close()
@@ -267,6 +267,11 @@ namespace PROJ_stud_
             {
                 e.Handled = true;
             }
+        }
+
+        private void frmStud_Load(object sender, EventArgs e)
+        {
+            misc.createFold();
         }
 
         private void colTime_Tick(object sender, EventArgs e)

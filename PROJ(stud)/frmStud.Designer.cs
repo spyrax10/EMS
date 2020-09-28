@@ -1333,6 +1333,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EMS(stud)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStud_FormClosing);
+            this.Load += new System.EventHandler(this.frmStud_Load);
             this.paneMain.ResumeLayout(false);
             this.paneMain.PerformLayout();
             this.paneLogo.ResumeLayout(false);

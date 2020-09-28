@@ -105,8 +105,6 @@
   <ItemGroup>
     <None Include="Resources\Actions-trash-empty-icon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Log\Crash Logs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
