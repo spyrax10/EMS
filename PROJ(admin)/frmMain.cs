@@ -212,11 +212,6 @@ namespace PROJ_admin_
             }        
         }
 
-        private void tBLPass_Leave(object sender, EventArgs e)
-        {
-            misc.invPass(sender, lblPass2);
-        }
-
         private void lblAdLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (DBInfo.admChk() == false)

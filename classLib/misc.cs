@@ -25,7 +25,7 @@ namespace classLib
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
 
         [Obsolete]
-        public static string ip = Dns.GetHostByName(Environment.MachineName).AddressList[2].ToString();
+        public static string ip = Dns.GetHostByName(Environment.MachineName).AddressList[0].ToString();
 
         public static Form activeForm = null;
         public static int second = 59;
@@ -613,23 +613,31 @@ namespace classLib
         }
         public static void crashRep(string stat)
         {            
-            string path = @"..\..\Log\Crash Logs\Crash Report.txt";
+            string path = @"..\..\Log\Crash\Crash Report.txt";
             crashDet(fname(path), stat);
         }
         public static void usrCode(string user)
         {
-            string path = @"..\..\Log\" + user + ".txt";
-            string code = randCode();
-
-            if (!File.Exists(path))
+            try
             {
-                using (StreamWriter sw = new StreamWriter(path))
+                string path = @"..\..\Log\" + user + ".txt";
+               // string path = "Log\\" + user + ".txt";
+                string code = randCode();
+
+                if (!File.Exists(path))
                 {
-                    sw.WriteLine(code);
+                    using (StreamWriter sw = new StreamWriter(path))
+                    {
+                        sw.WriteLine(code);
+                    }
+                    DbQ.codeLog(code, msg.codeNUse, msg.date, "", DbQ.getEmpId(user)); ;
+                    DbQ.sysLog(user, msg.time, msg.date, msg.codeReq + code);
                 }
-                DbQ.codeLog(code, msg.codeNUse, msg.date, "", DbQ.getEmpId(user)); ;
-                DbQ.sysLog(user, msg.time, msg.date, msg.codeReq + code);
             }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            } 
         }
 
         public static bool passMatch(TextBox pass, TextBox pass2)

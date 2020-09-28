@@ -193,7 +193,7 @@
     <None Include="Resources\cartoon-geeky-nerd-kid-is-typing-notebook-enthusiastically_9633-12.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Log\Crash Logs\" />
+    <Folder Include="Log\Crash\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Very-Basic-Menu-icon.png" />
