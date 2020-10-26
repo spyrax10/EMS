@@ -9,11 +9,11 @@ Main Features:
 - Support Enumeration, Identification and Multiple Choice type of questions.
 - Timed Test
 
-* Admin User
+Admin User
 - Account Password recovery can be sent through registered email account.
 - Can add and manage both Instructor and Student user.
 
-* Instructor User:
+Instructor User:
 - Account Password recovery can be sent through registered email account.
 - Test set are base on desire code of Instructor user.
 - Easily customized test questions.
@@ -22,7 +22,7 @@ Main Features:
 - Instructor can set grading scheme for the test.
 - Can print the test result of each students.
 
-* Student User:
+Student User:
 - Application will automatically goes on full screen as the test start.
 - ALT + TAB, Task manager, ALT + F4 are disabled during the test.
 - Automatically calculate the test grade (based on Instructor user grading scheme) after the end of exam.
