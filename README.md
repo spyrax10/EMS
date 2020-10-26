@@ -7,11 +7,13 @@ Main Features:
 - Main Users: Admin (designated employee), Instructor and Students
 - Cosinsts of 2 separate application for Instructor & Admin user and Student user.
 - Support Enumeration, Identification and Multiple Choice type of questions.
-- Timed Test
+- Customized timed Test
+
 
 Admin User
 - Account Password recovery can be sent through registered email account.
 - Can add and manage both Instructor and Student user.
+
 
 Instructor User:
 - Account Password recovery can be sent through registered email account.
@@ -21,6 +23,7 @@ Instructor User:
 - Can divide test into different test set. 
 - Instructor can set grading scheme for the test.
 - Can print the test result of each students.
+
 
 Student User:
 - Application will automatically goes on full screen as the test start.
