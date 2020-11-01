@@ -1,12 +1,12 @@
 # EMS
 
-Exam Management Sytem (LAN Based)
+Exam Management System (LAN Based)
 
 Main Features:
 
 - Main Users: Admin (designated employee), Instructor and Students
-- Cosinsts of 2 separate application for Instructor & Admin user and Student user.
-- Support Enumeration, Identification and Multiple Choice type of questions.
+- Consists of 2 separate application for Instructor & Admin user and Student user.
+- Support Enumeration, Identification, and Multiple Choice type of questions.
 - Customized timed Test
 
 
