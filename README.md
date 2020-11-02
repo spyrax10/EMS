@@ -12,26 +12,29 @@
 </ul>
 
 <h4>Admin User:</h4>
-- Account Password recovery can be sent through registered email account.
-- Can add and manage both Instructor and Student user.
-
+<ul>
+  <li>Account Password recovery can be sent through registered email account.</li>
+  <li>Can add and manage both Instructor and Student user.</li>
+</ul>
 
 <h4>Instructor User:</h4>
-- Account Password recovery can be sent through registered email account.
-- Test set are base on desire code of Instructor user.
-- Easily customized test questions.
-- Can choose the time limit for the test.
-- Can divide test into different test set. 
-- Instructor can set grading scheme for the test.
-- Can print the test result of each students.
-
+<ul>
+  <li>Account Password recovery can be sent through registered email account.</li>
+  <li>Test set are base on desire code of Instructor user.</li>
+  <li>Easily customized the test questions.</li>
+  <li>Can choose the time limit for the test.</li>
+  <li>Can divide test into different test set.</li>
+  <li>Instructor can set grading scheme for the test.</li>
+  <li>Can print the test result of each students.</li>
+</ul> 
 
 <h4>Student User:</h4>
-- Application will automatically goes on full screen as the test start.
-- ALT + TAB, Task manager, ALT + F4 are disabled during the test.
-- Automatically calculate the test grade (based on Instructor user grading scheme) after the end of exam.
-- Can choose to save a screenshot of test result.
-
+<ul>
+  <li>Application will automatically goes on full screen as the test start.</li>
+  <li>ALT + TAB, Task manager, ALT + F4 are disabled during the test.</li>
+  <li>Automatically calculate the test grade (based on Instructor user grading scheme) after the end of exam.</li>
+  <li>Can choose to save a screenshot of test result.</li>
+</ul>
 
 <h2>How it works?</h2>
 - Database are shared across the involved PCs.
